@@ -1,0 +1,98 @@
+package com.tool;
+
+import java.io.*;
+import java.net.URI;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.*;
+import org.apache.hadoop.io.IOUtils;
+
+/**
+ * Created by ZKJ on 2017/3/16 0016.
+ */
+public class HDFSOperation {
+
+    private Configuration conf;
+    private FileSystem fs;
+
+    public HDFSOperation() throws Exception {
+        conf = new Configuration();
+        fs = FileSystem.get(conf);
+      //  fs = FileSystem.get(new URI("hdfs://192.168.58.29:8020"), conf, "zkj");
+    }
+
+
+    /*
+      上传文件
+     */
+    private boolean upLoad( String localPath, String hdfsPath ) throws IOException {
+
+        Path path = new Path(hdfsPath);
+        if (fs.exists(path)) {
+            System.out.println("文件已经存在");
+            return false;
+        }
+        FSDataOutputStream out = fs.create(new Path(hdfsPath));
+        FileInputStream in = new FileInputStream(new File(localPath));
+        IOUtils.copyBytes(in, out, 4096, true);
+        in.close();
+        out.close();
+        return true;
+    }
+
+    /*
+    下载文件
+     */
+    private boolean downLoad( String localPath, String hdfsPath ) throws IOException {
+        Path path = new Path(hdfsPath);
+        if (!fs.exists(path)) {
+            System.out.println("云端文件不存在");
+            return false;
+        }
+        Path dstPath = new Path(localPath);
+        fs.copyToLocalFile(false, path, dstPath);
+        return true;
+    }
+
+    /*删除文件
+     */
+    private boolean deletePath( String hdfsPath ) {
+        try {
+            fs.delete(new Path(hdfsPath), true);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    //创建文件夹
+    private boolean mkdir( String dir ) {
+        try {
+            fs.mkdirs(new Path(dir));
+            fs.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+
+    /*删除文件夹*/
+    private boolean deleteDir( String dir ) {
+        try {
+            fs.delete(new Path(dir));
+            fs.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public static void main( String[] args ) throws Exception {
+        HDFSOperation h = new HDFSOperation();
+        System.out.println(h.deleteDir("/test")?1:0);
+    }
+}
