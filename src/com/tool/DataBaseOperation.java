@@ -32,4 +32,7 @@ public class DataBaseOperation {
         stmt.executeUpdate(sql);
         return true;
     }
+    public boolean addFile(){
+        return true;
+    }
 }

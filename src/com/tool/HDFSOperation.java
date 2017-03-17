@@ -14,18 +14,24 @@ public class HDFSOperation {
 
     private Configuration conf;
     private FileSystem fs;
+    private String localPath;
+    private String dbPath;
+    private String hdfsPath;
+
+
+
 
     public HDFSOperation() throws Exception {
         conf = new Configuration();
         fs = FileSystem.get(conf);
-      //  fs = FileSystem.get(new URI("hdfs://192.168.58.29:8020"), conf, "zkj");
+        //  fs = FileSystem.get(new URI("hdfs://192.168.58.29:8020"), conf, "zkj");
     }
 
 
     /*
       上传文件
      */
-    private boolean upLoad( String localPath, String hdfsPath ) throws IOException {
+    private boolean upLoad(String localPath,String hdfsPath) throws IOException {
 
         Path path = new Path(hdfsPath);
         if (fs.exists(path)) {
@@ -43,7 +49,7 @@ public class HDFSOperation {
     /*
     下载文件
      */
-    private boolean downLoad( String localPath, String hdfsPath ) throws IOException {
+    private boolean downLoad() throws IOException {
         Path path = new Path(hdfsPath);
         if (!fs.exists(path)) {
             System.out.println("云端文件不存在");
@@ -56,7 +62,7 @@ public class HDFSOperation {
 
     /*删除文件
      */
-    private boolean deletePath( String hdfsPath ) {
+    private boolean deleteFile() {
         try {
             fs.delete(new Path(hdfsPath), true);
         } catch (IOException e) {
@@ -67,9 +73,9 @@ public class HDFSOperation {
     }
 
     //创建文件夹
-    private boolean mkdir( String dir ) {
+    private boolean mkdir() {
         try {
-            fs.mkdirs(new Path(dir));
+            fs.mkdirs(new Path(localPath));
             fs.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -80,9 +86,9 @@ public class HDFSOperation {
 
 
     /*删除文件夹*/
-    private boolean deleteDir( String dir ) {
+    private boolean deleteDir() {
         try {
-            fs.delete(new Path(dir));
+            fs.delete(new Path(localPath));
             fs.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -93,6 +99,6 @@ public class HDFSOperation {
 
     public static void main( String[] args ) throws Exception {
         HDFSOperation h = new HDFSOperation();
-        System.out.println(h.deleteDir("/test")?1:0);
+        System.out.println(h.deleteDir() ? 1 : 0);
     }
 }
