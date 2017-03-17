@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>	
+<head>
+<title>Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<meta name="keywords" content="Flat Dark Web Login Form Responsive Templates, Iphone Widget Template, Smartphone login forms,Login form, Widget Template, Responsive Templates, a Ipad 404 Templates, Flat Responsive Templates" />
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+<!--webfonts-->
+<link href='http://fonts.useso.com/css?family=PT+Sans:400,700,400italic,700italic|Oswald:400,300,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.useso.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
+<!--//webfonts-->
+<script src="http://ajax.useso.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+</head>
+<body>
+<script>$(document).ready(function(c) {
+	$('.close').on('click', function(c){
+		$('.login-form').fadeOut('slow', function(c){
+	  		$('.login-form').remove();
+		});
+	});	  
+	
+});
+</script>
+<script>
+	function Close(){
+		var user = document.getElementById("text");
+		user.value = "Username";
+		var pass = document.getElementById("password");
+		pass.value = "Password";
+		var bc = document.getElementById("mainform");
+		bc.style.background = "#2b2b36";
+	};
+	function lblblue(){
+		var bc = document.getElementById("mainform");
+		bc.style.background = "#6756ea"; 
+	}
+	function lblpink(){
+		var bc = document.getElementById("mainform");
+		bc.style.background = "#ea569a";
+	}
+	function lblyellow(){
+		var bc = document.getElementById("mainform");
+		bc.style.background = "#f1c85f";
+	}
+</script>
+
+ <!--SIGN UP-->
+ <h1>基于JFinal+Hadoop+bootstrap+AngularJs的云端文件管理系统</h1>
+<div class="login-form" id="mainform">
+	<div class="close" onclick="Close()"> </div>
+		<div class="head-info">
+			<label class="lbl-1" onclick="lblblue()"> </label>
+			<label class="lbl-2" onclick="lblpink()"> </label>
+			<label class="lbl-3" onclick="lblyellow()"> </label>
+		</div>
+			<div class="clear"> </div>
+	<div class="avtar">
+		<img src="images/avtar.png" />
+	</div>
+			<form action="login" method="post">
+					<input type="text" id="username" name="username" value="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}" >
+						<div class="key">
+					<input type="password" id="password" name="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+						</div>
+			
+	<div class="signin">
+		<input type="submit" value="Login" style="float:left" >
+		<input type="submit-1" value="Register"  style="float:left;" readOnly="true" onclick="window.location.href='register.html'">
+	</div>
+	</form>
+</div>
+ 
+
+</body>
+</html>
