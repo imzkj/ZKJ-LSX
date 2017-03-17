@@ -2,12 +2,35 @@ package com.tool;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import java.sql.ResultSet;
+
 /**
  * Created by ZKJ on 2017/3/16 0016.
  */
-public class LoginAction extends ActionSupport{
+public class LoginAction extends ActionSupport {
     private String username;
-    private  String password;
+    private String password;
+    private String phonenum;
+    private DataBaseOperation dataBaseOperation;
+    private ResultSet resultSet;
+
+    public String getPhonenum() {
+        return phonenum;
+    }
+
+    public void setPhonenum( String phonenum ) {
+        this.phonenum = phonenum;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail( String email ) {
+        this.email = email;
+    }
+
+    private String email;
 
     public String getUsername() {
         return username;
@@ -18,7 +41,7 @@ public class LoginAction extends ActionSupport{
     }
 
     public String getPassword() {
-    
+
         return password;
     }
 
@@ -26,9 +49,22 @@ public class LoginAction extends ActionSupport{
         this.password = password;
     }
 
-    @Override
-    public String execute() throws Exception {
-        System.out.println(username+password);
+    public String login() throws Exception {
+        dataBaseOperation = new DataBaseOperation();
+        String selectsql = "select * from user where username=\"" + username + "\" and password=\"" + password + "\"";
+        resultSet = dataBaseOperation.querySql(selectsql);
+        if (resultSet.next()) {
+            return "ok";
+        }
+        return "failed";
+    }
+
+    public String register() throws Exception {
+        dataBaseOperation = new DataBaseOperation();
+        String selectsql = "insert into user(username,password,phonenum,email,totalsize) values(\""
+                + username + "\",\"" + password + "\",\"" + phonenum + "\",\"" + email + "\",10)";
+        System.out.println(selectsql);
+        dataBaseOperation.updateSql(selectsql);
         return "ok";
     }
 }

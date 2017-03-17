@@ -8,7 +8,7 @@
 
 <style type="text/css">
 body{
-	background: url(../images/bg1.jpg) no-repeat 0px 0px;
+	background: url(images/bg1.jpg) no-repeat 0px 0px;
 	font-family: 'Open Sans', sans-serif;
 	background-size:cover;
 	-webkit-background-size:cover;
@@ -110,24 +110,24 @@ label.lbl-4 {
 <span class="glyphicon glyphicon-arrow-left" aria-hidden="true" style="cursor:pointer; margin-left: 10px;" onclick="window.location.href='index.html'" ></span>
 
 <!-- 文件夹预览 -->
-<img  ng-repeat="item in dirlist" src="/images/file.jpg" width="60" class="img-circle" id="popover_dir_{{item.id}}"
-	onmouseover="$(this).popover('show');"
-	onmouseleave="$(this).popover('hide');" 
-	ng-click="select_dir(item.id,item.name)"
-	data-placement="bottom" 
-	data-toggle="popover" 
-	data-html=true
-	data-content="<span class='label label-success'>文件夹名称：{{item.name}}</span><br><br>
-				  <span class='label label-success'>已上传文件数：{{item.sonfilenum}}个</span>" 
-	data-original-title="<b>文件夹描述</>">
+<img ng-repeat="item in dirlist" src="/images/file.jpg" width="60" class="img-circle" id="popover_dir_{{item.id}}"
+     onmouseover="$(this).popover('show');"
+     onmouseleave="$(this).popover('hide');"
+     ng-click="select_dir(item.id,item.name)"
+     data-placement="bottom"
+     data-toggle="popover"
+     data-html=true
+     data-content="<span class='label label-success'>文件夹名称：{{item.name}}</span><br><br>
+				  <span class='label label-success'>已上传文件数：{{item.sonfilenum}}个</span>"
+     data-original-title="<b>文件夹描述</>">
 
 <!-- 添加文件夹 -->
 <img src="/images/addfile.jpg" width="40" class="img-circle" id="popover_adddir" style="margin-left: 5px;"
-	onmouseover="$('#popover_adddir').popover('show');" 
-	data-placement="bottom"  
-	data-toggle="popover" 
-	data-html=true
-	data-content="<div class='col-lg-16'>
+     onmouseover="$('#popover_adddir').popover('show');"
+     data-placement="bottom"
+     data-toggle="popover"
+     data-html=true
+     data-content="<div class='col-lg-16'>
     <div class='input-group'>
      <input type='text' class='form-control' placeholder='输入文件夹名称'>
       <span class='input-group-btn'>
