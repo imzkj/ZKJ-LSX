@@ -12,6 +12,7 @@ public class LoginAction extends ActionSupport {
     private String username;
     private String password;
     private String phonenum;
+    private String email;
     private DataBaseOperation dataBaseOperation;
     private ResultSet resultSet;
 
@@ -31,7 +32,6 @@ public class LoginAction extends ActionSupport {
         this.email = email;
     }
 
-    private String email;
 
     public String getUsername() {
         return username;
@@ -55,6 +55,8 @@ public class LoginAction extends ActionSupport {
         String selectsql = "select * from user where username=\"" + username + "\" and password=\"" + password + "\"";
         resultSet = dataBaseOperation.querySql(selectsql);
         if (resultSet.next()) {
+            setEmail(resultSet.getString("email"));
+            setPhonenum(resultSet.getString("phonenum"));
             return "ok";
         }
         return "failed";

@@ -4,8 +4,10 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.tool.DataBaseOperation;
 import com.tool.HDFSOperation;
 
+import java.nio.file.Files;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.common.File;
@@ -19,7 +21,7 @@ public class FileServiceAction extends ActionSupport {
     private String localPath;
     private String dbPath;
     private String hdfsPath;
-    private List<File> fileslist = new ArrayList<File>();
+    public static List<File> fileslist = new ArrayList<File>();
 
     public List<File> getFileslist() {
         return fileslist;
@@ -56,12 +58,11 @@ public class FileServiceAction extends ActionSupport {
 
     public String listAll() throws Exception {
         dataBaseOperation = new DataBaseOperation();
-
-        File file = new File();
         String sql = "select * from file ";
         //"where dbpath=\"" + path + "\"";
         ResultSet resultSet = dataBaseOperation.querySql(sql);
         while(resultSet.next()) {
+            File file = new File();
             file.setFilename(resultSet.getString("filename"));
             file.setDbpath(resultSet.getString("dbpath"));
             file.setOwner(resultSet.getString("owner"));

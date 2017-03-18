@@ -11,6 +11,19 @@ public class File {
     private String size;
     private String type;
 
+    @Override
+    public String toString() {
+        return "File{" +
+                "filename='" + filename + '\'' +
+                ", dbpath='" + dbpath + '\'' +
+                ", owner='" + owner + '\'' +
+                ", tag='" + tag + '\'' +
+                ", size='" + size + '\'' +
+                ", type='" + type + '\'' +
+                ", md5='" + md5 + '\'' +
+                '}';
+    }
+
     public String getTag() {
         return tag;
     }
