@@ -8,15 +8,12 @@
 
     <package name="default" namespace="/" extends="struts-default">
 
-        <action name="login" class="com.service.LoginAction" method="login">
-            <result name="ok">/index.jsp</result>
+        <action name="login" class="com.tool.LoginAction" method="login">
+            <result name="ok">/Home_main.html</result>
             <result name="failed">/index.html</result>
         </action>
-        <action name="register" class="com.service.LoginAction" method="register">
+        <action name="register" class="com.tool.LoginAction" method="register">
             <result name="ok">/index.html</result>
-        </action>
-        <action name="list" class="com.service.FileServiceAction" method="listAll">
-            <result name="ok">/index.jsp</result>
         </action>
     </package>
 
