@@ -7,9 +7,27 @@ public class File {
     private String filename;
     private String dbpath;
     private String owner;
-    private String hdfspath;
+    private String tag;
     private String size;
     private String type;
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag( String tag ) {
+        this.tag = tag;
+    }
+
+    public String getMd5() {
+        return md5;
+    }
+
+    public void setMd5( String md5 ) {
+        this.md5 = md5;
+    }
+
+    private String md5;
 
     public String getFilename() {
         return filename;
@@ -35,13 +53,6 @@ public class File {
         this.owner = owner;
     }
 
-    public String getHdfspath() {
-        return hdfspath;
-    }
-
-    public void setHdfspath( String hdfspath ) {
-        this.hdfspath = hdfspath;
-    }
 
     public String getSize() {
         return size;

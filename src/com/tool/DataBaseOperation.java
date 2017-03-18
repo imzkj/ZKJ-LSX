@@ -1,5 +1,7 @@
 package com.tool;
 
+import com.common.File;
+
 import java.sql.*;
 
 /**
@@ -22,17 +24,38 @@ public class DataBaseOperation {
         ResultSet resultSet = stmt.executeQuery(sql);
         return resultSet;
     }
+
     public void updateSql( String sql ) throws SQLException {
         stmt.executeUpdate(sql);
 
     }
-    //添加用户
-    public boolean addUser() throws SQLException {
-        String sql = "insert into user(name,password) values()";
-        stmt.executeUpdate(sql);
+
+    //添加文件
+    public boolean addFile( File file ) throws SQLException {
+        String addSql = "insert into file values(\"" + file.getFilename() + "\",\"" + file.getDbpath() + "\",\"" + file.getOwner()
+                + "\",\"" + file.getTag() + "\",\"" + file.getSize() + "\",\"" + file.getType() + "\",\"" + file.getMd5() + "\")";
+        stmt.executeUpdate(addSql);
         return true;
     }
-    public boolean addFile(){
+
+    //删除文件
+    public boolean deleteFile( String filename ) throws SQLException {
+        String deleteSql = "delete from file where filename=\"" + filename + "\"";
+        stmt.executeUpdate(deleteSql);
+        return true;
+    }
+
+    //新建文件夹
+    public boolean newDir( String dirName, String dbpath, String owner ) throws SQLException {
+        String newDir = "insert into file values(\"" + dirName + "\",\"" + dbpath + "\",\"" + owner
+                + "\",\"\",\"\",\"dir\",\"\")";
+        stmt.executeUpdate(newDir);
+        return true;
+    }
+    //删除文件夹
+    public boolean deleteDir( String dirname ) throws SQLException {
+        String deleteSql = "delete from file where filename=\"" + dirname + "\"";
+        stmt.executeUpdate(deleteSql);
         return true;
     }
 }

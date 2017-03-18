@@ -65,9 +65,10 @@ public class FileServiceAction extends ActionSupport {
             file.setFilename(resultSet.getString("filename"));
             file.setDbpath(resultSet.getString("dbpath"));
             file.setOwner(resultSet.getString("owner"));
-            file.setHdfspath(resultSet.getString("hdfspath"));
+            file.setTag(resultSet.getString("tag"));
             file.setSize(resultSet.getString("size"));
             file.setType(resultSet.getString("type"));
+            file.setMd5(resultSet.getString("md5"));
             fileslist.add(file);
         }
         return "ok";
