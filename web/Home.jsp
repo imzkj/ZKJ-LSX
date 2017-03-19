@@ -20,7 +20,7 @@
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
-            min-height: 800px;
+            min-height: 1000px;
         }
 
         .contain {
@@ -51,7 +51,7 @@
         }
 
         .center_left {
-            width: 40%;
+            width: 30%;
             height: 450px;;
             margin: 0 auto;
             padding: 10px;
@@ -59,7 +59,7 @@
         }
 
         .center_right {
-            width: 60%;
+            width: 70%;
             height: 450px;;
             margin: 0 auto;
             padding: 10px;
@@ -174,43 +174,46 @@
                 </div>
             </div>
 
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
-                    data-whatever="@mdo">Open modal for @mdo
-            </button>
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="exampleModalLabel">New message</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <div class="form-group">
-                                    <label for="recipient-name" class="control-label">Recipient:</label>
-                                    <input type="text" class="form-control" id="recipient-name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="message-text" class="control-label">Message:</label>
-                                    <textarea class="form-control" id="message-text"></textarea>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Send message</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
         </div>
-        <div class="center_right">
+        <div class="center_right" style="margin-top: 1em;">
 
-            <table id="sort" cellpadding="15px;">
+            <table id="sort" cellpadding="5px;">
                 <tr>
+                    <th>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                                data-whatever="@mdo" >Upload
+                        </button>
+
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="recipient-name" class="control-label">Recipient:</label>
+                                                <input type="text" class="form-control" id="recipient-name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="message-text" class="control-label">Message:</label>
+                                                <textarea class="form-control" id="message-text"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Send message</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </th>
                     <th>
                         <div class="dropdown">
                             <button class="btn btn-default dropdown-toggle" type="button" id="sortType"
@@ -229,7 +232,7 @@
                     </th>
                     <th><input type="text" class="form-control" id="FileType" placeholder="According FileType"
                                style="width:400px;"></th>
-
+                    <th><input class="btn btn-default" type="submit" value="Submit"></th>
                 </tr>
             </table>
 
