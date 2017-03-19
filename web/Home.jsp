@@ -20,7 +20,7 @@
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
-            min-height: 1000px;
+            min-height: 900px;
         }
 
         .contain {
@@ -111,7 +111,6 @@
         }
 
         .Title {
-
             text-align: center;
             padding-top: 1em;
             padding-bottom: 10px;
@@ -127,6 +126,31 @@
             font-weight: 600;
             color: silver;
             font-size: 2em;
+        }
+        #menu_context{
+            width: 80px;
+            height: 90px;
+            display: none;
+            position: absolute;
+            background-color:white;
+            border-style: groove;
+            cursor: pointer;
+            border-bottom-left-radius: 10px;
+            -webkit-border-bottom-left-radius: 10px;
+            -moz-border-bottom-left-radius: 10px;
+            -o-border-bottom-left-radius: 10px;
+            border-top-left-radius: 10px;
+            -webkit-border-top-left-radius: 10px;
+            -moz-border-top-left-radius: 10px;
+            -o-border-top-left-radius: 10px;"
+            border-bottom-right-radius: 10px;
+            -webkit-border-bottom-right-radius: 10px;
+            -moz-border-bottom-right-radius: 10px;
+            -o-border-bottom-right-radius: 10px;
+            border-top-right-radius: 10px;
+            -webkit-border-top-right-radius: 10px;
+            -moz-border-top-right-radius: 10px;
+            -o-border-top-right-radius: 10px;"
         }
     </style>
 
@@ -156,8 +180,7 @@
 
         <ul class="nav nav-tabs">
             <li role="presentation" class="active"><a href="#">Home</a></li>
-            <li role="presentation"><a href="#">Profile</a></li>
-            <li role="presentation"><a href="#">Messages</a></li>
+            <li role="presentation"><a href="File.jsp">File</a></li>
         </ul>
 
         <div class="center_left">
@@ -169,7 +192,7 @@
                         <h5>UserName:<font color="red"><s:property value="username"/></font> </h5>
                         <h5>E_mail:<font color="red"><s:property value="email"/></font></h5>
                         <h5>PhoneNumber:<font color="red"><s:property value="phonenum"/></font></h5>
-                        <p><a href="#" class="btn btn-primary" role="button" input type="file">Modify Photo</a></p>
+                        <p><button type="file" class="btn btn-primary" id="modifyPhoto" name="modifyPhoto">Modify Photo</button></p>
                     </div>
                 </div>
             </div>
@@ -182,33 +205,41 @@
             <table id="sort" cellpadding="5px;">
                 <tr>
                     <th>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
-                                data-whatever="@mdo" >Upload
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#upload"
+                                data-whatever="upload" >Upload
                         </button>
 
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                        <div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="uploadLabel">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                                 aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+                                        <h4 class="modal-title" id="uploadLabel">New File</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <form>
+                                        <form action="">
                                             <div class="form-group">
-                                                <label for="recipient-name" class="control-label">Recipient:</label>
-                                                <input type="text" class="form-control" id="recipient-name">
+                                                <label class="control-label">File_input:</label>
+                                                <input type="file" id="uploadfile" style="margin-bottom: 1em;" id="local_path">
+                                                <label class="control-label">Upload_path:</label>
+
+                                                <textarea class="form-control" id="input-text" name="address_input" placeholder="address"></textarea>
+                                                <%--<select class="form-control" >--%>
+                                                    <%--<option value="C">C:\</option>--%>
+                                                    <%--<option value="D">D:\</option>--%>
+                                                <%--</select>--%>
+                                                <%--<input type="text" class="form-control" id="upload_path">--%>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="message-text" class="control-label">Message:</label>
-                                                <textarea class="form-control" id="message-text"></textarea>
-                                            </div>
+                                            <%--<div class="form-group">--%>
+                                                <%--<label for="message-text" class="control-label">Message:</label>--%>
+                                                <%--<textarea class="form-control" id="message-text"></textarea>--%>
+                                            <%--</div>--%>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Send message</button>
+                                        <button type="submit" class="btn btn-primary" onclick="addFile()">Confirm</button>
                                     </div>
                                 </div>
                             </div>
@@ -222,38 +253,56 @@
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="sortType">
-                                <li><a href="#">According FileName</a></li>
-                                <li><a href="#">According FileContext</a></li>
+                                <li ><a onclick="sortType_name()">According FileName</a></li>
+                                <li ><a onclick="sortType_context()">According FileContext</a></li>
                                 <!--<li><a href="#">Something else here</a></li>-->
                                 <!--<li role="separator" class="divider"></li>-->
                                 <!--<li><a href="#">Separated link</a></li>-->
                             </ul>
                         </div>
                     </th>
-                    <th><input type="text" class="form-control" id="FileType" placeholder="According FileType"
-                               style="width:400px;"></th>
-                    <th><input class="btn btn-default" type="submit" value="Submit"></th>
+                    <form action="">
+                    <th><input type="text" class="form-control" id="FileType" placeholder="According FileType" style="width:400px;"></th>
+                    <th><input class="btn btn-default" type="submit" value="Search"></th>
+                    </form>
                 </tr>
             </table>
 
-            <ol class="breadcrumb">
+            <ol class="breadcrumb" style="margin-top: 1em;">
                 <li><a href="#">Home</a></li>
-                <li><a href="#">Library</a></li>
-                <li class="active">Data</li>
+                <%--<li><a href="#">Library</a></li>--%>
+                <%--<li class="active">Data</li>--%>
             </ol>
 
-            <table class="table table-hover" style="margin-top: 1em;">
+            <table class="table table-hover" id="fileTable">
                 <tr>
                     <th>file</th>
                     <th>modification time</th>
                     <th>size</th>
                 </tr>
-                <tr>
+                <tr onclick="click()" id="first" oncontextmenu="menu_context()">
+                    <td>January</td>
+                    <td>$100</td>
+                    <td>$100</td>
+                </tr>
+                <tr onclick="click()" id="sec">
+                    <td>January</td>
+                    <td>$100</td>
+                    <td>$100</td>
+                </tr>
+                <tr onclick="click()" oncontextmenu="alert('aa')">
                     <td>January</td>
                     <td>$100</td>
                     <td>$100</td>
                 </tr>
             </table>
+
+            <div id="menu_context">
+                <ul style="line-height: 40px;list-style-type: none; padding: 0px;margin-left: 5px;border: 2px;">
+                    <li>download</li>
+                    <li>delete</li>
+                </ul>
+            </div>
 
             <nav aria-label="Page navigation" style="margin-left: 5em;margin-right: 5em; ">
                 <ul class="pagination" style="margin-left: 5em;margin-right: 5em; ">
@@ -296,7 +345,7 @@
 </html>
 <script>
 
-    $('#exampleModal').on('show.bs.modal', function (event) {
+    $('#upload').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
         var recipient = button.data('whatever') // Extract info from data-* attributes
 // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
@@ -323,6 +372,44 @@
         var bc = document.getElementById("mainform");
         bc.style.background = "#f1c85f";
     }
+    function click(){
+
+    }
+    function addFile() {
+        
+    }
+    function sortType_name() {
+        var st= document.getElementById("FileType");
+        st.setAttribute("placeholder","According FileName");
+
+    }
+    function sortType_context() {
+        var st= document.getElementById("FileType");
+        st.setAttribute("placeholder","According FileContext");
+
+    }
+    function menu_context() {
+        var menu = document.getElementById("menu_context");
+        document.oncontextmenu = function(ev) {
+            var oEvent = ev || event;
+            //自定义的菜单显示
+            menu.style.display = "block";
+            //让自定义菜单随鼠标的箭头位置移动
+            menu.style.left = oEvent.clientX + "px";
+            menu.style.top = oEvent.clientY + "px";
+            //return false阻止系统自带的菜单，
+            //return false必须写在最后，否则自定义的右键菜单也不会出现
+            return false;
+        }
+        //实现点击document，自定义菜单消失
+        document.onclick = function() {
+            menu.style.display = "none";
+            document.oncontextmenu=true;
+        }
+
+    }
+
+
 </script>
 
 <!-- angularjs插件 -->
