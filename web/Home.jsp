@@ -218,18 +218,26 @@
                                         <h4 class="modal-title" id="uploadLabel">New File</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="">
+                                        <form action="upload">
                                             <div class="form-group">
+
+                                                <input type='text' name='textfield' id='textfield' class='txt' />
+                                                <input type="file" name="fileField" class="file" id="fileField" size="28" onchange="document.getElementById('textfield').value=this.value" />
+
                                                 <label class="control-label">File_input:</label>
-                                                <input type="file" id="uploadfile" style="margin-bottom: 1em;" id="local_path">
+                                                <input type="file" id="uploadfile" style="margin-bottom: 1em;" id="local_path" name="localPath1">
                                                 <label class="control-label">Upload_path:</label>
 
-                                                <textarea class="form-control" id="input-text" name="address_input" placeholder="address"></textarea>
+                                                <textarea class="form-control" id="input-text" name="dbPath1" placeholder="address"></textarea>
                                                 <%--<select class="form-control" >--%>
                                                     <%--<option value="C">C:\</option>--%>
                                                     <%--<option value="D">D:\</option>--%>
                                                 <%--</select>--%>
                                                 <%--<input type="text" class="form-control" id="upload_path">--%>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Confirm</button>
                                             </div>
                                             <%--<div class="form-group">--%>
                                                 <%--<label for="message-text" class="control-label">Message:</label>--%>
@@ -237,10 +245,7 @@
                                             <%--</div>--%>
                                         </form>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary" onclick="addFile()">Confirm</button>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -273,29 +278,26 @@
                 <%--<li><a href="#">Library</a></li>--%>
                 <%--<li class="active">Data</li>--%>
             </ol>
-
-            <table class="table table-hover" id="fileTable">
+            <div style="overflow-x: auto; overflow-y: auto; height: 350px; width:680px;">
+            <table class="table table-hover" id="fileTable" width="680px" height="350px">
                 <tr>
-                    <th>file</th>
-                    <th>modification time</th>
-                    <th>size</th>
+                    <th style="width:20px">filename</th>
+                    <th style="width:20px">tag</th>
+                    <th style="width:20px" >size</th>
                 </tr>
-                <tr onclick="click()" id="first" oncontextmenu="menu_context()">
-                    <td>January</td>
-                    <td>$100</td>
-                    <td>$100</td>
-                </tr>
-                <tr onclick="click()" id="sec">
-                    <td>January</td>
-                    <td>$100</td>
-                    <td>$100</td>
-                </tr>
-                <tr onclick="click()" oncontextmenu="alert('aa')">
-                    <td>January</td>
-                    <td>$100</td>
-                    <td>$100</td>
-                </tr>
+                <s:iterator value="fileslist" >
+                    <tr>
+                        <td><s:property value="filename"/></td>
+                        <td><s:property value="dbpath"/></td>
+                        <td><s:property value="owner"/></td>
+                        <td><s:property value="tag"/></td>
+                        <td><s:if test='type=="s"'><img src="images/file.jpg"></s:if>
+                            <s:elseif test='type=="f"'><img src="images/avtar.png"></s:elseif>
+                        </td>
+                    </tr>
+                </s:iterator>
             </table>
+            </div>
 
             <div id="menu_context">
                 <ul style="line-height: 40px;list-style-type: none; padding: 0px;margin-left: 5px;border: 2px;">
