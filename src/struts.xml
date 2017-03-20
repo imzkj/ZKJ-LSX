@@ -9,13 +9,16 @@
     <package name="default" namespace="/" extends="struts-default">
 
         <action name="login" class="com.service.LoginAction" method="login">
-            <result name="ok">/Home.jsp</result>
+            <result name="ok" type="chain">list</result>
             <result name="failed">/index.html</result>
         </action>
         <action name="register" class="com.service.LoginAction" method="register">
             <result name="ok">/index.html</result>
         </action>
         <action name="list" class="com.service.FileServiceAction" method="listAll">
+            <result name="ok">/Home.jsp</result>
+        </action>
+        <action name="upload" class="com.service.FileServiceAction" method="uploadFile">
             <result name="ok">/test.jsp</result>
         </action>
     </package>

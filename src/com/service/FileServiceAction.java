@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.common.File;
+import org.apache.struts2.ServletActionContext;
 
 /**
  * Created by ZKJ on 2017/3/16 0016.
@@ -53,7 +54,8 @@ public class FileServiceAction extends ActionSupport {
 
     // FileService
     public String uploadFile() {
-        return "";
+        System.out.println(dbPath+":"+localPath+"  "+ ServletActionContext.getContext().getName());
+        return "ok";
     }
 
     public String listAll() throws Exception {
