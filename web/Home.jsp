@@ -274,9 +274,9 @@
                 <%--<li class="active">Data</li>--%>
             </ol>
 
-            <table class="table table-hover" id="fileTable">
-                <tr>
-                    <th>file</th>
+            <table class="table table-hover" id="fileTable" style="min-width: 100%;">
+                <tr >
+                    <th style="min-width: 200px;">file</th>
                     <th>modification time</th>
                     <th>size</th>
                 </tr>
