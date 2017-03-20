@@ -4,10 +4,8 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.tool.DataBaseOperation;
 import com.tool.HDFSOperation;
 
-import java.nio.file.Files;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import com.common.File;
@@ -22,6 +20,7 @@ public class FileServiceAction extends ActionSupport {
     private String localPath;
     private String dbPath;
     private String hdfsPath;
+
     public static List<File> fileslist = new ArrayList<File>();
 
     public List<File> getFileslist() {
@@ -52,9 +51,9 @@ public class FileServiceAction extends ActionSupport {
         this.hdfsPath = hdfsPath;
     }
 
-    // FileService
-    public String uploadFile() {
-        System.out.println(dbPath+":"+localPath+"  "+ ServletActionContext.getContext().getName());
+    public String uploadFile() throws Exception {
+
+        System.out.println(dbPath + ":" + localPath + "  " + ServletActionContext.getContext().getName());
         return "ok";
     }
 

@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib uri="/struts-tags" prefix="s"%>
+<%@taglib uri="/struts-tags" prefix="s" %>
 <html ng-app>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -127,12 +127,13 @@
             color: silver;
             font-size: 2em;
         }
-        #menu_context{
+
+        #menu_context {
             width: 80px;
             height: 90px;
             display: none;
             position: absolute;
-            background-color:white;
+            background-color: white;
             border-style: groove;
             cursor: pointer;
             border-bottom-left-radius: 10px;
@@ -142,15 +143,16 @@
             border-top-left-radius: 10px;
             -webkit-border-top-left-radius: 10px;
             -moz-border-top-left-radius: 10px;
-            -o-border-top-left-radius: 10px;"
-            border-bottom-right-radius: 10px;
+            -o-border-top-left-radius: 10px;
+        " border-bottom-right-radius: 10 px;
             -webkit-border-bottom-right-radius: 10px;
             -moz-border-bottom-right-radius: 10px;
             -o-border-bottom-right-radius: 10px;
             border-top-right-radius: 10px;
             -webkit-border-top-right-radius: 10px;
             -moz-border-top-right-radius: 10px;
-            -o-border-top-right-radius: 10px;"
+            -o-border-top-right-radius: 10px;
+        "
         }
     </style>
 
@@ -189,14 +191,17 @@
                 <div class="thumbnail">
                     <img src="/images/person.svg" alt="个人图片" style="width:160px;height: 200px;">
                     <div class="caption">
-                        <h5>UserName:<font color="red"><s:property value="username"/></font> </h5>
+                        <h5>UserName:<font color="red"><s:property value="username"/></font></h5>
                         <h5>E_mail:<font color="red"><s:property value="email"/></font></h5>
                         <h5>PhoneNumber:<font color="red"><s:property value="phonenum"/></font></h5>
-                        <p><button type="file" class="btn btn-primary" id="modifyPhoto" name="modifyPhoto">Modify Photo</button></p>
+                        <p>
+                            <button type="file" class="btn btn-primary" id="modifyPhoto" name="modifyPhoto">Modify
+                                Photo
+                            </button>
+                        </p>
                     </div>
                 </div>
             </div>
-
 
 
         </div>
@@ -206,14 +211,15 @@
                 <tr>
                     <th>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#upload"
-                                data-whatever="upload" >Upload
+                                data-whatever="upload">Upload
                         </button>
 
                         <div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="uploadLabel">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close"><span
                                                 aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="uploadLabel">New File</h4>
                                     </div>
@@ -221,27 +227,33 @@
                                         <form action="upload">
                                             <div class="form-group">
 
-                                                <input type='text' name='textfield' id='textfield' class='txt' />
-                                                <input type="file" name="fileField" class="file" id="fileField" size="28" onchange="document.getElementById('textfield').value=this.value" />
+                                                <input type='text' name='textfield' id='textfield' class='txt'/>
+                                                <input type="file" name="fileField" class="file" id="fileField"
+                                                       size="28"
+                                                       onchange="document.getElementById('textfield').value=this.value"/>
 
                                                 <label class="control-label">File_input:</label>
-                                                <input type="file" id="uploadfile" style="margin-bottom: 1em;" id="local_path" name="localPath1">
+                                                <input type="file" id="uploadfile" style="margin-bottom: 1em;"
+                                                       id="local_path" name="localPath1">
                                                 <label class="control-label">Upload_path:</label>
 
-                                                <textarea class="form-control" id="input-text" name="dbPath1" placeholder="address"></textarea>
+                                                <textarea class="form-control" id="input-text" name="dbPath1"
+                                                          placeholder="address"></textarea>
                                                 <%--<select class="form-control" >--%>
-                                                    <%--<option value="C">C:\</option>--%>
-                                                    <%--<option value="D">D:\</option>--%>
+                                                <%--<option value="C">C:\</option>--%>
+                                                <%--<option value="D">D:\</option>--%>
                                                 <%--</select>--%>
                                                 <%--<input type="text" class="form-control" id="upload_path">--%>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                    Close
+                                                </button>
                                                 <button type="submit" class="btn btn-primary">Confirm</button>
                                             </div>
                                             <%--<div class="form-group">--%>
-                                                <%--<label for="message-text" class="control-label">Message:</label>--%>
-                                                <%--<textarea class="form-control" id="message-text"></textarea>--%>
+                                            <%--<label for="message-text" class="control-label">Message:</label>--%>
+                                            <%--<textarea class="form-control" id="message-text"></textarea>--%>
                                             <%--</div>--%>
                                         </form>
                                     </div>
@@ -258,8 +270,8 @@
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="sortType">
-                                <li ><a onclick="sortType_name()">According FileName</a></li>
-                                <li ><a onclick="sortType_context()">According FileContext</a></li>
+                                <li><a onclick="sortType_name()">According FileName</a></li>
+                                <li><a onclick="sortType_context()">According FileContext</a></li>
                                 <!--<li><a href="#">Something else here</a></li>-->
                                 <!--<li role="separator" class="divider"></li>-->
                                 <!--<li><a href="#">Separated link</a></li>-->
@@ -267,36 +279,38 @@
                         </div>
                     </th>
                     <form action="">
-                    <th><input type="text" class="form-control" id="FileType" placeholder="According FileType" style="width:400px;"></th>
-                    <th><input class="btn btn-default" type="submit" value="Search"></th>
+                        <th><input type="text" class="form-control" id="FileType" placeholder="According FileType"
+                                   style="width:400px;"></th>
+                        <th><input class="btn btn-default" type="submit" value="Search"></th>
                     </form>
                 </tr>
             </table>
 
-            <ol class="breadcrumb" style="margin-top: 1em;">
+            <ol class="breadcrumb" style="margin-top: 10px;border-top-width: 0px;margin-bottom: 10px;">
                 <li><a href="#">Home</a></li>
                 <%--<li><a href="#">Library</a></li>--%>
                 <%--<li class="active">Data</li>--%>
             </ol>
-            <div style="overflow-x: auto; overflow-y: auto; height: 350px; width:680px;">
-            <table class="table table-hover" id="fileTable" width="680px" height="350px">
-                <tr>
-                    <th style="width:20px">filename</th>
-                    <th style="width:20px">tag</th>
-                    <th style="width:20px" >size</th>
+            <table>
+                <tr >
+                    <th style="width:226px;text-align: left">filename</th>
+                    <th style="width:226px;text-align: left">tag</th>
+                    <th style="width:226px;text-align: left">size</th>
                 </tr>
-                <s:iterator value="fileslist" >
-                    <tr>
-                        <td><s:property value="filename"/></td>
-                        <td><s:property value="dbpath"/></td>
-                        <td><s:property value="owner"/></td>
-                        <td><s:property value="tag"/></td>
-                        <td><s:if test='type=="s"'><img src="images/file.jpg"></s:if>
-                            <s:elseif test='type=="f"'><img src="images/avtar.png"></s:elseif>
-                        </td>
-                    </tr>
-                </s:iterator>
             </table>
+            <div style="overflow-x: auto; overflow-y: auto; height: 350px; width:680px;">
+                <table class="table table-hover" id="fileTable" width="680px" height="350px">
+
+                    <s:iterator value="fileslist">
+                        <tr>
+                            <td style="width:226px"><s:property value="filename"/></td>
+                            <td style="width:226px"><s:property value="tag"/></td>
+                            <td style="width:226px"><s:if test='type=="s"'><img src="images/file.jpg"></s:if>
+                                <s:elseif test='type=="f"'><img src="images/avtar.png"></s:elseif>
+                            </td>
+                        </tr>
+                    </s:iterator>
+                </table>
             </div>
 
             <div id="menu_context">
@@ -305,26 +319,6 @@
                     <li>delete</li>
                 </ul>
             </div>
-
-            <nav aria-label="Page navigation" style="margin-left: 5em;margin-right: 5em; ">
-                <ul class="pagination" style="margin-left: 5em;margin-right: 5em; ">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
         </div>
     </div> <!--center end -->
 
@@ -374,25 +368,25 @@
         var bc = document.getElementById("mainform");
         bc.style.background = "#f1c85f";
     }
-    function click(){
+    function click() {
 
     }
     function addFile() {
-        
+
     }
     function sortType_name() {
-        var st= document.getElementById("FileType");
-        st.setAttribute("placeholder","According FileName");
+        var st = document.getElementById("FileType");
+        st.setAttribute("placeholder", "According FileName");
 
     }
     function sortType_context() {
-        var st= document.getElementById("FileType");
-        st.setAttribute("placeholder","According FileContext");
+        var st = document.getElementById("FileType");
+        st.setAttribute("placeholder", "According FileContext");
 
     }
     function menu_context() {
         var menu = document.getElementById("menu_context");
-        document.oncontextmenu = function(ev) {
+        document.oncontextmenu = function (ev) {
             var oEvent = ev || event;
             //自定义的菜单显示
             menu.style.display = "block";
@@ -404,9 +398,9 @@
             return false;
         }
         //实现点击document，自定义菜单消失
-        document.onclick = function() {
+        document.onclick = function () {
             menu.style.display = "none";
-            document.oncontextmenu=true;
+            document.oncontextmenu = true;
         }
 
     }
