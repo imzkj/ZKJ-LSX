@@ -180,14 +180,14 @@
 
         <ul class="nav nav-tabs">
             <li role="presentation" class="active"><a href="#">Home</a></li>
-            <li role="presentation"><a href="File.jsp">File</a></li>
+            <li role="presentation"><a href="Home_File.jsp">File</a></li>
         </ul>
 
         <div class="center_left">
 
             <div class="col-sm-6 col-md-4" style="margin-top: 20px;width:280px;">
                 <div class="thumbnail">
-                    <img src="/images/person299.svg" alt="个人图片" style="width:160px;height: 200px;">
+                    <img src="/images/person.svg" alt="个人图片" style="width:160px;height: 200px;">
                     <div class="caption">
                         <h5>UserName:<font color="red"><s:property value="username"/></font> </h5>
                         <h5>E_mail:<font color="red"><s:property value="email"/></font></h5>
@@ -334,7 +334,7 @@
              style="min-width: 2em;">
             0%
         </div>
-        <span style="float: right;padding-right: 50px;">0K/1024G</span>
+        <span style="float: right;padding-right: 50px;">0K/10G</span>
 
     </div>
 
