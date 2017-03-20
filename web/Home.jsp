@@ -180,7 +180,7 @@
 
         <ul class="nav nav-tabs">
             <li role="presentation" class="active"><a href="#">Home</a></li>
-            <li role="presentation"><a href="File.jsp">File</a></li>
+            <li role="presentation"><a href="Home_File.jsp">File</a></li>
         </ul>
 
         <div class="center_left">
@@ -285,7 +285,7 @@
                     <td>$100</td>
                     <td>$100</td>
                 </tr>
-                <tr onclick="click()" id="sec">
+                <tr onclick="click()" id="sec" oncontextmenu="menu_context()">
                     <td>January</td>
                     <td>$100</td>
                     <td>$100</td>
@@ -332,7 +332,7 @@
              style="min-width: 2em;">
             0%
         </div>
-        <span style="float: right;padding-right: 50px;">0K/1024G</span>
+        <span style="float: right;padding-right: 50px;">0K/10G</span>
 
     </div>
 
