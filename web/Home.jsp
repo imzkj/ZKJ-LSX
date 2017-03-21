@@ -278,7 +278,12 @@
                                             </div>
                                             <div class="modal-footer">
 
-                                                
+                                                <div ng-app="myApp" ng-controller="myCtrl">
+
+                                                    <select ng-init="selectedName = names[0]" ng-model="selectedName" ng-options="x for x in names">
+                                                    </select>
+
+                                                </div>
 
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">
                                                     Close
@@ -373,6 +378,11 @@
 </body>
 </html>
 <script>
+
+    var app = angular.module('myApp', []);     //file标签
+    app.controller('myCtrl', function($scope) {
+        $scope.names = ["风景", "历史", "人文"];
+    });
 
     $('#upload').on('show.bs.modal', function (event) {                 //上传function
         var button = $(event.relatedTarget) // Button that triggered the modal
