@@ -9,6 +9,16 @@ public class File {
     private String owner;
     private String tag;
     private String size;
+    private String used;
+
+    public String getUsed() {
+        return used;
+    }
+
+    public void setUsed( String used ) {
+        this.used = used;
+    }
+
     private String type;
 
     @Override

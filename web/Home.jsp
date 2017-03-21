@@ -265,7 +265,7 @@
                                     </div>
                                     <div class="modal-body">
 
-                                        <s:form action="uploadpath" method="post" enctype="multipart/form-data">
+                                        <s:form action="upload" method="post" enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <label class="control-label">File_input:</label>
                                                 <input type="file" id="uploadfile" style="margin-bottom: 1em;"
@@ -273,6 +273,8 @@
                                                 <label class="control-label">Upload_path:</label>
                                                 <textarea class="form-control" id="input-text" name="dbPath"
                                                           placeholder="address"></textarea>
+                                                <s:hidden name="username" value="%{#request.username}">
+                                                </s:hidden>
                                             </div>
                                             <div class="modal-footer">
 
@@ -342,8 +344,8 @@
                                 <s:elseif test='type=="doc"'><img src="images/word.svg"></s:elseif>
                                 <s:elseif test='type=="xls"'><img src="images/xls.svg"></s:elseif>
                                 <s:elseif test='type=="exe"'><img src="images/exe.svg"></s:elseif>
-                                <s:elseif test='type=="s"'><img src="images/unknown.svg"></s:elseif>
                                 <s:elseif test='type=="zip"'><img src="images/zip.svg"></s:elseif>
+                                <s:else><img src="images/unknown.svg"></s:else>
 
                                 <s:property value="filename"/></td>
                             <td style="width:226px"><s:property value="tag"/></td>

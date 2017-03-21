@@ -73,10 +73,11 @@ public class FileMd5Utils {
     }
 
     public static void main( String[] args ) throws IOException {
-        String fileName = "F:\\test01\\1.txt";
-        String str = "d0970714757783e6cf17b26fb8e2298f";
-        String str2 = "ea3ed20b6b101a09085ef09c97da1597";
-        System.out.println(str.equals(str2));
-        System.out.println(getFileMD5String(fileName));
+        String filenameFileName="/debug/txt/e_e";
+        String substring = filenameFileName.substring(filenameFileName.lastIndexOf("/")+1, filenameFileName.lastIndexOf("_"));
+        System.out.println(substring+"   ");
+        String[] split = filenameFileName.split("\\*\\.\\?");
+        System.out.println(split[0]);
+        System.out.println(filenameFileName+split.length);
     }
 }

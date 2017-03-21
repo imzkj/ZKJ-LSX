@@ -1,8 +1,11 @@
 package com.service;
 
+import com.common.User;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tool.DataBaseOperation;
+import org.apache.struts2.ServletActionContext;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.ResultSet;
 
 /**
@@ -57,6 +60,8 @@ public class LoginAction extends ActionSupport {
         if (resultSet.next()) {
             setEmail(resultSet.getString("email"));
             setPhonenum(resultSet.getString("phonenum"));
+            HttpServletRequest request = ServletActionContext.getRequest();
+            request.getSession().setAttribute("username",username);
             return "ok";
         }
         return "failed";
@@ -64,8 +69,8 @@ public class LoginAction extends ActionSupport {
 
     public String register() throws Exception {
         dataBaseOperation = new DataBaseOperation();
-        String selectsql = "insert into user(username,password,phonenum,email,totalsize) values(\""
-                + username + "\",\"" + password + "\",\"" + phonenum + "\",\"" + email + "\",10)";
+        String selectsql = "insert into user(username,password,phonenum,email,totalsize,used) values(\""
+                + username + "\",\"" + password + "\",\"" + phonenum + "\",\"" + email + "\",10,0)";
         System.out.println(selectsql);
         dataBaseOperation.updateSql(selectsql);
         return "ok";
