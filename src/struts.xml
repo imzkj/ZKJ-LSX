@@ -19,7 +19,7 @@
             <result name="ok">/Home.jsp</result>
         </action>
         <action name="upload" class="com.service.FileServiceAction" method="uploadFile">
-            <result name="ok">/test.jsp</result>
+            <result name="ok">/Home.jsp</result>
         </action>
     </package>
 

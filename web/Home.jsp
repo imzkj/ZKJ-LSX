@@ -264,6 +264,8 @@
                                                 <label class="control-label">Upload_path:</label>
                                                 <textarea class="form-control" id="input-text" name="dbPath"
                                                           placeholder="address"></textarea>
+                                                <s:hidden name="username" value="%{#request.username}">
+                                                </s:hidden>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">
