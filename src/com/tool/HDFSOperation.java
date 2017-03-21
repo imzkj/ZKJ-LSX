@@ -31,13 +31,9 @@ public class HDFSOperation {
     /*
       上传文件
      */
-    private boolean upLoad(FileInputStream in,String hdfsPath) throws IOException {
-
+    public boolean upLoad(FileInputStream in,String hdfsPath) throws IOException {
+        FileSystem fs = FileSystem.get(URI.create(hdfsPath), conf);
         Path path = new Path(hdfsPath);
-        if (fs.exists(path)) {
-            System.out.println("文件已经存在");
-            return false;
-        }
         FSDataOutputStream out = fs.create(new Path(hdfsPath));
         IOUtils.copyBytes(in, out, 4096, true);
         in.close();
@@ -48,7 +44,7 @@ public class HDFSOperation {
     /*
     下载文件
      */
-    private boolean downLoad() throws IOException {
+    public boolean downLoad() throws IOException {
         Path path = new Path(hdfsPath);
         if (!fs.exists(path)) {
             System.out.println("云端文件不存在");
@@ -61,7 +57,7 @@ public class HDFSOperation {
 
     /*删除文件
      */
-    private boolean deleteFile() {
+    public boolean deleteFile() {
         try {
             fs.delete(new Path(hdfsPath), true);
         } catch (IOException e) {
@@ -72,7 +68,7 @@ public class HDFSOperation {
     }
 
     //创建文件夹
-    private boolean mkdir() {
+    public boolean mkdir() {
         try {
             fs.mkdirs(new Path(localPath));
             fs.close();
@@ -85,7 +81,7 @@ public class HDFSOperation {
 
 
     /*删除文件夹*/
-    private boolean deleteDir() {
+    public boolean deleteDir() {
         try {
             fs.delete(new Path(localPath));
             fs.close();
@@ -97,7 +93,12 @@ public class HDFSOperation {
     }
 
     public static void main( String[] args ) throws Exception {
-        HDFSOperation h = new HDFSOperation();
-        System.out.println(h.deleteDir() ? 1 : 0);
+//        FileSystem fs = FileSystem.get(URI.create(hdfsPath), conf);
+//        Path l = new Path("D:\\test1.txt");
+//        Path y = new Path("/topkeyinput");
+//        fs.copyFromLocalFile(l, y);
+//        HDFSOperation h = new HDFSOperation();
+//        FileInputStream fileInputStream = new FileInputStream(new File("D:\\test1.txt"));
+//        System.out.println(h.upLoad(fileInputStream,"/test1.txt"));
     }
 }

@@ -1,6 +1,7 @@
 package com.service;
 
 import com.common.User;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tool.DataBaseOperation;
 import com.tool.FileMd5Utils;
@@ -11,8 +12,14 @@ import java.sql.ResultSet;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.StringJoiner;
 
 import com.common.File;
+import org.apache.struts2.ServletActionContext;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by ZKJ on 2017/3/16 0016.
@@ -29,6 +36,25 @@ public class FileServiceAction extends ActionSupport {
     private String tag;
     private String username;
     private String dirName;
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail( String email ) {
+        this.email = email;
+    }
+
+    public String getPhonenum() {
+        return phonenum;
+    }
+
+    public void setPhonenum( String phonenum ) {
+        this.phonenum = phonenum;
+    }
+
+    private String phonenum;
 
     public String getDirName() {
         return dirName;
@@ -57,6 +83,10 @@ public class FileServiceAction extends ActionSupport {
     public static List<File> fileslist;
 
     public FileServiceAction() throws Exception {
+        Map<String, Object> session = ActionContext.getContext().getSession();
+        username = (String) session.get("username");
+        email = (String) session.get("email");
+        phonenum = (String) session.get("phonenum");
     }
 
     public String getFilenameFileName() {
@@ -107,6 +137,7 @@ public class FileServiceAction extends ActionSupport {
         FileInputStream in = new FileInputStream(getFilename());
         String filename1 = "";
         String type = "";
+        String fileMd5 = md5.getFileMD5String(filename);
         if (filenameFileName.lastIndexOf(".") != -1) {
             filename1 = filenameFileName.substring(0, filenameFileName.lastIndexOf("."));
             type = filenameFileName.substring(filenameFileName.lastIndexOf(".") + 1);
@@ -116,17 +147,22 @@ public class FileServiceAction extends ActionSupport {
         }
 
         //相同文件名相同路径下不允许上传
-        String selectSql = "select * from file where filename=\"" + filenameFileName + "\" and dbpath=\"" + dbPath + "\"";
+        String selectSql = "select * from file where filename=\"" + filenameFileName + "\" and dbpath=\"" + dbPath + "\""
+                + " and owner=\"" + username + "\"";
         ResultSet resultSet = dataBaseOperation.querySql(selectSql);
         if (resultSet.next()) {
             //弹出提示框
-            this.addActionMessage("shanchu");
+            Map<String, Object> request1 = ActionContext.getContext().getSession();
+            HttpServletRequest request = ServletActionContext.getRequest();
+            request.setAttribute("errorMessage", "目录：" + dbPath + "下已经存在" + filenameFileName + "文件！");
+            return "ok";
         }
         String hdfsName = filename1 + "_";
         //重命名文件在网盘的名字
         String fileSql = "select hdfsPath from file where owner=\"" + username + "\" order by hdfsPath desc";
         ResultSet resultSet0 = dataBaseOperation.querySql(fileSql);
         String hdfsName1 = "";
+
         //如果网盘已存在文件
         while(resultSet0.next()) {
             hdfsName1 = resultSet0.getString("hdfsPath").substring(resultSet0.getString("hdfsPath").lastIndexOf("/") + 1,
@@ -167,11 +203,25 @@ public class FileServiceAction extends ActionSupport {
         if (EXE.contains(type)) {
             type = "EXE";
         }
-
+//如果网盘存在内容相同的文件则
+        String fileExistHdfs = "select md5,hdfsPath from file where owner=\"" + username + "\"";
+        ResultSet resultSet2 = dataBaseOperation.querySql(selectSql);
+        String hdfsPath = "/Disk/" + username + "/" + hdfsName;
+        boolean isUploadFile = true;
+        while(resultSet2.next()) {
+            if (resultSet2.getString("md5").equals(fileMd5)) {
+                hdfsPath = resultSet2.getString("hdfsPath");
+                isUploadFile=false;
+                break;
+            }
+        }
+        if (isUploadFile) {
+            hdfsOperation.upLoad(in,hdfsPath);
+        }
         String addFile = "insert into file(filename,dbpath,owner,tag,size,type,md5,hdfsPath) values(\"" +
                 filenameFileName + "\",\"" + dbPath + "\",\"" + username + "\",\"" + tag + "\",\""
-                + FormetFileSize(filename.length()) + "\",\"" + type + "\",\"" + md5.getFileMD5String(filename)
-                + "\",\"" + "/Disk/" + username + "/" + hdfsName + "\")";
+                + FormetFileSize(filename.length()) + "\",\"" + type + "\",\"" + fileMd5 + "\",\""
+                + hdfsPath + "\")";
         dataBaseOperation.updateSql(addFile);
         return "ok";
     }

@@ -1,12 +1,14 @@
 package com.service;
 
 import com.common.User;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tool.DataBaseOperation;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.ResultSet;
+import java.util.Map;
 
 /**
  * Created by ZKJ on 2017/3/16 0016.
@@ -60,8 +62,10 @@ public class LoginAction extends ActionSupport {
         if (resultSet.next()) {
             setEmail(resultSet.getString("email"));
             setPhonenum(resultSet.getString("phonenum"));
-            HttpServletRequest request = ServletActionContext.getRequest();
-            request.getSession().setAttribute("username",username);
+            Map<String, Object> session = ActionContext.getContext().getSession();
+            session.put("username", username);
+            session.put("email", resultSet.getString("email"));
+            session.put("phonenum", resultSet.getString("phonenum"));
             return "ok";
         }
         return "failed";
