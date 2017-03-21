@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="/struts-tags" prefix="s" %>
-<html ng-app>
+<html >
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>基于JFinal+Hadoop+bootstrap+AngularJs的云端文件管理系统</title>
@@ -278,15 +278,6 @@
                                                 </s:hidden>
                                             </div>
                                             <div class="modal-footer">
-
-                                                <div ng-app="myApp" ng-controller="myCtrl">
-
-                                                    <select ng-init="selectedName = names[0]" ng-model="selectedName"
-                                                            ng-options="x for x in names">
-                                                    </select>
-
-                                                </div>
-
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">
                                                     Close
                                                 </button>
@@ -388,13 +379,8 @@
 <div class="Bottom">基于JFinal+Hadoop+bootstrap+AngularJs的云端文件管理系统</div>
 </body>
 </html>
+
 <script>
-
-    var app = angular.module('myApp', []);     //file标签
-    app.controller('myCtrl', function ($scope) {
-        $scope.names = ["风景", "历史", "人文"];
-    });
-
     $('#upload').on('show.bs.modal', function (event) {                 //上传function
         var button = $(event.relatedTarget) // Button that triggered the modal
         var recipient = button.data('whatever') // Extract info from data-* attributes
@@ -456,10 +442,7 @@
             menu.style.display = "none";
             document.oncontextmenu = true;
         }
-
     }
-
-
 </script>
 
 <!-- angularjs插件 -->
