@@ -21,6 +21,9 @@
         <action name="upload" class="com.service.FileServiceAction" method="uploadFile">
             <result name="ok">/test.jsp</result>
         </action>
+        <action name="uploadpath" class="com.service.FileServiceAction" method="uploadFilePath">
+            <result name="ok">/test.jsp</result>
+        </action>
     </package>
 
 </struts>

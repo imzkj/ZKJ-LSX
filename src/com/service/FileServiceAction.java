@@ -79,7 +79,7 @@ public class FileServiceAction extends ActionSupport {
 
     public String uploadFile() throws Exception {
         FileInputStream is = new FileInputStream(getFilename());
-       System.out.println(md5.getFileMD5String(filename));
+        System.out.println(md5.getFileMD5String(filename));
         BufferedReader tBufferedReader = new BufferedReader(new InputStreamReader(is));
         StringBuffer tStringBuffer = new StringBuffer();
         String sTempOneLine = new String("");
@@ -98,7 +98,12 @@ public class FileServiceAction extends ActionSupport {
 //        is.close();
         return "ok";
     }
+    public String uploadFilePath() throws Exception{
 
+        System.getProperty("java.class.path");
+
+        return "ok";
+    }
     public String listAll() throws Exception {
         String sql = "select * from file ";
         //"where dbpath=\"" + path + "\"";

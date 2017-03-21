@@ -184,8 +184,9 @@
             <li role="presentation"><a href="Home_File.jsp">File</a></li>
         </ul>
 
-        <div class="center_left">
 
+        <div class="center_left" style="height: 480px;">
+            <%-- 个人信息--%>
             <div class="col-sm-6 col-md-4" style="margin-top: 20px;width:280px;">
                 <div class="thumbnail">
                     <img src="/images/person.svg" alt="个人图片" style="width:160px;height: 200px;">
@@ -233,7 +234,15 @@
                     </div>
                 </div>
             </div>
+            <%-- 进度条--%>
+            <div class="progress" style="width: 280px; margin-top: 30em;">
+                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+                     style="min-width: 2em;">
+                    0%
+                </div>
+                <span style="float: right;padding-right: 50px;">0K/10G</span>
 
+            </div>
 
         </div>
         <div class="center_right" style="margin-top: 1em;">
@@ -256,11 +265,11 @@
                                     </div>
                                     <div class="modal-body">
 
-                                        <s:form action="upload" method="post" enctype="multipart/form-data">
+                                        <s:form action="uploadpath" method="post" enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <label class="control-label">File_input:</label>
                                                 <input type="file" id="uploadfile" style="margin-bottom: 1em;"
-                                                       id="local_path" name="filename">
+                                                       id="local_path" name="filename" onchange="document.getElementById('input-text').value=this.value">
                                                 <label class="control-label">Upload_path:</label>
                                                 <textarea class="form-control" id="input-text" name="dbPath"
                                                           placeholder="address"></textarea>
@@ -324,6 +333,7 @@
                     <s:iterator value="fileslist">
                         <tr>
                             <td style="width:226px">
+
                                 <s:if test='type=="image"'><img src="images/file.svg"></s:if>
                                 <s:elseif test='type=="txt"'><img src="images/txt.svg"></s:elseif>
                                 <s:elseif test='type=="doc"'><img src="images/word.svg"></s:elseif>
@@ -350,17 +360,6 @@
             </div>
         </div>
     </div> <!--center end -->
-
-
-    <div class="progress" style="margin-left: 40px;margin-right: 300px;">
-        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
-             style="min-width: 2em;">
-            0%
-        </div>
-        <span style="float: right;padding-right: 50px;">0K/10G</span>
-
-    </div>
-
 
 </div> <!-- contain end -->
 
