@@ -152,7 +152,7 @@
     </style>
 
 </head>
-<body ng-controller="MyBody">
+<body >
 <div class="Title"><b>Welcome</b></div>
 
 <div class="contain" id="mainform">
@@ -246,7 +246,7 @@
 
         </div>
         <div class="center_right" style="margin-top: 1em;">
-
+            <%--搜索--%>
             <table id="sort" cellpadding="5px;">
                 <tr>
                     <th>
@@ -317,12 +317,13 @@
                     </form>
                 </tr>
             </table>
-
+            <%--路径导航--%>
             <ol class="breadcrumb" style="margin-top: 10px;border-top-width: 0px;margin-bottom: 10px;">
                 <li><a href="#">Home</a></li>
                 <%--<li><a href="#">Library</a></li>--%>
                 <%--<li class="active">Data</li>--%>
             </ol>
+            <%--table--%>
             <table class="table table-hover" style="margin-bottom: 0px;">
                 <tr>
                     <th style="width:226px;text-align: left">filename</th>
@@ -363,7 +364,7 @@
                     </s:iterator>
                 </table>
             </div>
-
+            <%--右键菜单--%>
             <div id="menu_context">
                 <ul style="line-height: 40px;list-style-type: none; padding: 0px;margin-left: 5px;border: 2px;">
                     <li>download</li>
@@ -373,14 +374,15 @@
         </div>
     </div> <!--center end -->
 
+
 </div> <!-- contain end -->
 
 
 <div class="Bottom">基于JFinal+Hadoop+bootstrap+AngularJs的云端文件管理系统</div>
 </body>
 </html>
-
 <script>
+
     $('#upload').on('show.bs.modal', function (event) {                 //上传function
         var button = $(event.relatedTarget) // Button that triggered the modal
         var recipient = button.data('whatever') // Extract info from data-* attributes
