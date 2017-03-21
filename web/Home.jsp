@@ -338,7 +338,7 @@
 
                                 <s:if test='type=="image"'><img src="images/file.svg"></s:if>
                                 <s:elseif test='type=="txt"'><img src="images/txt.svg"></s:elseif>
-                                <s:elseif test='type=="doc"'><img src="images/word.svg"></s:elseif>
+                                <s:elseif test='type=="word"'><img src="images/word.svg"></s:elseif>
                                 <s:elseif test='type=="xls"'><img src="images/xls.svg"></s:elseif>
                                 <s:elseif test='type=="exe"'><img src="images/exe.svg"></s:elseif>
                                 <s:elseif test='type=="zip"'><img src="images/zip.svg"></s:elseif>

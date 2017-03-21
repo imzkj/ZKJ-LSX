@@ -111,6 +111,7 @@ public class FileServiceAction extends ActionSupport {
             filename1=filenameFileName;
             type="UnKnown";
         }
+
         //相同文件名相同路径下不允许上传
         String selectSql = "select * from file where filename=\"" + filenameFileName + "\" and dbpath=\"" + dbPath + "\"";
         ResultSet resultSet = dataBaseOperation.querySql(selectSql);
@@ -138,6 +139,29 @@ public class FileServiceAction extends ActionSupport {
         String temp=filename1 + "_";
         if (hdfsName.equals(temp)) {
             hdfsName+="0."+type;
+        }
+        String image=".jpg,.png,.gif";//图片类型
+        String zip=".zip,.rar,.gzip";//压缩包类型
+        String word=".doc,.docx";//word文档类型
+        String excel=".xls";//excel文件类型
+        String TXT=".txt";//TXT文件类型
+        String EXE=".exe";//EXE文件类型
+        if (image.contains(type)) {
+            type="image";
+        }
+        if (zip.contains(type)) {
+            type="zip";
+        }
+        if (word.contains(type)) {
+            type="word";
+        }
+        if (excel.contains(type)) {
+            type="excel";
+        }
+        if (TXT.contains(type)) {
+            type="TXT";
+        }if (EXE.contains(type)) {
+            type="EXE";
         }
 
         String addFile = "insert into file(filename,dbpath,owner,tag,size,type,md5,hdfsPath) values(\"" +
