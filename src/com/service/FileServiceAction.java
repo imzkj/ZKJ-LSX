@@ -111,6 +111,13 @@ public class FileServiceAction extends ActionSupport {
             filename1=filenameFileName;
             type="UnKnown";
         }
+        //相同文件名相同路径下不允许上传
+        String selectSql = "select * from file where filename=\"" + filenameFileName + "\" and dbpath=\"" + dbPath + "\"";
+        ResultSet resultSet = dataBaseOperation.querySql(selectSql);
+        if (resultSet.next()) {
+            //弹出提示框
+            this.addActionMessage("shanchu");
+        }
         String hdfsName = filename1 + "_";
         //重命名文件在网盘的名字
         String fileSql = "select hdfsPath from file where owner=\"" + username + "\" order by hdfsPath desc";
@@ -132,13 +139,7 @@ public class FileServiceAction extends ActionSupport {
         if (hdfsName.equals(temp)) {
             hdfsName+="0."+type;
         }
-//相同文件名相同路径下不允许上传
-        String selectSql = "select * from file where filename=\"" + filenameFileName + "\" and dbpath=\"" + dbPath + "\"";
-        ResultSet resultSet = dataBaseOperation.querySql(selectSql);
-        if (resultSet.next()) {
-            //弹出提示框
-            this.addActionMessage("shanchu");
-        }
+
         String addFile = "insert into file(filename,dbpath,owner,tag,size,type,md5,hdfsPath) values(\"" +
                 filenameFileName + "\",\"" + dbPath + "\",\"" + username + "\",\"" + tag + "\",\""
                 + FormetFileSize(filename.length()) + "\",\"" + type + "\",\"" + md5.getFileMD5String(filename)
@@ -146,7 +147,12 @@ public class FileServiceAction extends ActionSupport {
         dataBaseOperation.updateSql(addFile);
         return "ok";
     }
+    public String uploadFilePath() throws Exception{
 
+        System.getProperty("java.class.path");
+
+        return "ok";
+    }
     public String listAll() throws Exception {
         String sql = "select * from file ";
         //"where dbpath=\"" + path + "\"";
