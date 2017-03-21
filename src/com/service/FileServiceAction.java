@@ -80,14 +80,14 @@ public class FileServiceAction extends ActionSupport {
     public String uploadFile() throws Exception {
         FileInputStream is = new FileInputStream(getFilename());
        System.out.println(md5.getFileMD5String(filename));
-//        BufferedReader tBufferedReader = new BufferedReader(new InputStreamReader(is));
-//        StringBuffer tStringBuffer = new StringBuffer();
-//        String sTempOneLine = new String("");
-//        while((sTempOneLine = tBufferedReader.readLine()) != null) {
-//            tStringBuffer.append(sTempOneLine);
-//        }
-//        System.out.println("输入文件内容:" + tStringBuffer.toString());
-//        System.out.println("输入文件名字:" + filenameFileName);
+        BufferedReader tBufferedReader = new BufferedReader(new InputStreamReader(is));
+        StringBuffer tStringBuffer = new StringBuffer();
+        String sTempOneLine = new String("");
+        while((sTempOneLine = tBufferedReader.readLine()) != null) {
+            tStringBuffer.append(sTempOneLine);
+        }
+        System.out.println("输入文件内容:" + tStringBuffer.toString());
+        System.out.println("输入文件名字:" + filenameFileName);
 //        OutputStream os = new FileOutputStream(hdfsPath);
 //        byte buffer[] = new byte[1024];
 //        int cnt = 0;
