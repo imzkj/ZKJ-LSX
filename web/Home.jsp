@@ -323,14 +323,12 @@
 
                     <s:iterator value="fileslist">
                         <tr>
-                            <td style="width:226px;"><s:property value="filename"/></td>
-                            <td style="width:226px"><s:property value="tag"/></td>
                             <td style="width:226px"><s:if test='type=="s"'><img src="images/file.jpg"></s:if>
                                 <s:elseif test='type=="f"'><img src="images/avtar.png"></s:elseif>
                                 <s:property value="filename"/></td>
                             <td style="width:226px"><s:property value="tag"/></td>
                             <td style="width:226px">
-                                <s:property value="tag"/>
+                                <s:property value="size"/>
                             </td>
                         </tr>
                     </s:iterator>
