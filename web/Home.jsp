@@ -323,8 +323,15 @@
 
                     <s:iterator value="fileslist">
                         <tr>
-                            <td style="width:226px"><s:if test='type=="s"'><img src="images/file.jpg"></s:if>
-                                <s:elseif test='type=="f"'><img src="images/avtar.png"></s:elseif>
+                            <td style="width:226px">
+                                <s:if test='type=="image"'><img src="images/file.svg"></s:if>
+                                <s:elseif test='type=="txt"'><img src="images/txt.svg"></s:elseif>
+                                <s:elseif test='type=="doc"'><img src="images/word.svg"></s:elseif>
+                                <s:elseif test='type=="xls"'><img src="images/xls.svg"></s:elseif>
+                                <s:elseif test='type=="exe"'><img src="images/exe.svg"></s:elseif>
+                                <s:elseif test='type=="s"'><img src="images/unknown.svg"></s:elseif>
+                                <s:elseif test='type=="zip"'><img src="images/zip.svg"></s:elseif>
+
                                 <s:property value="filename"/></td>
                             <td style="width:226px"><s:property value="tag"/></td>
                             <td style="width:226px">
