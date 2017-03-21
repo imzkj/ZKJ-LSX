@@ -13,12 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.common.File;
-import javafx.scene.control.Alert;
-import org.apache.struts2.ServletActionContext;
-
-import org.apache.struts2.ServletActionContext;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by ZKJ on 2017/3/16 0016.
