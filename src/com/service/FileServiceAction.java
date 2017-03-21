@@ -28,6 +28,15 @@ public class FileServiceAction extends ActionSupport {
     private String filenameFileName;
     private String tag;
     private String username;
+    private String dirName;
+
+    public String getDirName() {
+        return dirName;
+    }
+
+    public void setDirName( String dirName ) {
+        this.dirName = dirName;
+    }
 
     public String getUsername() {
         return username;
@@ -45,7 +54,7 @@ public class FileServiceAction extends ActionSupport {
         this.tag = tag;
     }
 
-    public static List<File> fileslist = new ArrayList<File>();
+    public static List<File> fileslist;
 
     public FileServiceAction() throws Exception {
     }
@@ -98,12 +107,12 @@ public class FileServiceAction extends ActionSupport {
         FileInputStream in = new FileInputStream(getFilename());
         String filename1 = "";
         String type = "";
-        if( filenameFileName.lastIndexOf(".")!=-1) {
-            filename1=filenameFileName.substring(0, filenameFileName.lastIndexOf("."));
-            type=filenameFileName.substring(filenameFileName.lastIndexOf(".")+1);
+        if (filenameFileName.lastIndexOf(".") != -1) {
+            filename1 = filenameFileName.substring(0, filenameFileName.lastIndexOf("."));
+            type = filenameFileName.substring(filenameFileName.lastIndexOf(".") + 1);
         } else {
-            filename1=filenameFileName;
-            type="UnKnown";
+            filename1 = filenameFileName;
+            type = "UnKnown";
         }
 
         //相同文件名相同路径下不允许上传
@@ -117,45 +126,46 @@ public class FileServiceAction extends ActionSupport {
         //重命名文件在网盘的名字
         String fileSql = "select hdfsPath from file where owner=\"" + username + "\" order by hdfsPath desc";
         ResultSet resultSet0 = dataBaseOperation.querySql(fileSql);
-        String hdfsName1="";
+        String hdfsName1 = "";
         //如果网盘已存在文件
         while(resultSet0.next()) {
-            hdfsName1=resultSet0.getString("hdfsPath").substring(resultSet0.getString("hdfsPath").lastIndexOf("/")+1,
+            hdfsName1 = resultSet0.getString("hdfsPath").substring(resultSet0.getString("hdfsPath").lastIndexOf("/") + 1,
                     resultSet0.getString("hdfsPath").lastIndexOf("_"));
             if (filename1.equals(hdfsName1)) {
-                int index = Integer.parseInt(resultSet0.getString("hdfsPath").substring(resultSet0.getString("hdfsPath").lastIndexOf("_")+1,
-                        resultSet0.getString("hdfsPath").lastIndexOf(".")), 10)+1;
+                int index = Integer.parseInt(resultSet0.getString("hdfsPath").substring(resultSet0.getString("hdfsPath").lastIndexOf("_") + 1,
+                        resultSet0.getString("hdfsPath").lastIndexOf(".")), 10) + 1;
                 hdfsName += index + "." + type;
                 System.out.println(hdfsName);
                 break;
             }
         }
-        String temp=filename1 + "_";
+        String temp = filename1 + "_";
         if (hdfsName.equals(temp)) {
-            hdfsName+="0."+type;
+            hdfsName += "0." + type;
         }
-        String image=".jpg,.png,.gif";//图片类型
-        String zip=".zip,.rar,.gzip";//压缩包类型
-        String word=".doc,.docx";//word文档类型
-        String excel=".xls";//excel文件类型
-        String TXT=".txt";//TXT文件类型
-        String EXE=".exe";//EXE文件类型
+        String image = ".jpg,.png,.gif";//图片类型
+        String zip = ".zip,.rar,.gzip";//压缩包类型
+        String word = ".doc,.docx";//word文档类型
+        String excel = ".xls";//excel文件类型
+        String TXT = ".txt";//TXT文件类型
+        String EXE = ".exe";//EXE文件类型
         if (image.contains(type)) {
-            type="image";
+            type = "image";
         }
         if (zip.contains(type)) {
-            type="zip";
+            type = "zip";
         }
         if (word.contains(type)) {
-            type="word";
+            type = "word";
         }
         if (excel.contains(type)) {
-            type="excel";
+            type = "excel";
         }
         if (TXT.contains(type)) {
-            type="TXT";
-        }if (EXE.contains(type)) {
-            type="EXE";
+            type = "TXT";
+        }
+        if (EXE.contains(type)) {
+            type = "EXE";
         }
 
         String addFile = "insert into file(filename,dbpath,owner,tag,size,type,md5,hdfsPath) values(\"" +
@@ -165,13 +175,16 @@ public class FileServiceAction extends ActionSupport {
         dataBaseOperation.updateSql(addFile);
         return "ok";
     }
-    public String uploadFilePath() throws Exception{
+
+    public String uploadFilePath() throws Exception {
 
         System.getProperty("java.class.path");
 
         return "ok";
     }
+
     public String listAll() throws Exception {
+        fileslist = new ArrayList<File>();
         String sql = "select * from file ";
         //"where dbpath=\"" + path + "\"";
         ResultSet resultSet = dataBaseOperation.querySql(sql);
@@ -204,8 +217,23 @@ public class FileServiceAction extends ActionSupport {
         return fileSizeString;
     }
 
-    public static boolean fileIsExist() {
-
-        return true;
+    public String listDir() throws Exception {
+        fileslist = new ArrayList<File>();
+        String sql = "select * from file where dbpath=\"" + dirName + "\"";
+        System.out.println(sql);
+        //"where dbpath=\"" + path + "\"";
+        ResultSet resultSet = dataBaseOperation.querySql(sql);
+        while(resultSet.next()) {
+            File file = new File();
+            file.setFilename(resultSet.getString("filename"));
+            file.setDbpath(resultSet.getString("dbpath"));
+            file.setOwner(resultSet.getString("owner"));
+            file.setTag(resultSet.getString("tag"));
+            file.setSize(resultSet.getString("size"));
+            file.setType(resultSet.getString("type"));
+            file.setMd5(resultSet.getString("md5"));
+            fileslist.add(file);
+        }
+        return "ok";
     }
 }

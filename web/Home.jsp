@@ -144,11 +144,7 @@
             -webkit-border-top-left-radius: 10px;
             -moz-border-top-left-radius: 10px;
             -o-border-top-left-radius: 10px;
-        " border-bottom-right-radius: 10 px; -webkit-border-bottom-right-radius: 10 px;
-            -moz-border-bottom-right-radius: 10px;
-            -o-border-bottom-right-radius: 10px;
-            border-top-right-radius: 10px;
-            -webkit-border-top-right-radius: 10px;
+        " border-bottom-right-radius: 10 px; -webkit-border-bottom-right-radius: 10 px; -moz-border-bottom-right-radius: 10 px; -o-border-bottom-right-radius: 10 px; border-top-right-radius: 10 px; -webkit-border-top-right-radius: 10 px;
             -moz-border-top-right-radius: 10px;
             -o-border-top-right-radius: 10px;
         "
@@ -195,12 +191,14 @@
                         <h5>E_mail:<font color="red"><s:property value="email"/></font></h5>
                         <h5>PhoneNumber:<font color="red"><s:property value="phonenum"/></font></h5>
                         <p>
-                            <button type="button" class="btn btn-primary" name="modifyPhoto" data-toggle="modal" data-target="#modifyPhoto"
+                            <button type="button" class="btn btn-primary" name="modifyPhoto" data-toggle="modal"
+                                    data-target="#modifyPhoto"
                                     data-whatever="modifyPhoto">Modify
                                 Photo
                             </button>
 
-                        <div class="modal fade" id="modifyPhoto" tabindex="-1" role="dialog" aria-labelledby="modifyPhotoLabel">
+                        <div class="modal fade" id="modifyPhoto" tabindex="-1" role="dialog"
+                             aria-labelledby="modifyPhotoLabel">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -212,8 +210,10 @@
                                     <div class="modal-body">
                                         <form action="">
                                             <div class="form-group">
-                                                <input type="file" name="photoField" class="file" id="photoField" size="28"/>
-                                                <label class="control-label" style="margin-top: 5px;">文件最大不能超过20MB</label><br>
+                                                <input type="file" name="photoField" class="file" id="photoField"
+                                                       size="28"/>
+                                                <label class="control-label"
+                                                       style="margin-top: 5px;">文件最大不能超过20MB</label><br>
                                                 <label class="control-label">文件格式必须是：JPG,JPEG,PNG</label>
                                             </div>
 
@@ -269,7 +269,8 @@
                                             <div class="form-group">
                                                 <label class="control-label">File_input:</label>
                                                 <input type="file" id="uploadfile" style="margin-bottom: 1em;"
-                                                       id="local_path" name="filename" onchange="document.getElementById('input-text').value=this.value">
+                                                       id="local_path" name="filename"
+                                                       onchange="document.getElementById('input-text').value=this.value">
                                                 <label class="control-label">Upload_path:</label>
                                                 <textarea class="form-control" id="input-text" name="dbPath"
                                                           placeholder="address"></textarea>
@@ -280,7 +281,8 @@
 
                                                 <div ng-app="myApp" ng-controller="myCtrl">
 
-                                                    <select ng-init="selectedName = names[0]" ng-model="selectedName" ng-options="x for x in names">
+                                                    <select ng-init="selectedName = names[0]" ng-model="selectedName"
+                                                            ng-options="x for x in names">
                                                     </select>
 
                                                 </div>
@@ -343,16 +345,25 @@
                     <s:iterator value="fileslist">
                         <tr>
                             <td style="width:226px">
-
-                                <s:if test='type=="image"'><img src="images/file.svg"></s:if>
-                                <s:elseif test='type=="txt"'><img src="images/txt.svg"></s:elseif>
-                                <s:elseif test='type=="word"'><img src="images/word.svg"></s:elseif>
-                                <s:elseif test='type=="xls"'><img src="images/xls.svg"></s:elseif>
-                                <s:elseif test='type=="exe"'><img src="images/exe.svg"></s:elseif>
-                                <s:elseif test='type=="zip"'><img src="images/zip.svg"></s:elseif>
-                                <s:else><img src="images/unknown.svg"></s:else>
-
-                                <s:property value="filename"/></td>
+                                <s:if test='type=="image"'><img src="images/file.svg"><s:property
+                                        value="filename"/></s:if>
+                                <s:elseif test='type=="txt"'><img src="images/txt.svg"><s:property
+                                        value="filename"/></s:elseif>
+                                <s:elseif test='type=="word"'><img src="images/word.svg"><s:property value="filename"/></s:elseif>
+                                <s:elseif test='type=="xls"'><img src="images/xls.svg"><s:property
+                                        value="filename"/></s:elseif>
+                                <s:elseif test='type=="exe"'><img src="images/exe.svg"><s:property
+                                        value="filename"/></s:elseif>
+                                <s:elseif test='type=="zip"'><img src="images/zip.svg"><s:property
+                                        value="filename"/></s:elseif>
+                                <s:elseif test='type=="dir"'>
+                                    <a href="listDir?dirName=<s:property value="filename"/>">
+                                        <img src="images/zip.svg">
+                                        <s:property value="filename"/>
+                                    </a>
+                                </s:elseif>
+                                <s:else><img src="images/unknown.svg"><s:property value="filename"/></s:else>
+                            </td>
                             <td style="width:226px"><s:property value="tag"/></td>
                             <td style="width:226px">
                                 <s:property value="size"/>
@@ -380,7 +391,7 @@
 <script>
 
     var app = angular.module('myApp', []);     //file标签
-    app.controller('myCtrl', function($scope) {
+    app.controller('myCtrl', function ($scope) {
         $scope.names = ["风景", "历史", "人文"];
     });
 

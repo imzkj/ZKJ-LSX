@@ -18,6 +18,9 @@
         <action name="list" class="com.service.FileServiceAction" method="listAll">
             <result name="ok">/Home.jsp</result>
         </action>
+        <action name="listDir" class="com.service.FileServiceAction" method="listDir">
+            <result name="ok">/Home.jsp</result>
+        </action>
         <action name="upload" class="com.service.FileServiceAction" method="uploadFile">
             <result name="ok" type="chain">list</result>
         </action>
