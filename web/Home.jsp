@@ -323,7 +323,7 @@
                 <%--<li><a href="#">Library</a></li>--%>
                 <%--<li class="active">Data</li>--%>
             </ol>
-            <table>
+            <table class="table table-hover">
                 <tr >
                     <th style="width:226px;text-align: left;">filename</th>
                     <th style="width:226px;text-align: left">tag</th>
