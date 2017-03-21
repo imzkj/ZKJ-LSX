@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="/struts-tags" prefix="s" %>
-<html >
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>基于JFinal+Hadoop+bootstrap+AngularJs的云端文件管理系统</title>
@@ -144,15 +144,14 @@
             -webkit-border-top-left-radius: 10px;
             -moz-border-top-left-radius: 10px;
             -o-border-top-left-radius: 10px;
-        " border-bottom-right-radius: 10 px; -webkit-border-bottom-right-radius: 10 px; -moz-border-bottom-right-radius: 10 px; -o-border-bottom-right-radius: 10 px; border-top-right-radius: 10 px; -webkit-border-top-right-radius: 10 px;
-            -moz-border-top-right-radius: 10px;
+        " border-bottom-right-radius: 10 px; -webkit-border-bottom-right-radius: 10 px; -moz-border-bottom-right-radius: 10 px; -o-border-bottom-right-radius: 10 px; border-top-right-radius: 10 px; -webkit-border-top-right-radius: 10 px; -moz-border-top-right-radius: 10 px;
             -o-border-top-right-radius: 10px;
         "
         }
     </style>
 
 </head>
-<body >
+<body ng-controller="MyBody">
 <div class="Title"><b>Welcome</b></div>
 
 <div class="contain" id="mainform">
@@ -187,9 +186,9 @@
                 <div class="thumbnail">
                     <img src="/images/person.svg" alt="个人图片" style="width:160px;height: 200px;">
                     <div class="caption">
-                        <h5>UserName:<font color="red"><s:property value="username"/></font></h5>
-                        <h5>E_mail:<font color="red"><s:property value="email"/></font></h5>
-                        <h5>PhoneNumber:<font color="red"><s:property value="phonenum"/></font></h5>
+                        <h5>UserName:<font color="red"><s:property value="#session.username"/></font></h5>
+                        <h5>E_mail:<font color="red"><s:property value="#session.email"/></font></h5>
+                        <h5>PhoneNumber:<font color="red"><s:property value="#session.phonenum"/></font></h5>
                         <p>
                             <button type="button" class="btn btn-primary" name="modifyPhoto" data-toggle="modal"
                                     data-target="#modifyPhoto"
@@ -246,7 +245,7 @@
 
         </div>
         <div class="center_right" style="margin-top: 1em;">
-            <%--搜索--%>
+
             <table id="sort" cellpadding="5px;">
                 <tr>
                     <th>
@@ -274,8 +273,6 @@
                                                 <label class="control-label">Upload_path:</label>
                                                 <textarea class="form-control" id="input-text" name="dbPath"
                                                           placeholder="address"></textarea>
-                                                <s:hidden name="username" value="%{#request.username}">
-                                                </s:hidden>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -317,13 +314,12 @@
                     </form>
                 </tr>
             </table>
-            <%--路径导航--%>
+
             <ol class="breadcrumb" style="margin-top: 10px;border-top-width: 0px;margin-bottom: 10px;">
                 <li><a href="#">Home</a></li>
                 <%--<li><a href="#">Library</a></li>--%>
                 <%--<li class="active">Data</li>--%>
             </ol>
-            <%--table--%>
             <table class="table table-hover" style="margin-bottom: 0px;">
                 <tr>
                     <th style="width:226px;text-align: left">filename</th>
@@ -364,7 +360,7 @@
                     </s:iterator>
                 </table>
             </div>
-            <%--右键菜单--%>
+
             <div id="menu_context">
                 <ul style="line-height: 40px;list-style-type: none; padding: 0px;margin-left: 5px;border: 2px;">
                     <li>download</li>
@@ -374,15 +370,14 @@
         </div>
     </div> <!--center end -->
 
-
 </div> <!-- contain end -->
 
 
 <div class="Bottom">基于JFinal+Hadoop+bootstrap+AngularJs的云端文件管理系统</div>
 </body>
 </html>
-<script>
 
+<script>
     $('#upload').on('show.bs.modal', function (event) {                 //上传function
         var button = $(event.relatedTarget) // Button that triggered the modal
         var recipient = button.data('whatever') // Extract info from data-* attributes
@@ -459,3 +454,6 @@
 <link rel="stylesheet" href="/web-plug/bootstrap-3.0.0/css/bootstrap.min.css">
 
 <script type="text/javascript" src="/web-plug/jQuery-Form.min.js"></script>
+<script>
+    window.onload=function(){ var errorMsg="${request.errorMessage}"; if(errorMsg!=""){ alert(errorMsg); } }
+</script>
