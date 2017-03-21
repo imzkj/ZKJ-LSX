@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="/struts-tags" prefix="s" %>
-<html>
+<html >
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>基于JFinal+Hadoop+bootstrap+AngularJs的云端文件管理系统</title>
@@ -145,7 +145,7 @@
             -moz-border-top-left-radius: 10px;
             -o-border-top-left-radius: 10px;
         " border-bottom-right-radius: 10 px; -webkit-border-bottom-right-radius: 10 px; -moz-border-bottom-right-radius: 10 px; -o-border-bottom-right-radius: 10 px; border-top-right-radius: 10 px; -webkit-border-top-right-radius: 10 px; -moz-border-top-right-radius: 10 px;
-            -o-border-top-right-radius: 10px;
+            -moz-border-top-right-radius: 10px;            -o-border-top-right-radius: 10px;
         "
         }
     </style>
@@ -245,7 +245,7 @@
 
         </div>
         <div class="center_right" style="margin-top: 1em;">
-
+            <%--搜索--%>
             <table id="sort" cellpadding="5px;">
                 <tr>
                     <th>
