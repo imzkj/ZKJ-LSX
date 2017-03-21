@@ -194,9 +194,41 @@
                         <h5>E_mail:<font color="red"><s:property value="email"/></font></h5>
                         <h5>PhoneNumber:<font color="red"><s:property value="phonenum"/></font></h5>
                         <p>
-                            <button type="file" class="btn btn-primary" id="modifyPhoto" name="modifyPhoto">Modify
+                            <button type="button" class="btn btn-primary" name="modifyPhoto" data-toggle="modal" data-target="#modifyPhoto"
+                                    data-whatever="modifyPhoto">Modify
                                 Photo
                             </button>
+
+                        <div class="modal fade" id="modifyPhoto" tabindex="-1" role="dialog" aria-labelledby="modifyPhotoLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close"><span
+                                                aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="modifyPhotoLabel">New h</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="">
+                                            <div class="form-group">
+                                                <input type="file" name="photoField" class="file" id="photoField" size="28"/>
+                                                <label class="control-label" style="margin-top: 5px;">文件最大不能超过20MB</label><br>
+                                                <label class="control-label">文件格式必须是：JPG,JPEG,PNG</label>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                    Close
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">Confirm</button>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
                         </p>
                     </div>
                 </div>
@@ -291,8 +323,9 @@
 
                     <s:iterator value="fileslist">
                         <tr>
-                            <td style="width:226px">
-                                <s:if test='type=="s"'><img src="images/file.jpg"></s:if>
+                            <td style="width:226px;"><s:property value="filename"/></td>
+                            <td style="width:226px"><s:property value="tag"/></td>
+                            <td style="width:226px"><s:if test='type=="s"'><img src="images/file.jpg"></s:if>
                                 <s:elseif test='type=="f"'><img src="images/avtar.png"></s:elseif>
                                 <s:property value="filename"/></td>
                             <td style="width:226px"><s:property value="tag"/></td>
@@ -332,7 +365,7 @@
 </html>
 <script>
 
-    $('#upload').on('show.bs.modal', function (event) {
+    $('#upload').on('show.bs.modal', function (event) {                 //上传function
         var button = $(event.relatedTarget) // Button that triggered the modal
         var recipient = button.data('whatever') // Extract info from data-* attributes
 // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
@@ -342,7 +375,7 @@
         modal.find('.modal-body input').val(recipient)
     })
 
-    function lblwhite() {
+    function lblwhite() {               //换色布function
         var bc = document.getElementById("mainform");
         bc.style.background = "#FFFFFF";
     }
@@ -359,13 +392,13 @@
         var bc = document.getElementById("mainform");
         bc.style.background = "#f1c85f";
     }
-    function click() {
+    function click() {                  //左键function
 
     }
     function addFile() {
 
     }
-    function sortType_name() {
+    function sortType_name() {          //搜索方式function
         var st = document.getElementById("FileType");
         st.setAttribute("placeholder", "According FileName");
 
@@ -375,7 +408,7 @@
         st.setAttribute("placeholder", "According FileContext");
 
     }
-    function menu_context() {
+    function menu_context() {          //右键function
         var menu = document.getElementById("menu_context");
         document.oncontextmenu = function (ev) {
             var oEvent = ev || event;
