@@ -144,8 +144,7 @@
             -webkit-border-top-left-radius: 10px;
             -moz-border-top-left-radius: 10px;
             -o-border-top-left-radius: 10px;
-        " border-bottom-right-radius: 10 px;
-            -webkit-border-bottom-right-radius: 10px;
+        " border-bottom-right-radius: 10 px; -webkit-border-bottom-right-radius: 10 px;
             -moz-border-bottom-right-radius: 10px;
             -o-border-bottom-right-radius: 10px;
             border-top-right-radius: 10px;
@@ -256,26 +255,15 @@
                                         <h4 class="modal-title" id="uploadLabel">New File</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="upload">
+
+                                        <s:form action="upload" method="post" enctype="multipart/form-data">
                                             <div class="form-group">
-
-                                                <input type='text' name='textfield' id='textfield' class='txt'/>
-                                                <input type="file" name="fileField" class="file" id="fileField"
-                                                       size="28"
-                                                       onchange="document.getElementById('textfield').value=this.value"/>
-
                                                 <label class="control-label">File_input:</label>
                                                 <input type="file" id="uploadfile" style="margin-bottom: 1em;"
-                                                       id="local_path" name="localPath1">
+                                                       id="local_path" name="filename">
                                                 <label class="control-label">Upload_path:</label>
-
-                                                <textarea class="form-control" id="input-text" name="dbPath1"
+                                                <textarea class="form-control" id="input-text" name="dbPath"
                                                           placeholder="address"></textarea>
-                                                <%--<select class="form-control" >--%>
-                                                <%--<option value="C">C:\</option>--%>
-                                                <%--<option value="D">D:\</option>--%>
-                                                <%--</select>--%>
-                                                <%--<input type="text" class="form-control" id="upload_path">--%>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -287,7 +275,7 @@
                                             <%--<label for="message-text" class="control-label">Message:</label>--%>
                                             <%--<textarea class="form-control" id="message-text"></textarea>--%>
                                             <%--</div>--%>
-                                        </form>
+                                        </s:form>
                                     </div>
 
                                 </div>
@@ -323,9 +311,9 @@
                 <%--<li><a href="#">Library</a></li>--%>
                 <%--<li class="active">Data</li>--%>
             </ol>
-            <table class="table table-hover">
-                <tr >
-                    <th style="width:226px;text-align: left;">filename</th>
+            <table class="table table-hover" style="margin-bottom: 0px;">
+                <tr>
+                    <th style="width:226px;text-align: left">filename</th>
                     <th style="width:226px;text-align: left">tag</th>
                     <th style="width:226px;text-align: left">size</th>
                 </tr>
@@ -339,6 +327,10 @@
                             <td style="width:226px"><s:property value="tag"/></td>
                             <td style="width:226px"><s:if test='type=="s"'><img src="images/file.jpg"></s:if>
                                 <s:elseif test='type=="f"'><img src="images/avtar.png"></s:elseif>
+                                <s:property value="filename"/></td>
+                            <td style="width:226px"><s:property value="tag"/></td>
+                            <td style="width:226px">
+                                <s:property value="tag"/>
                             </td>
                         </tr>
                     </s:iterator>

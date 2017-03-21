@@ -31,7 +31,7 @@ public class HDFSOperation {
     /*
       上传文件
      */
-    private boolean upLoad(String localPath,String hdfsPath) throws IOException {
+    private boolean upLoad(FileInputStream in,String hdfsPath) throws IOException {
 
         Path path = new Path(hdfsPath);
         if (fs.exists(path)) {
@@ -39,7 +39,6 @@ public class HDFSOperation {
             return false;
         }
         FSDataOutputStream out = fs.create(new Path(hdfsPath));
-        FileInputStream in = new FileInputStream(new File(localPath));
         IOUtils.copyBytes(in, out, 4096, true);
         in.close();
         out.close();
