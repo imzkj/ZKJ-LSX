@@ -3,6 +3,7 @@ package com.service;
 import com.common.File;
 import com.opensymphony.xwork2.ActionContext;
 import com.tool.DataBaseOperation;
+import com.tool.LuceneFileSearch;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class SearchServiceAction {
     private String username;
     private String search;
     private String searchType;
+    private LuceneFileSearch fileSearch=new LuceneFileSearch();
     private DataBaseOperation dataBaseOperation = new DataBaseOperation();
 
     public List<File> getFileslist() {
@@ -58,16 +60,16 @@ public class SearchServiceAction {
     }
 
     public String search() throws Exception {
+        fileslist = new ArrayList<File>();
         if (searchType.equals("FileName")) {
-            return searchFileName();
+            searchFileName();
         }
         if (searchType.equals("FileContext")) {
-            return searchFileContent();
+            searchFileContent();
         }
         return "ok";
     }
-    public String searchFileName() throws Exception {
-        fileslist = new ArrayList<File>();
+    public void searchFileName() throws Exception {
         String sql = "select * from file where owner=\"" + username + "\" and filename like \"%" +search+"%\"";
         ResultSet resultSet = dataBaseOperation.querySql(sql);
         while(resultSet.next()) {
@@ -81,28 +83,9 @@ public class SearchServiceAction {
             file.setMd5(resultSet.getString("md5"));
             fileslist.add(file);
         }
-        return "ok";
     }
 
-    public String searchFileContent() throws Exception {
-        fileslist = new ArrayList<File>();
-        System.out.println(username+"   "+search+"  "+searchType);
-        String sql = "select * from file where owner=\"" + username + "\" and filename like \"%" +search+"%\"";
-        System.out.println(sql);
-        //"where dbpath=\"" + path + "\"";
-        ResultSet resultSet = dataBaseOperation.querySql(sql);
-        while(resultSet.next()) {
-            File file = new File();
-            file.setFilename(resultSet.getString("filename"));
-            file.setDbpath(resultSet.getString("dbpath"));
-            file.setOwner(resultSet.getString("owner"));
-            file.setTag(resultSet.getString("tag"));
-            file.setSize(resultSet.getString("size"));
-            file.setType(resultSet.getString("type"));
-            file.setMd5(resultSet.getString("md5"));
-            fileslist.add(file);
-        }
-        System.out.println(fileslist);
-        return "ok";
+    public void searchFileContent() throws Exception {
+        fileslist=fileSearch.contentSearch(search,username);
     }
 }

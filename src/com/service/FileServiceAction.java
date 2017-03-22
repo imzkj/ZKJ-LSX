@@ -3,9 +3,7 @@ package com.service;
 import com.common.User;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.tool.DataBaseOperation;
-import com.tool.FileMd5Utils;
-import com.tool.HDFSOperation;
+import com.tool.*;
 
 import java.io.*;
 import java.sql.ResultSet;
@@ -19,7 +17,6 @@ import com.common.File;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by ZKJ on 2017/3/16 0016.
@@ -38,6 +35,8 @@ public class FileServiceAction extends ActionSupport {
     private String dirName;
     private String email;
     private String deftag;
+    private utils util=new utils();
+    private LuceneFileIndex luceneFileIndex=new LuceneFileIndex();
 
     public String getDeftag() {
         return deftag;
@@ -252,6 +251,15 @@ public class FileServiceAction extends ActionSupport {
         if (isUploadFile) {
             hdfsOperation.upLoad(in, hdfsPath);
         }
+        String selectId="select id from file where filename=\""+filenameFileName+"\" and dbpath=\""+dbPath+"\" and owner=\""+username+"\"";
+        ResultSet resultSet3 = dataBaseOperation.querySql(selectId);
+        String fileID="";
+        if (resultSet3.next()) {
+            fileID=resultSet3.getString("id");
+        }
+        String contents=util.streamToString(new FileInputStream(getFilename()));
+        luceneFileIndex.index(fileID,contents);
+        //in.close();
         return "ok";
     }
 

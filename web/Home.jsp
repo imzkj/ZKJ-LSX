@@ -340,12 +340,12 @@
                             <td style="width:226px">
                                 <s:if test='type=="image"'><img src="images/file.svg"><s:property
                                         value="filename"/></s:if>
-                                <s:elseif test='type=="txt"'><img src="images/txt.svg"><s:property
+                                <s:elseif test='type=="TXT"'><img src="images/txt.svg"><s:property
                                         value="filename"/></s:elseif>
                                 <s:elseif test='type=="word"'><img src="images/word.svg"><s:property value="filename"/></s:elseif>
                                 <s:elseif test='type=="xls"'><img src="images/xls.svg"><s:property
                                         value="filename"/></s:elseif>
-                                <s:elseif test='type=="exe"'><img src="images/exe.svg"><s:property
+                                <s:elseif test='type=="EXE"'><img src="images/exe.svg"><s:property
                                         value="filename"/></s:elseif>
                                 <s:elseif test='type=="zip"'><img src="images/zip.svg"><s:property
                                         value="filename"/></s:elseif>
