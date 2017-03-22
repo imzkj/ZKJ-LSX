@@ -239,7 +239,9 @@
                      style="min-width: 2em;">
                     0%
                 </div>
-                <span style="float: right;padding-right: 50px;">0K/10G</span>
+                <span style="float: right;padding-right: 50px;">
+                    <s:property value="#session.used"/>G/<s:property value="#session.totalsize"/>G
+                </span>
 
             </div>
 

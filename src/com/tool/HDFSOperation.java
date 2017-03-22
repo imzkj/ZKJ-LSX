@@ -2,6 +2,7 @@ package com.tool;
 
 import java.io.*;
 import java.net.URI;
+import java.text.DecimalFormat;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.*;
@@ -57,7 +58,7 @@ public class HDFSOperation {
 
     /*删除文件
      */
-    public boolean deleteFile() {
+    public boolean deleteFile(String hdfsPath) {
         try {
             fs.delete(new Path(hdfsPath), true);
         } catch (IOException e) {
@@ -93,12 +94,15 @@ public class HDFSOperation {
     }
 
     public static void main( String[] args ) throws Exception {
-//        FileSystem fs = FileSystem.get(URI.create(hdfsPath), conf);
-//        Path l = new Path("D:\\test1.txt");
-//        Path y = new Path("/topkeyinput");
-//        fs.copyFromLocalFile(l, y);
-//        HDFSOperation h = new HDFSOperation();
-//        FileInputStream fileInputStream = new FileInputStream(new File("D:\\test1.txt"));
-//        System.out.println(h.upLoad(fileInputStream,"/test1.txt"));
+//        double used=0.3365;
+//        DecimalFormat df = new DecimalFormat("#.00");
+//        System.out.println(df.format(used));
+//        String a="0.333";
+//        System.out.println(a.substring(0,3));
+//        double used = 0;
+//        used += (double)67072 / (1024 * 1024);
+//        System.out.println(67072 / (1024 * 1024)+"   "+used);
+//       HDFSOperation hdfsOperation = new HDFSOperation();
+//       hdfsOperation.deleteFile("/Disk/a/wow_helper_0.exe");
     }
 }

@@ -138,6 +138,7 @@ public class FileServiceAction extends ActionSupport {
         String filename1 = "";
         String type = "";
         String fileMd5 = md5.getFileMD5String(filename);
+        HttpServletRequest request = ServletActionContext.getRequest();
         if (filenameFileName.lastIndexOf(".") != -1) {
             filename1 = filenameFileName.substring(0, filenameFileName.lastIndexOf("."));
             type = filenameFileName.substring(filenameFileName.lastIndexOf(".") + 1);
@@ -152,8 +153,6 @@ public class FileServiceAction extends ActionSupport {
         ResultSet resultSet = dataBaseOperation.querySql(selectSql);
         if (resultSet.next()) {
             //弹出提示框
-            Map<String, Object> request1 = ActionContext.getContext().getSession();
-            HttpServletRequest request = ServletActionContext.getRequest();
             request.setAttribute("errorMessage", "目录：" + dbPath + "下已经存在" + filenameFileName + "文件！");
             return "ok";
         }
@@ -205,24 +204,41 @@ public class FileServiceAction extends ActionSupport {
         }
 //如果网盘存在内容相同的文件则
         String fileExistHdfs = "select md5,hdfsPath from file where owner=\"" + username + "\"";
-        ResultSet resultSet2 = dataBaseOperation.querySql(selectSql);
+        ResultSet resultSet2 = dataBaseOperation.querySql(fileExistHdfs);
         String hdfsPath = "/Disk/" + username + "/" + hdfsName;
         boolean isUploadFile = true;
         while(resultSet2.next()) {
             if (resultSet2.getString("md5").equals(fileMd5)) {
                 hdfsPath = resultSet2.getString("hdfsPath");
-                isUploadFile=false;
+                isUploadFile = false;
                 break;
             }
         }
-        if (isUploadFile) {
-            hdfsOperation.upLoad(in,hdfsPath);
+        String selectUsed = "select used,totalsize from user where username=\"" + username + "\"";
+        ResultSet resultSet1 = dataBaseOperation.querySql(selectUsed);
+        if (resultSet1.next()) {
+            double used = resultSet1.getDouble("used");
+            used += (double) filename.length() / (1024 * 1024);
+            if (resultSet1.getDouble("totalsize") < used) {
+                //弹出提示框
+                request.setAttribute("errorMessage", "您的空间已达到上限，请升级会员继续使用！");
+                return "ok";
+            }
+            Map<String, Object> session = ActionContext.getContext().getSession();
+            DecimalFormat df = new DecimalFormat("0.00");
+            session.put("used", df.format(used));
+            session.put("totalsize", resultSet1.getDouble("totalsize"));
+            String updateUesd = "update user set used=" + used + " where username=\"" + username + "\"";
+            dataBaseOperation.updateSql(updateUesd);
         }
         String addFile = "insert into file(filename,dbpath,owner,tag,size,type,md5,hdfsPath) values(\"" +
                 filenameFileName + "\",\"" + dbPath + "\",\"" + username + "\",\"" + tag + "\",\""
                 + FormetFileSize(filename.length()) + "\",\"" + type + "\",\"" + fileMd5 + "\",\""
                 + hdfsPath + "\")";
         dataBaseOperation.updateSql(addFile);
+        if (isUploadFile) {
+            hdfsOperation.upLoad(in, hdfsPath);
+        }
         return "ok";
     }
 

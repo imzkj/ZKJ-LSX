@@ -57,12 +57,18 @@ public class LoginAction extends ActionSupport {
 
     public String login() throws Exception {
         dataBaseOperation = new DataBaseOperation();
+        String selectUsed = "select used,totalsize from user where username=\"" + username + "\"";
+        ResultSet resultSet1 = dataBaseOperation.querySql(selectUsed);
+        Map<String, Object> session = ActionContext.getContext().getSession();
+        if(resultSet1.next()) {
+            session.put("used", resultSet1.getDouble("used"));
+            session.put("totalsize", resultSet1.getDouble("totalsize"));
+        }
         String selectsql = "select * from user where username=\"" + username + "\" and password=\"" + password + "\"";
         resultSet = dataBaseOperation.querySql(selectsql);
         if (resultSet.next()) {
             setEmail(resultSet.getString("email"));
             setPhonenum(resultSet.getString("phonenum"));
-            Map<String, Object> session = ActionContext.getContext().getSession();
             session.put("username", username);
             session.put("email", resultSet.getString("email"));
             session.put("phonenum", resultSet.getString("phonenum"));
