@@ -21,6 +21,12 @@
         <action name="listDir" class="com.service.FileServiceAction" method="listDir">
             <result name="ok">/Home.jsp</result>
         </action>
+        <action name="listTag" class="com.service.FileServiceAction" method="listTag">
+            <result name="ok">/Home.jsp</result>
+        </action>
+        <action name="search" class="com.service.SearchServiceAction" method="search">
+            <result name="ok" >/Home.jsp</result>
+        </action>
         <action name="upload" class="com.service.FileServiceAction" method="uploadFile">
             <result name="ok" type="chain">list</result>
         </action>

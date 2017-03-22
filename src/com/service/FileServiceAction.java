@@ -264,7 +264,7 @@ public class FileServiceAction extends ActionSupport {
 
     public String listAll() throws Exception {
         fileslist = new ArrayList<File>();
-        String sql = "select * from file ";
+        String sql = "select * from file where owner=\""+username+"\"";
         //"where dbpath=\"" + path + "\"";
         ResultSet resultSet = dataBaseOperation.querySql(sql);
         while(resultSet.next()) {
@@ -298,7 +298,27 @@ public class FileServiceAction extends ActionSupport {
 
     public String listDir() throws Exception {
         fileslist = new ArrayList<File>();
-        String sql = "select * from file where dbpath=\"" + dirName + "\"";
+        String sql = "select * from file where dbpath=\"" + dirName + "\" and owner=\""+username+"\"";
+        System.out.println(sql);
+        //"where dbpath=\"" + path + "\"";
+        ResultSet resultSet = dataBaseOperation.querySql(sql);
+        while(resultSet.next()) {
+            File file = new File();
+            file.setFilename(resultSet.getString("filename"));
+            file.setDbpath(resultSet.getString("dbpath"));
+            file.setOwner(resultSet.getString("owner"));
+            file.setTag(resultSet.getString("tag"));
+            file.setSize(resultSet.getString("size"));
+            file.setType(resultSet.getString("type"));
+            file.setMd5(resultSet.getString("md5"));
+            fileslist.add(file);
+        }
+        return "ok";
+    }
+
+    public String listTag() throws Exception {
+        fileslist = new ArrayList<File>();
+        String sql = "select * from file where tag=\"" + tag + "\" and owner=\""+username+"\"";
         System.out.println(sql);
         //"where dbpath=\"" + path + "\"";
         ResultSet resultSet = dataBaseOperation.querySql(sql);

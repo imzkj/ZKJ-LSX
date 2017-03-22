@@ -279,7 +279,8 @@
                                                     <option>人物</option>
                                                     <option>风景</option>
                                                 </select>
-                                                <input type="text" name="deftag" placeholder="自定义标签" style=" width: 154px; height: 32px; margin-top: 10px;margin-left: 10px;"/>
+                                                <input type="text" name="deftag" placeholder="自定义标签"
+                                                       style=" width: 154px; height: 32px; margin-top: 10px;margin-left: 10px;"/>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -299,31 +300,28 @@
                         </div>
                     </th>
                     <th>
-                        <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="sortType"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                sortType
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="sortType">
-                                <li><a onclick="sortType_name()">According FileName</a></li>
-                                <li><a onclick="sortType_context()">According FileContext</a></li>
-                                <!--<li><a href="#">Something else here</a></li>-->
-                                <!--<li role="separator" class="divider"></li>-->
-                                <!--<li><a href="#">Separated link</a></li>-->
-                            </ul>
-                        </div>
+                        <button type="button" class="btn btn-primary">New Dir
+                        </button>
                     </th>
-                    <form action="">
+                    <form action="search">
                         <th><input type="text" class="form-control" id="FileType" placeholder="According FileType"
-                                   style="width:400px;"></th>
+                                   style="width:315px;" name="search"></th>
+                        <th>
+                            <div class="dropdown">
+                                <select class="btn btn-default" name="searchType" style="width: 105px;">
+                                    <option selected>Type</option>
+                                    <option onclick="sortType_name()">FileName</option>
+                                    <option onclick="sortType_context()">FileContext</option>
+                                </select>
+                            </div>
+                        </th>
                         <th><input class="btn btn-default" type="submit" value="Search"></th>
                     </form>
                 </tr>
             </table>
 
             <ol class="breadcrumb" style="margin-top: 10px;border-top-width: 0px;margin-bottom: 10px;">
-                <li><a href="#">Home</a></li>
+                <li><a href="list">Home</a></li>
                 <%--<li><a href="#">Library</a></li>--%>
                 <%--<li class="active">Data</li>--%>
             </ol>
@@ -359,7 +357,9 @@
                                 </s:elseif>
                                 <s:else><img src="images/unknown.svg"><s:property value="filename"/></s:else>
                             </td>
-                            <td style="width:226px"><s:property value="tag"/></td>
+                            <td style="width:226px">
+                                <a href="listTag?tag=<s:property value="tag"/>"><s:property
+                                        value="tag"/></a></td>
                             <td style="width:226px">
                                 <s:property value="size"/>
                             </td>
