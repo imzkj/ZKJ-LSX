@@ -37,6 +37,15 @@ public class FileServiceAction extends ActionSupport {
     private String username;
     private String dirName;
     private String email;
+    private String deftag;
+
+    public String getDeftag() {
+        return deftag;
+    }
+
+    public void setDeftag( String deftag ) {
+        this.deftag = deftag;
+    }
 
     public String getEmail() {
         return email;
@@ -134,6 +143,10 @@ public class FileServiceAction extends ActionSupport {
     }
 
     public String uploadFile() throws Exception {
+        if (!deftag.equals("")) {
+            setTag(deftag);
+        }
+        System.out.println(deftag);
         FileInputStream in = new FileInputStream(getFilename());
         String filename1 = "";
         String type = "";

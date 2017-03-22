@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="/struts-tags" prefix="s" %>
-<html >
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>基于JFinal+Hadoop+bootstrap+AngularJs的云端文件管理系统</title>
@@ -144,9 +144,7 @@
             -webkit-border-top-left-radius: 10px;
             -moz-border-top-left-radius: 10px;
             -o-border-top-left-radius: 10px;
-        " border-bottom-right-radius: 10 px; -webkit-border-bottom-right-radius: 10 px; -moz-border-bottom-right-radius: 10 px; -o-border-bottom-right-radius: 10 px; border-top-right-radius: 10 px; -webkit-border-top-right-radius: 10 px; -moz-border-top-right-radius: 10 px;
-            -moz-border-top-right-radius: 10px;            -o-border-top-right-radius: 10px;
-        "
+        " border-bottom-right-radius: 10 px; -webkit-border-bottom-right-radius: 10 px; -moz-border-bottom-right-radius: 10 px; -o-border-bottom-right-radius: 10 px; border-top-right-radius: 10 px; -webkit-border-top-right-radius: 10 px; -moz-border-top-right-radius: 10 px; -moz-border-top-right-radius: 10 px; -o-border-top-right-radius: 10 px; "
         }
     </style>
 
@@ -275,6 +273,13 @@
                                                 <label class="control-label">Upload_path:</label>
                                                 <textarea class="form-control" id="input-text" name="dbPath"
                                                           placeholder="address"></textarea>
+                                                <select style="width: 152px;margin-left: 0px;border-top-width: 1px;margin-top: 10px;height: 31px;"
+                                                        name="tag">
+                                                    <option selected>=请选择文件标签=</option>
+                                                    <option>人物</option>
+                                                    <option>风景</option>
+                                                </select>
+                                                <input type="text" name="deftag" placeholder="自定义标签" style=" width: 154px; height: 32px; margin-top: 10px;margin-left: 10px;"/>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -457,5 +462,10 @@
 
 <script type="text/javascript" src="/web-plug/jQuery-Form.min.js"></script>
 <script>
-    window.onload=function(){ var errorMsg="${request.errorMessage}"; if(errorMsg!=""){ alert(errorMsg); } }
+    window.onload = function () {
+        var errorMsg = "${request.errorMessage}";
+        if (errorMsg != "") {
+            alert(errorMsg);
+        }
+    }
 </script>
