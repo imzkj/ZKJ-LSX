@@ -20,7 +20,7 @@
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
-            min-height: 900px;
+            min-height: 680px;
         }
 
         .contain {
@@ -45,9 +45,9 @@
 
         .center {
             width: 100%;
-            height: 580px;
+            height: 560px;
             margin: 0 auto;
-            padding: 10px;
+            /*padding: 5px;*/
         }
 
         .center_left {
@@ -112,8 +112,8 @@
 
         .Title {
             text-align: center;
-            padding-top: 1em;
-            padding-bottom: 10px;
+            /*padding-top: 1em;*/
+            /*padding-bottom: 5px;*/
             font-weight: 500;
             color: #2B2B36;
             font-size: 3em;
@@ -154,11 +154,31 @@
             -moz-border-top-right-radius: 10px;
             -o-border-top-right-radius: 10px; "
         }
+        download{
+            cursor: pointer;
+            background: url(/images/download148.svg) no-repeat 0px 0px;
+            width: 20px;
+            height: 20px;
+            display: block;
+            float: left;
+            border-radius: 50%;
+            margin: 16px 10px 0px 0px;
+        }
+        delete{
+            cursor: pointer;
+            background: url(/images/delete67.svg) no-repeat 0px 0px;
+            width: 20px;
+            height: 20px;
+            display: block;
+            float: left;
+            border-radius: 50%;
+            margin: 16px 10px 0px 0px;
+        }
     </style>
 
 </head>
 <body ng-controller="MyBody">
-<div class="Title"><b>Welcome</b></div>
+<div class="Title" style="height: 60px;"><b>Welcome</b></div>
 
 <div class="contain" id="mainform">
 
@@ -371,9 +391,10 @@
 <%--文件table--%>
             <table class="table table-hover" style="margin-bottom: 0px;">
                 <tr>
-                    <th style="width:226px;text-align: left" >filename</th>
-                    <th style="width:226px;text-align: left">tag</th>
-                    <th style="width:226px;text-align: left">size</th>
+                    <th style="width:200px;text-align: left" >filename</th>
+                    <th style="width:200px;text-align: left">tag</th>
+                    <th style="width:200px;text-align: left">size</th>
+                    <th style="text-align: left">operation</th>
                 </tr>
             </table>
             <div style="overflow-x: auto; overflow-y: auto; height: 350px; width:680px;">
@@ -401,6 +422,10 @@
                                 </s:elseif>
                                 <s:else><img src="images/unknown.svg"><s:property value="filename"/></s:else>
                             </td>
+                            <td>
+                                <div ></div>
+                                <>
+                            </td>
                             <td style="width:196px">
                                 <a href="listTag?tag=<s:property value="tag"/>"><s:property
                                         value="tag"/></a></td>
@@ -408,26 +433,27 @@
                                 <s:property value="size"/>
                             </td>
                             <td>
-
+                                <a><div class="download"></div></a>
+                                <a><div class="delete"></div></a>
                             </td>
                         </tr>
                     </s:iterator>
                 </table>
             </div>
 <%--右键菜单--%>
-            <div id="menu_context">
-                <ul style="line-height: 40px;list-style-type: none; padding: 0px;margin-left: 5px;border: 2px;">
-                    <a href=""><li>download</li></a>
-                    <a href=""><li>delete</li></a>
-                </ul>
-            </div>
-        </div>
+            <%--<div id="menu_context">--%>
+                <%--<ul style="line-height: 40px;list-style-type: none; padding: 0px;margin-left: 5px;border: 2px;">--%>
+                    <%--<a href=""><li>download</li></a>--%>
+                    <%--<a href=""><li>delete</li></a>--%>
+                <%--</ul>--%>
+            <%--</div>--%>
+        <%--</div>--%>
     </div> <!--center end -->
 
 </div> <!-- contain end -->
 
 
-<div class="Bottom">基于JFinal+Hadoop+bootstrap+AngularJs的云端文件管理系统</div>
+<%--<div class="Bottom">基于JFinal+Hadoop+bootstrap+AngularJs的云端文件管理系统</div>--%>
 </body>
 </html>
 
