@@ -179,6 +179,7 @@ public class FileServiceAction extends ActionSupport {
         }
 
         //相同文件名相同路径下不允许上传
+        setDbPath((String) session.get("dir"));
         String selectSql = "select * from file where filename=\"" + filenameFileName + "\" and dbpath=\"" + dbPath + "\""
                 + " and owner=\"" + username + "\"";
         ResultSet resultSet = dataBaseOperation.querySql(selectSql);
@@ -329,12 +330,16 @@ public class FileServiceAction extends ActionSupport {
         System.out.println(session.get("dir"));
         String sessionDir = (String) session.get("dir");
         if (dirType == null) {
-            session.put("dir", session.get("dir") + "/" + dirName);
+            if (dirName != null) {
+                session.put("dir", session.get("dir") + "/" + dirName);
+            }
         } else {
             if (sessionDir.length() < dirName.length()) {
                 session.put("dir", session.get("dir") + "/" + dirName);
-            }else {
-                session.put("dir",dirName);
+            } else {
+                if (dirName != null) {
+                    session.put("dir", dirName);
+                }
             }
         }
 

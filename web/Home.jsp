@@ -268,11 +268,11 @@
                                             <div class="form-group">
                                                 <label class="control-label">File_input:</label>
                                                 <input type="file" id="uploadfile" style="margin-bottom: 1em;"
-                                                       id="local_path" name="filename"
-                                                       onchange="document.getElementById('input-text').value=this.value">
+                                                       id="local_path" name="filename">
                                                 <label class="control-label">Upload_path:</label>
-                                                <textarea class="form-control" id="input-text" name="dbPath"
-                                                          placeholder="address"></textarea>
+                                                <label class="form-control" id="input-text"
+                                                       name="dbPath"><s:property
+                                                        value="#session.dir"></s:property></label>
                                                 <select style="width: 152px;margin-left: 0px;border-top-width: 1px;margin-top: 10px;height: 31px;"
                                                         name="tag">
                                                     <option selected>=请选择文件标签=</option>
@@ -323,7 +323,8 @@
             <ol class="breadcrumb" style="margin-top: 10px;border-top-width: 0px;margin-bottom: 10px;">
                 <li><a href="list">Home</a></li>
                 <s:iterator value="dirList">
-                    <li><a href="listDir?dirName=<s:property value="dirPath"/>&dirType=DIR"><s:property value="dir"/></a></li>
+                    <li><a href="listDir?dirName=<s:property value="dirPath"/>&dirType=DIR"><s:property
+                            value="dir"/></a></li>
                 </s:iterator>
                 <%--<li class="active">Data</li>--%>
             </ol>

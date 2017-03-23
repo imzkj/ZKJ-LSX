@@ -28,7 +28,7 @@
             <result name="ok" >/Home.jsp</result>
         </action>
         <action name="upload" class="com.service.FileServiceAction" method="uploadFile">
-            <result name="ok" type="chain">list</result>
+            <result name="ok" type="chain">listDir</result>
         </action>
         <action name="uploadpath" class="com.service.FileServiceAction" method="uploadFilePath">
             <result name="ok">/test.jsp</result>
