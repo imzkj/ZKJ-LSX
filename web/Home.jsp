@@ -46,7 +46,7 @@
 
         .center {
             width: 100%;
-            height: 550px;
+            height: 580px;
             margin: 0 auto;
             padding: 10px;
         }
@@ -372,17 +372,17 @@
 <%--文件table--%>
             <table class="table table-hover" style="margin-bottom: 0px;">
                 <tr>
-                    <th style="width:226px;text-align: left">filename</th>
+                    <th style="width:226px;text-align: left" >filename</th>
                     <th style="width:226px;text-align: left">tag</th>
                     <th style="width:226px;text-align: left">size</th>
                 </tr>
             </table>
             <div style="overflow-x: auto; overflow-y: auto; height: 350px; width:680px;">
-                <table class="table table-hover" id="fileTable" width="680px" height="350px" oncontextmenu="tt();">
+                <table class="table table-hover" id="fileTable" width="680px" height="350px">
 
                     <s:iterator value="fileslist">
-                        <tr>
-                            <td style="width:226px">
+                        <tr style="height: 40px;">
+                            <td style="width:196px;">
                                 <s:if test='type=="image"'><img src="images/file.svg"><s:property
                                         value="filename"/></s:if>
                                 <s:elseif test='type=="TXT"'><img src="images/txt.svg"><s:property
@@ -402,11 +402,14 @@
                                 </s:elseif>
                                 <s:else><img src="images/unknown.svg"><s:property value="filename"/></s:else>
                             </td>
-                            <td style="width:226px">
+                            <td style="width:196px">
                                 <a href="listTag?tag=<s:property value="tag"/>"><s:property
                                         value="tag"/></a></td>
-                            <td style="width:226px">
+                            <td style="width:196px">
                                 <s:property value="size"/>
+                            </td>
+                            <td>
+                                <textarea style="width: auto;height: auto;" readonly="true" id="menu" onblur="menu_out()" onfocus="menu_in()"></textarea>
                             </td>
                         </tr>
                     </s:iterator>
@@ -415,8 +418,8 @@
 <%--右键菜单--%>
             <div id="menu_context">
                 <ul style="line-height: 40px;list-style-type: none; padding: 0px;margin-left: 5px;border: 2px;">
-                    <a href="downLoad?"><li>download</li></a>
-                    <a href="delete?"><li>delete</li></a>
+                    <a href="downLoad?filename=<s:property value="filename"/>"><li>download</li></a>
+                    <a href="delete?filename=<s:property value="filename"/>"><li>delete</li></a>
                 </ul>
             </div>
         </div>
@@ -462,6 +465,14 @@
     }
     function addFile() {
 
+    }
+    function menu_in() {
+        var menu =document.getElementById("menu_context");
+        menu.style.display='block';
+    }
+    function menu_out() {
+        var menu =document.getElementById("menu_context");
+        menu.style.display='none';
     }
     function menu_context() {          //右键function
         var menu = document.getElementById("menu_context");
