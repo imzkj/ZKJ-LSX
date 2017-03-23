@@ -33,6 +33,12 @@
         <action name="uploadpath" class="com.service.FileServiceAction" method="uploadFilePath">
             <result name="ok">/test.jsp</result>
         </action>
+        <action name="downLoad" class="com.tool.HDFSOperation" method="downLoad">
+            <result name="ok" >/Home.jsp</result>
+        </action>
+        <action name="delete" class="com.tool.HDFSOperation" method="deleteFile">
+            <result name="ok" >/Home.jsp</result>
+        </action>
     </package>
 
 </struts>
