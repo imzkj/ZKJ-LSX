@@ -21,7 +21,8 @@
             -moz-background-size: cover;
             -o-background-size: cover;
             min-height: 900px;
-        }
+            background-attachment:fixed
+    }
 
         .contain {
             width: 1024px;
@@ -112,8 +113,8 @@
 
         .Title {
             text-align: center;
-            padding-top: 1em;
-            padding-bottom: 10px;
+            padding-top: 10px;
+            padding-bottom: 5px;
             font-weight: 500;
             color: #2B2B36;
             font-size: 3em;

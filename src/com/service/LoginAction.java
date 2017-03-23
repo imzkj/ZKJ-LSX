@@ -102,14 +102,20 @@ public class LoginAction extends ActionSupport {
             identify="0";
         }
         String jcode = icode + "";
-        if (!identify.equals(code)) {
-            session.put("code", jcode);
-            MailUtil.sendEmail(email, icode, username);
-            return "again";
+        String selectsql="";
+        if (code.equals("0")) {
+            selectsql= "insert into user(username,password,phonenum,email,totalsize,used) values(\""
+                    + username + "\",\"" + password + "\",\"" + phonenum + "\",\"" + email + "\",10,0)";
+        }else {
+            selectsql= "insert into user(username,password,phonenum,email,totalsize,used) values(\""
+                    + username + "\",\"" + password + "\",\"" + phonenum + "\",\"" + email + "\",100,0)";
+            if (!identify.equals(code)) {
+                session.put("code", jcode);
+                MailUtil.sendEmail(email, icode, username);
+                return "again";
+            }
         }
         dataBaseOperation = new DataBaseOperation();
-        String selectsql = "insert into user(username,password,phonenum,email,totalsize,used) values(\""
-                + username + "\",\"" + password + "\",\"" + phonenum + "\",\"" + email + "\",10,0)";
         System.out.println(selectsql);
         dataBaseOperation.updateSql(selectsql);
         return "ok";

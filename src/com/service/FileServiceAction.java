@@ -305,9 +305,9 @@ public class FileServiceAction extends ActionSupport {
         session.put("dir", "Home");
         String sql;
         if (username.equals("admin")) {
-            sql = "select * from file where owner=\"" + username + "\" and dbpath=\"Home\"";
+            sql = "select * from file";
         } else {
-            sql = "select * from file where dbpath=\"Home\"";
+            sql = "select * from file where owner=\"" + username + "\" and dbpath=\"Home\"";
         }
 
         //"where dbpath=\"" + path + "\"";
