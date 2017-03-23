@@ -47,20 +47,16 @@ public class MailUtil {
         }
     }
 
-    public static void main( String[] args ) {
-        int x;//定义两变量
-        Random ne=new Random();//实例化一个random的对象ne
-        x=ne.nextInt(900000)+100000;//为变量赋随机值1000-9999
-        System.out.println("产生的随机数是:"+x);//输出
-//        Mail mail = new Mail();
-//        mail.setHost("smtp.163.com"); // 设置邮件服务器,如果不用163的,自己找找看相关的
-//        mail.setSender("18819423556@163.com");
-//        mail.setReceiver("601869492@qq.com"); // 接收人
-//        mail.setUsername("18819423556@163.com"); // 登录账号,一般都是和邮箱名一样吧
-//        mail.setPassword(""); // 发件人邮箱的登录密码
-//        mail.setSubject("aaaaaaaaa");
-//        mail.setMessage("bbbbbbbbbbbbbbbbb");
-//        new MailUtil().send(mail);
+    public static void sendEmail( String email,int code,String username) {
+        Mail mail = new Mail();
+        mail.setHost("smtp.163.com"); // 设置邮件服务器,如果不用163的,自己找找看相关的
+        mail.setSender("18819423556@163.com");
+        mail.setReceiver(email); // 接收人
+        mail.setUsername("18819423556@163.com"); // 登录账号,一般都是和邮箱名一样吧
+        mail.setPassword(""); // 发件人邮箱的登录密码
+        mail.setSubject("云盘注册");
+        mail.setMessage("亲爱的"+username+",您正在注册宇宙第一云盘，您的验证码是："+code+" ,请妥善保管！");
+        new MailUtil().send(mail);
     }
 
 }

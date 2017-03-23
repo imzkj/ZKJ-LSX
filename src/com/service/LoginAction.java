@@ -1,6 +1,7 @@
 package com.service;
 
 import com.common.User;
+import com.email.MailUtil;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tool.DataBaseOperation;
@@ -9,6 +10,7 @@ import org.apache.struts2.ServletActionContext;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.ResultSet;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by ZKJ on 2017/3/16 0016.
@@ -20,6 +22,15 @@ public class LoginAction extends ActionSupport {
     private String email;
     private DataBaseOperation dataBaseOperation;
     private ResultSet resultSet;
+    private String code;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode( String code ) {
+        this.code = code;
+    }
 
     public String getPhonenum() {
         return phonenum;
@@ -60,7 +71,7 @@ public class LoginAction extends ActionSupport {
         String selectUsed = "select used,totalsize from user where username=\"" + username + "\"";
         ResultSet resultSet1 = dataBaseOperation.querySql(selectUsed);
         Map<String, Object> session = ActionContext.getContext().getSession();
-        if(resultSet1.next()) {
+        if (resultSet1.next()) {
             session.put("used", resultSet1.getDouble("used"));
             session.put("totalsize", resultSet1.getDouble("totalsize"));
         }
@@ -78,6 +89,24 @@ public class LoginAction extends ActionSupport {
     }
 
     public String register() throws Exception {
+        Map<String, Object> session = ActionContext.getContext().getSession();
+        int icode;//定义两变量
+        String identify = "";
+        Random ne = new Random();//实例化一个random的对象ne
+        icode = ne.nextInt(900000) + 100000;//为变量赋随机值1000-9999
+        session.put("username", username);
+        session.put("phonenum", phonenum);
+        session.put("email", email);
+        identify = (String) session.get("code");
+        if (identify==null) {
+            identify="0";
+        }
+        String jcode = icode + "";
+        if (!identify.equals(code)) {
+            session.put("code", jcode);
+            MailUtil.sendEmail(email, icode, username);
+            return "again";
+        }
         dataBaseOperation = new DataBaseOperation();
         String selectsql = "insert into user(username,password,phonenum,email,totalsize,used) values(\""
                 + username + "\",\"" + password + "\",\"" + phonenum + "\",\"" + email + "\",10,0)";

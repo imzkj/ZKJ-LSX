@@ -25,7 +25,7 @@ public class LuceneFileIndex {
         String indexDir = "d:\\luceneindex";
         Analyzer analyzer = new PaodingAnalyzer();
         Directory dir = FSDirectory.getDirectory(indexDir);
-        IndexWriter writer = new IndexWriter(dir, analyzer, true, IndexWriter.MaxFieldLength.UNLIMITED);
+        IndexWriter writer = new IndexWriter(dir, analyzer, false, IndexWriter.MaxFieldLength.UNLIMITED);
         Document document = new Document();
         document.add(new Field("id", id, Field.Store.YES, Field.Index.NOT_ANALYZED));
         document.add(new Field("contents", contents, Field.Store.YES, Field.Index.ANALYZED));

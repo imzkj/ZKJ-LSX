@@ -324,7 +324,7 @@
                                     <h4 class="modal-title" id="newdirLabel">New Dir</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="">
+                                    <form action="newDir">
                                         <div class="form-group">
                                             <label class="control-label">New Folder Name:</label>
                                             <input class="form-control" id="inputDirName" name="inputFolderName" placeholder="Folder Name"></input>
@@ -350,8 +350,8 @@
                             <div class="dropdown">
                                 <select class="btn btn-default" name="searchType" style="width: 105px;" onchange="document.getElementById('FileType').setAttribute('placeholder',this.value)">
                                     <option selected>Type</option>
-                                    <option value="According FileName">FileName</option>
-                                    <option value="According FileContext">FileContext</option>
+                                    <option value="FileName">FileName</option>
+                                    <option value="FileContext">FileContext</option>
                                 </select>
                             </div>
                         </th>

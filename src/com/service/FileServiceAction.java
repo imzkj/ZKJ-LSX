@@ -8,6 +8,7 @@ import com.tool.*;
 
 import java.io.*;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +77,16 @@ public class FileServiceAction extends ActionSupport {
     }
 
     private String phonenum;
+
+    public String getInputFolderName() {
+        return inputFolderName;
+    }
+
+    public void setInputFolderName( String inputFolderName ) {
+        this.inputFolderName = inputFolderName;
+    }
+
+    private String inputFolderName;
 
     public String getDirName() {
         return dirName;
@@ -292,7 +303,13 @@ public class FileServiceAction extends ActionSupport {
     public String listAll() throws Exception {
         fileslist = new ArrayList<File>();
         session.put("dir", "Home");
-        String sql = "select * from file where owner=\"" + username + "\"";
+        String sql;
+        if (username.equals("admin")) {
+            sql = "select * from file where owner=\"" + username + "\" and dbpath=\"Home\"";
+        } else {
+            sql = "select * from file where dbpath=\"Home\"";
+        }
+
         //"where dbpath=\"" + path + "\"";
         ResultSet resultSet = dataBaseOperation.querySql(sql);
         while(resultSet.next()) {
@@ -391,6 +408,25 @@ public class FileServiceAction extends ActionSupport {
             file.setMd5(resultSet.getString("md5"));
             fileslist.add(file);
         }
+        return "ok";
+    }
+
+    public String newDir() throws SQLException {
+        HttpServletRequest request = ServletActionContext.getRequest();
+        String a = (String) session.get("dir");
+        String selectSql = "select * from file where filename=\"" + inputFolderName + "\" and dbpath=\"" + a + "\""
+                + " and owner=\"" + username + "\"";
+        ResultSet resultSet = dataBaseOperation.querySql(selectSql);
+        if (resultSet.next()) {
+            //弹出提示框
+            request.setAttribute("errorMessage", "目录：" + a + "下已经存在" + inputFolderName + "文件！");
+            return "ok";
+        }
+        String newDirSql = "insert into file(filename,dbpath,owner,tag,size,type,md5,hdfsPath) values(\"" +
+                inputFolderName + "\",\"" + a + "\",\"" + username + "\",\"" + "" + "\",\""
+                + "0" + "\",\"" + "dir" + "\",\"" + "" + "\",\""
+                + "/_." + "\")";
+        dataBaseOperation.updateSql(newDirSql);
         return "ok";
     }
 }

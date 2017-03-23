@@ -42,20 +42,22 @@ public class LuceneFileSearch {
             Document doc = searcher.doc(hits[i].doc);
             key += doc.get("id") + ",";
         }
-        key = key.substring(0, key.length() - 1);
-        String selectSql = "select * from file where owner=\"" + username + "\" and id in(" + key + ")";
-        System.out.println(selectSql);
-        ResultSet resultSet = dataBaseOperation.querySql(selectSql);
-        while(resultSet.next()) {
-            File file = new File();
-            file.setFilename(resultSet.getString("filename"));
-            file.setDbpath(resultSet.getString("dbpath"));
-            file.setOwner(resultSet.getString("owner"));
-            file.setTag(resultSet.getString("tag"));
-            file.setSize(resultSet.getString("size"));
-            file.setType(resultSet.getString("type"));
-            file.setMd5(resultSet.getString("md5"));
-            fileslist.add(file);
+        if (!key.equals("")) {
+            key = key.substring(0, key.length() - 1);
+            String selectSql = "select * from file where owner=\"" + username + "\" and id in(" + key + ")";
+            System.out.println(selectSql);
+            ResultSet resultSet = dataBaseOperation.querySql(selectSql);
+            while(resultSet.next()) {
+                File file = new File();
+                file.setFilename(resultSet.getString("filename"));
+                file.setDbpath(resultSet.getString("dbpath"));
+                file.setOwner(resultSet.getString("owner"));
+                file.setTag(resultSet.getString("tag"));
+                file.setSize(resultSet.getString("size"));
+                file.setType(resultSet.getString("type"));
+                file.setMd5(resultSet.getString("md5"));
+                fileslist.add(file);
+            }
         }
         searcher.close();
         dir.close();
