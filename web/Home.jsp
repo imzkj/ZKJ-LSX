@@ -144,7 +144,15 @@
             -webkit-border-top-left-radius: 10px;
             -moz-border-top-left-radius: 10px;
             -o-border-top-left-radius: 10px;
-        " border-bottom-right-radius: 10 px; -webkit-border-bottom-right-radius: 10 px; -moz-border-bottom-right-radius: 10 px; -o-border-bottom-right-radius: 10 px; border-top-right-radius: 10 px; -webkit-border-top-right-radius: 10 px; -moz-border-top-right-radius: 10 px; -moz-border-top-right-radius: 10 px; -o-border-top-right-radius: 10 px; "
+            border-bottom-right-radius: 10px;
+            -webkit-border-bottom-right-radius: 10px;
+            -moz-border-bottom-right-radius: 10px;
+            -o-border-bottom-right-radius: 10px;
+            border-top-right-radius: 10px;
+            -webkit-border-top-right-radius: 10px;
+            -moz-border-top-right-radius: 10px;
+            -moz-border-top-right-radius: 10px;
+            -o-border-top-right-radius: 10px; "
         }
     </style>
 
@@ -308,10 +316,10 @@
                                    style="width:315px;" name="search"></th>
                         <th>
                             <div class="dropdown">
-                                <select class="btn btn-default" name="searchType" style="width: 105px;">
+                                <select class="btn btn-default" name="searchType" style="width: 105px;" onchange="document.getElementById('FileType').setAttribute('placeholder',this.value)">
                                     <option selected>Type</option>
-                                    <option onclick="sortType_name()">FileName</option>
-                                    <option onclick="sortType_context()">FileContext</option>
+                                    <option value="According FileName">FileName</option>
+                                    <option value="According FileContext">FileContext</option>
                                 </select>
                             </div>
                         </th>
@@ -336,7 +344,7 @@
                 </tr>
             </table>
             <div style="overflow-x: auto; overflow-y: auto; height: 350px; width:680px;">
-                <table class="table table-hover" id="fileTable" width="680px" height="350px">
+                <table class="table table-hover" id="fileTable" width="680px" height="350px" oncontextmenu="menu_context();">
 
                     <s:iterator value="fileslist">
                         <tr>
@@ -373,8 +381,8 @@
 
             <div id="menu_context">
                 <ul style="line-height: 40px;list-style-type: none; padding: 0px;margin-left: 5px;border: 2px;">
-                    <li>download</li>
-                    <li>delete</li>
+                    <form action="downLoad"><li>download</li></form>
+                    <form action="delete"><li>delete</li></form>
                 </ul>
             </div>
         </div>
@@ -419,16 +427,6 @@
 
     }
     function addFile() {
-
-    }
-    function sortType_name() {          //搜索方式function
-        var st = document.getElementById("FileType");
-        st.setAttribute("placeholder", "According FileName");
-
-    }
-    function sortType_context() {
-        var st = document.getElementById("FileType");
-        st.setAttribute("placeholder", "According FileContext");
 
     }
     function menu_context() {          //右键function
