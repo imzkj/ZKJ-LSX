@@ -350,8 +350,8 @@
                             <div class="dropdown">
                                 <select class="btn btn-default" name="searchType" style="width: 105px;" onchange="document.getElementById('FileType').setAttribute('placeholder',this.value)">
                                     <option selected>Type</option>
-                                    <option value="According FileName">FileName</option>
-                                    <option value="According FileContext">FileContext</option>
+                                    <option value="FileName">FileName</option>
+                                    <option value="FileContext">FileContext</option>
                                 </select>
                             </div>
                         </th>
