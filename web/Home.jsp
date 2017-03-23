@@ -187,7 +187,7 @@
 
 
         <div class="center_left" style="height: 480px;">
-            <%-- 个人信息--%>
+<%-- 个人信息--%>
             <div class="col-sm-6 col-md-4" style="margin-top: 20px;width:280px;">
                 <div class="thumbnail">
                     <img src="/images/person.svg" alt="个人图片" style="width:160px;height: 200px;">
@@ -239,7 +239,7 @@
                     </div>
                 </div>
             </div>
-            <%-- 进度条--%>
+<%-- 进度条--%>
             <div class="progress" style="width: 280px; margin-top: 30em;">
                 <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
                      style="min-width: 2em;">
@@ -253,14 +253,14 @@
 
         </div>
         <div class="center_right" style="margin-top: 1em;">
-            <%--搜索--%>
+<%--上传按键--%>
             <table id="sort" cellpadding="5px;">
                 <tr>
                     <th>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#upload"
                                 data-whatever="upload">Upload
                         </button>
-
+<%--上传框--%>
                         <div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="uploadLabel">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -307,10 +307,42 @@
                             </div>
                         </div>
                     </th>
+<%--新建文件夹按键--%>
                     <th>
-                        <button type="button" class="btn btn-primary">New Dir
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newdir"
+                                data-whatever="newdir">New Dir
                         </button>
                     </th>
+<%--新建文件夹栏--%>
+                    <div class="modal fade" id="newdir" tabindex="-1" role="dialog" aria-labelledby="newdirLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"
+                                            aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="newdirLabel">New Dir</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="">
+                                        <div class="form-group">
+                                            <label class="control-label">New Folder Name:</label>
+                                            <input class="form-control" id="inputDirName" name="inputFolderName" placeholder="Folder Name"></input>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <button type="submit" class="btn btn-primary">Confirm</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+<%--搜索--%>
                     <form action="search">
                         <th><input type="text" class="form-control" id="FileType" placeholder="According FileType"
                                    style="width:315px;" name="search"></th>
@@ -327,7 +359,7 @@
                     </form>
                 </tr>
             </table>
-
+<%--路径导航栏--%>
             <ol class="breadcrumb" style="margin-top: 10px;border-top-width: 0px;margin-bottom: 10px;">
                 <li><a href="list">Home</a></li>
                 <s:iterator value="dirList">
@@ -336,6 +368,7 @@
                 </s:iterator>
                 <%--<li class="active">Data</li>--%>
             </ol>
+<%--文件table--%>
             <table class="table table-hover" style="margin-bottom: 0px;">
                 <tr>
                     <th style="width:226px;text-align: left">filename</th>
@@ -344,7 +377,7 @@
                 </tr>
             </table>
             <div style="overflow-x: auto; overflow-y: auto; height: 350px; width:680px;">
-                <table class="table table-hover" id="fileTable" width="680px" height="350px" oncontextmenu="menu_context();">
+                <table class="table table-hover" id="fileTable" width="680px" height="350px" oncontextmenu="tt();">
 
                     <s:iterator value="fileslist">
                         <tr>
@@ -378,11 +411,11 @@
                     </s:iterator>
                 </table>
             </div>
-
+<%--右键菜单--%>
             <div id="menu_context">
                 <ul style="line-height: 40px;list-style-type: none; padding: 0px;margin-left: 5px;border: 2px;">
-                    <form action="downLoad"><li>download</li></form>
-                    <form action="delete"><li>delete</li></form>
+                    <a href="downLoad?"><li>download</li></a>
+                    <a href="delete?"><li>delete</li></a>
                 </ul>
             </div>
         </div>
@@ -442,8 +475,10 @@
             //return false必须写在最后，否则自定义的右键菜单也不会出现
             return false;
         }
+
         //实现点击document，自定义菜单消失
         document.onclick = function () {
+
             menu.style.display = "none";
             document.oncontextmenu = true;
         }
