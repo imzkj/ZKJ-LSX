@@ -154,7 +154,7 @@
             -moz-border-top-right-radius: 10px;
             -o-border-top-right-radius: 10px; "
         }
-        download{
+        .download{
             cursor: pointer;
             background: url(/images/download148.svg) no-repeat 0px 0px;
             width: 20px;
@@ -164,7 +164,7 @@
             border-radius: 50%;
             margin: 16px 10px 0px 0px;
         }
-        delete{
+        .delete{
             cursor: pointer;
             background: url(/images/delete67.svg) no-repeat 0px 0px;
             width: 20px;
@@ -394,7 +394,9 @@
                     <th style="width:200px;text-align: left" >filename</th>
                     <th style="width:200px;text-align: left">tag</th>
                     <th style="width:200px;text-align: left">size</th>
-                    <th style="text-align: left">operation</th>
+                    <%--<th style="text-align: left">operation</th>--%>
+                    <th><a><div class="download"></div></a>
+                        <a><div class="delete"></div></a></th>
                 </tr>
             </table>
             <div style="overflow-x: auto; overflow-y: auto; height: 350px; width:680px;">
