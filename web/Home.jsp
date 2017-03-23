@@ -394,9 +394,7 @@
                     <th style="width:200px;text-align: left" >filename</th>
                     <th style="width:200px;text-align: left">tag</th>
                     <th style="width:200px;text-align: left">size</th>
-                    <%--<th style="text-align: left">operation</th>--%>
-                    <th><a><div class="download"></div></a>
-                        <a><div class="delete"></div></a></th>
+                    <th style="text-align: left">operation</th>
                 </tr>
             </table>
             <div style="overflow-x: auto; overflow-y: auto; height: 350px; width:680px;">
@@ -425,8 +423,8 @@
                                 <s:else><img src="images/unknown.svg"><s:property value="filename"/></s:else>
                             </td>
                             <td>
-                                <div ></div>
-                                <>
+                                <a><div class="download"></div></a>
+                                <a><div class="delete"></div></a>
                             </td>
                             <td style="width:196px">
                                 <a href="listTag?tag=<s:property value="tag"/>"><s:property
