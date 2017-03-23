@@ -322,7 +322,9 @@
 
             <ol class="breadcrumb" style="margin-top: 10px;border-top-width: 0px;margin-bottom: 10px;">
                 <li><a href="list">Home</a></li>
-                <%--<li><a href="#">Library</a></li>--%>
+                <s:iterator value="dirList">
+                    <li><a href="listDir?dirName=<s:property value="dirPath"/>&dirType=DIR"><s:property value="dir"/></a></li>
+                </s:iterator>
                 <%--<li class="active">Data</li>--%>
             </ol>
             <table class="table table-hover" style="margin-bottom: 0px;">

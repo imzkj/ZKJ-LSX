@@ -1,5 +1,6 @@
 package com.service;
 
+import com.common.DirPath;
 import com.common.User;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -33,10 +34,22 @@ public class FileServiceAction extends ActionSupport {
     private String tag;
     private String username;
     private String dirName;
+    private String dirType;
     private String email;
     private String deftag;
-    private utils util=new utils();
-    private LuceneFileIndex luceneFileIndex=new LuceneFileIndex();
+    private utils util = new utils();
+    private List<DirPath> dirList;
+    public static List<File> fileslist;
+    private LuceneFileIndex luceneFileIndex = new LuceneFileIndex();
+    private Map<String, Object> session = ActionContext.getContext().getSession();
+
+    public String getDirType() {
+        return dirType;
+    }
+
+    public void setDirType( String dirType ) {
+        this.dirType = dirType;
+    }
 
     public String getDeftag() {
         return deftag;
@@ -88,7 +101,13 @@ public class FileServiceAction extends ActionSupport {
         this.tag = tag;
     }
 
-    public static List<File> fileslist;
+    public List<DirPath> getDirList() {
+        return dirList;
+    }
+
+    public void setDirList( List<DirPath> dirList ) {
+        this.dirList = dirList;
+    }
 
     public FileServiceAction() throws Exception {
         Map<String, Object> session = ActionContext.getContext().getSession();
@@ -236,7 +255,6 @@ public class FileServiceAction extends ActionSupport {
                 request.setAttribute("errorMessage", "您的空间已达到上限，请升级会员继续使用！");
                 return "ok";
             }
-            Map<String, Object> session = ActionContext.getContext().getSession();
             DecimalFormat df = new DecimalFormat("0.00");
             session.put("used", df.format(used));
             session.put("totalsize", resultSet1.getDouble("totalsize"));
@@ -251,14 +269,14 @@ public class FileServiceAction extends ActionSupport {
         if (isUploadFile) {
             hdfsOperation.upLoad(in, hdfsPath);
         }
-        String selectId="select id from file where filename=\""+filenameFileName+"\" and dbpath=\""+dbPath+"\" and owner=\""+username+"\"";
+        String selectId = "select id from file where filename=\"" + filenameFileName + "\" and dbpath=\"" + dbPath + "\" and owner=\"" + username + "\"";
         ResultSet resultSet3 = dataBaseOperation.querySql(selectId);
-        String fileID="";
+        String fileID = "";
         if (resultSet3.next()) {
-            fileID=resultSet3.getString("id");
+            fileID = resultSet3.getString("id");
         }
-        String contents=util.streamToString(new FileInputStream(getFilename()));
-        luceneFileIndex.index(fileID,contents);
+        String contents = util.streamToString(new FileInputStream(getFilename()));
+        luceneFileIndex.index(fileID, contents);
         //in.close();
         return "ok";
     }
@@ -272,7 +290,8 @@ public class FileServiceAction extends ActionSupport {
 
     public String listAll() throws Exception {
         fileslist = new ArrayList<File>();
-        String sql = "select * from file where owner=\""+username+"\"";
+        session.put("dir", "Home");
+        String sql = "select * from file where owner=\"" + username + "\"";
         //"where dbpath=\"" + path + "\"";
         ResultSet resultSet = dataBaseOperation.querySql(sql);
         while(resultSet.next()) {
@@ -306,7 +325,33 @@ public class FileServiceAction extends ActionSupport {
 
     public String listDir() throws Exception {
         fileslist = new ArrayList<File>();
-        String sql = "select * from file where dbpath=\"" + dirName + "\" and owner=\""+username+"\"";
+        dirList = new ArrayList<DirPath>();
+        System.out.println(session.get("dir"));
+        String sessionDir = (String) session.get("dir");
+        if (dirType == null) {
+            session.put("dir", session.get("dir") + "/" + dirName);
+        } else {
+            if (sessionDir.length() < dirName.length()) {
+                session.put("dir", session.get("dir") + "/" + dirName);
+            }else {
+                session.put("dir",dirName);
+            }
+        }
+
+        System.out.println(session.get("dir"));
+        dirName = (String) session.get("dir");
+        String[] splitDir = dirName.split("/");
+        for (int i = 1; i < splitDir.length; i++) {
+            DirPath dp = new DirPath();
+            dp.setDir(splitDir[i]);
+            String temp = "";
+            for (int j = 0; j <= i; j++) {
+                temp += splitDir[j] + "/";
+            }
+            dp.setDirPath(temp.substring(0, temp.length() - 1));
+            dirList.add(dp);
+        }
+        String sql = "select * from file where dbpath=\"" + dirName + "\" and owner=\"" + username + "\"";
         System.out.println(sql);
         //"where dbpath=\"" + path + "\"";
         ResultSet resultSet = dataBaseOperation.querySql(sql);
@@ -326,7 +371,7 @@ public class FileServiceAction extends ActionSupport {
 
     public String listTag() throws Exception {
         fileslist = new ArrayList<File>();
-        String sql = "select * from file where tag=\"" + tag + "\" and owner=\""+username+"\"";
+        String sql = "select * from file where tag=\"" + tag + "\" and owner=\"" + username + "\"";
         System.out.println(sql);
         //"where dbpath=\"" + path + "\"";
         ResultSet resultSet = dataBaseOperation.querySql(sql);
