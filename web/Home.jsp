@@ -21,8 +21,7 @@
             -moz-background-size: cover;
             -o-background-size: cover;
             min-height: 900px;
-            background-attachment:fixed
-    }
+        }
 
         .contain {
             width: 1024px;
@@ -113,8 +112,8 @@
 
         .Title {
             text-align: center;
-            padding-top: 10px;
-            padding-bottom: 5px;
+            padding-top: 1em;
+            padding-bottom: 10px;
             font-weight: 500;
             color: #2B2B36;
             font-size: 3em;
@@ -409,7 +408,7 @@
                                 <s:property value="size"/>
                             </td>
                             <td>
-                                <textarea style="width: auto;height: auto;" readonly="true" id="menu" onblur="menu_out()" onfocus="menu_in()"></textarea>
+
                             </td>
                         </tr>
                     </s:iterator>
@@ -418,8 +417,8 @@
 <%--右键菜单--%>
             <div id="menu_context">
                 <ul style="line-height: 40px;list-style-type: none; padding: 0px;margin-left: 5px;border: 2px;">
-                    <a href="downLoad?filename=<s:property value="filename"/>"><li>download</li></a>
-                    <a href="delete?filename=<s:property value="filename"/>"><li>delete</li></a>
+                    <a href=""><li>download</li></a>
+                    <a href=""><li>delete</li></a>
                 </ul>
             </div>
         </div>
@@ -465,14 +464,6 @@
     }
     function addFile() {
 
-    }
-    function menu_in() {
-        var menu =document.getElementById("menu_context");
-        menu.style.display='block';
-    }
-    function menu_out() {
-        var menu =document.getElementById("menu_context");
-        menu.style.display='none';
     }
     function menu_context() {          //右键function
         var menu = document.getElementById("menu_context");
