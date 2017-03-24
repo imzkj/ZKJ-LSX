@@ -37,8 +37,11 @@
         <action name="delete" class="com.service.FileServiceAction" method="delete">
             <result name="ok" type="chain">listDir</result>
         </action>
-        <action name="share" class="com.service.FileServiceAction" method="share">
+        <action name="share" class="com.service.tishi" method="share">
             <result name="ok" type="chain">listDir</result>
+        </action>
+        <action name="listId" class="com.service.tishi" method="listId">
+            <result name="ok">/Home.jsp</result>
         </action>
         <action name="upload" class="com.service.FileServiceAction" method="uploadFile">
             <result name="ok" type="chain">listDir</result>

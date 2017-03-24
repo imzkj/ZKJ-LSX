@@ -308,8 +308,7 @@
                                                        id="local_path" name="filename">
                                                 <label class="control-label">Upload_path:</label>
                                                 <label class="form-control" id="input-text"
-                                                       name="dbPath"><s:property
-                                                        value="#session.dir"></s:property></label>
+                                                       name="dbPath"><s:property value="#session.dir"></s:property></label>
                                                 <select style="width: 152px;margin-left: 0px;border-top-width: 1px;margin-top: 10px;height: 31px;"
                                                         name="tag">
                                                     <option selected>=请选择文件标签=</option>
@@ -443,6 +442,7 @@
                                 <a href="share?id=<s:property value="id"/>" ><div class="share"></div></a>
                             </td>
 
+
                         </tr>
 
                     </s:iterator>
@@ -530,8 +530,8 @@
             }
             else {
                 document.getElementById("progressbar").style.width = probar + "%";
-            }
         }
+    }
 
 </script>
 
@@ -547,13 +547,3 @@
 <link rel="stylesheet" href="/web-plug/bootstrap-3.0.0/css/bootstrap.min.css">
 
 <script type="text/javascript" src="/web-plug/jQuery-Form.min.js"></script>
-<script>
-    window.onload = function () {
-        var errorMsg = "${request.errorMessage}";
-        if (errorMsg != "") {
-            alert(errorMsg);
-        }
-    }
-
-    window.clipboardData.setData("copytext",sha.value)
-</script>
