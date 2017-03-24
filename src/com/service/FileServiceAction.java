@@ -462,6 +462,6 @@ public class FileServiceAction extends ActionSupport {
     }
     public String share() throws SQLException {
 
-        return NONE;
+        return "ok";
     }
 }

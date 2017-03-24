@@ -399,7 +399,7 @@
                 <%--<li class="active">Data</li>--%>
             </ol>
 <%--文件table--%>
-            <table class="table table-hover" style="margin-bottom: 0px;">
+            <table class="table table-hover" style="margin-bottom: 0px;" align="center">
                 <tr>
                     <th style="width:166px;text-align: left" >filename</th>
                     <th style="width:166px;text-align: left">tag</th>
@@ -408,7 +408,7 @@
                 </tr>
             </table>
             <div style="overflow-x: auto; overflow-y: auto; height: 350px; width:680px;">
-                <table class="table table-hover" id="fileTable" width="680px" height="350px">
+                <table class="table table-hover" id="fileTable" width="680px" height="350px" align="center">
 
                     <s:iterator value="fileslist">
                         <tr style="height: 40px;">
@@ -441,43 +441,14 @@
                             <td style="width:216px"; padding-left: 20px;>
                                 <a href="download?id=<s:property value="id"/>"><div class="download"></div></a>
                                 <a href="delete?id=<s:property value="id"/>"><div class="delete"></div></a>
-                                <a href="share?id=<s:property value="id"/>" data-whatever="share" data-toggle="modal" data-target="#share"><div class="share"></div></a>
-
+                                <a href="share?IJtyzVlqab8=<s:property value="id"/>"><div class="share"></div></a>
                             </td>
                         </tr>
 
                     </s:iterator>
                 </table>
             </div>
-    <div class="modal fade" id="share" tabindex="-1" role="dialog" aria-labelledby="shareLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"
-                            aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="aaa">Share</h4>
-                </div>
-                <div class="modal-body">
-                    <form action="">
-                        <div class="form-group">
-                            <label class="control-label">New Folder Name:</label>
-                            <label class="form-control" id="sha"
-                                   name="dbPath"><s:property
-                                    value="#session.share"></s:property></label>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">
-                                Close
-                            </button>
-                            <button type="submit" class="btn btn-primary" onclick="copy()">Copy</button>
-                        </div>
-                    </form>
-                </div>
 
-            </div>
-        </div>
-    </div>
 <%--右键菜单--%>
             <%--<div id="menu_context">--%>
                 <%--<ul style="line-height: 40px;list-style-type: none; padding: 0px;margin-left: 5px;border: 2px;">--%>
@@ -551,6 +522,98 @@
         }
     }
 </script>
+<%--进度条ajax异步--%>
+<script type="text/javascript">
+    var xmlHttp;
+    var bar_color = 'blue';
+    var span_id = "yellow";
+    var clear = "   "
+    function createXMLHttpRequest() {
+        if (window.ActiveXObject) {
+            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        else if (window.XMLHttpRequest) {
+            xmlHttp = new XMLHttpRequest();
+        }
+    }
+    function go() {
+        createXMLHttpRequest();
+        checkDiv();
+        var url = "ProgressBarJsp.jsp?task=create";
+        xmlHttp.open("GET", url, true);
+        xmlHttp.onreadystatechange = goCallback;
+        xmlHttp.send(null);
+    }
+    function goCallback() {
+        if (xmlHttp.readyState == 4) {
+            if (xmlHttp.status == 200) {
+                setTimeout("pollServer()", 2000);
+            }
+        }
+    }
+
+    function pollServer() {
+        createXMLHttpRequest();
+        var url = "ProgressBarJsp.jsp?task=poll";
+        xmlHttp.open("GET", url, true);
+        xmlHttp.onreadystatechange = pollCallback;
+        xmlHttp.send(null);
+    }
+
+    function pollCallback() {
+        if (xmlHttp.readyState == 4) {
+            if (xmlHttp.status == 200) {
+                var percent_complete = xmlHttp.responseXML.getElementsByTagName
+                ("percent")[0].firstChild.data;
+                var index = processResult(percent_complete);
+                for (var i = 1; i <= index; i++) {
+                    var elem = document.getElementById("block" + i);
+                    elem.innerHTML = clear;
+                    elem.style.backgroundColor = bar_color;
+                    var next_cell = i + 1;
+                    if (next_cell > index && next_cell <= 9) {
+                        document.getElementById("block" + next_cell).
+                            innerHTML = percent_complete + "%";
+                    }
+                }
+                if (index < 9) {
+                    setTimeout("pollServer()", 2000);
+                } else {
+                    document.getElementById("complete").innerHTML = "网站已完成加载!";
+                }
+            }
+        }
+    }
+    function processResult(percent_complete) {
+        var ind;
+        if (percent_complete.length == 1) {
+            ind = 1;
+        } else if (percent_complete.length == 2) {
+            ind = percent_complete.substring(0, 1);
+        } else {
+            ind = 9;
+        }
+        return ind;
+    }
+
+    function checkDiv() {
+        var progress_bar = document.getElementById("progressBar");
+        if (progress_bar.style.visibility == "visible") {
+            clearBar();
+            document.getElementById("complete").innerHTML = "";
+        } else {
+            progress_bar.style.visibility = "visible"
+        }
+    }
+
+    function clearBar() {
+        for (var i = 1; i < 10; i++) {
+            var elem = document.getElementById("block" + i);
+            elem.innerHTML = clear;
+            elem.style.backgroundColor = "white";
+        }
+    }
+</script>
 
 <!-- angularjs插件 -->
 <script type="text/javascript" src="/web-plug/AngularJS/angular.min.js"></script>
@@ -567,10 +630,12 @@
 <script>
     window.onload = function () {
         var errorMsg = "${request.errorMessage}";
+        var sharemess = "${request.sharemess}";
         if (errorMsg != "") {
             alert(errorMsg);
         }
+        if (sharemess != "") {
+            alert(sharemess);
+        }
     }
-
-    window.clipboardData.setData("copytext",sha.value)
 </script>
