@@ -174,6 +174,16 @@
             border-radius: 50%;
             margin: 16px 10px 0px 0px;
         }
+        .share{
+            cursor: pointer;
+            background: url(/images/share6.svg) no-repeat 0px 0px;
+            width: 20px;
+            height: 20px;
+            display: block;
+            float: left;
+            border-radius: 50%;
+            margin: 16px 10px 0px 0px;
+        }
     </style>
 
 </head>
@@ -395,6 +405,9 @@
                     <th style="width:200px;text-align: left">tag</th>
                     <th style="width:200px;text-align: left">size</th>
                     <th style="text-align: left">operation</th>
+                    <%--<th><a><div class="download"></div></a>--%>
+                    <%--<a><div class="delete"></div></a>--%>
+                    <%--<a><div class="share"></div></a></th>--%>
                 </tr>
             </table>
             <div style="overflow-x: auto; overflow-y: auto; height: 350px; width:680px;">
@@ -435,6 +448,7 @@
                             <td>
                                 <a><div class="download"></div></a>
                                 <a><div class="delete"></div></a>
+                                <a><div class="share"></div></a>
                             </td>
                         </tr>
                     </s:iterator>
