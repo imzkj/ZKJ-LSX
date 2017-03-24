@@ -159,27 +159,28 @@
 
     </div> <!--center end -->
 
-    <div id="menu_context">
-        <ul style="line-height: 40px;list-style-type: none; padding: 0px;margin-left: 5px;border: 2px;">
-            <li>download</li>
-            <li>delete</li>
-        </ul>
-    </div>
+    <%--<div id="menu_context">--%>
+        <%--<ul style="line-height: 40px;list-style-type: none; padding: 0px;margin-left: 5px;border: 2px;">--%>
+            <%--<li>download</li>--%>
+            <%--<li>delete</li>--%>
+        <%--</ul>--%>
+    <%--</div>--%>
 
+<%--进度条--%>
     <div class="progress" style="margin-left: 40px;margin-right: 300px;">
         <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
              style="min-width: 2em;">
-            0%
+        ?%
         </div>
-        <span style="float: right;padding-right: 50px;">0K/10G</span>
-
+        <span style="float: right;padding-right: 50px;">
+        <s:property value="#session.used"/>G/<s:property value="#session.totalsize"/>G
+    </span>
     </div>
-
 
 </div> <!-- contain end -->
 
 
-<div class="Bottom">基于JFinal+Hadoop+bootstrap+AngularJs的云端文件管理系统</div>
+
 </body>
 </html>
 <script>
@@ -247,7 +248,16 @@
         }
 
     }
-
+    //进度条
+    function getCurrentProgress() {
+        var probar=${session.used}/${session.totalsize};
+//            var probar = 50;
+        if( probar == 100){
+            alert("boom!");
+        }
+        else {
+            document.getElementById("progressbar").style.width = probar + "%";
+        }
 
 </script>
 

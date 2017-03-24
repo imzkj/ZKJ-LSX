@@ -187,7 +187,7 @@
     </style>
 
 </head>
-<body ng-controller="MyBody">
+<body ng-controller="MyBody" onload="go();">
 <div class="Title" style="height: 60px;"><b>Welcome</b></div>
 
 <div class="contain" id="mainform">
@@ -270,18 +270,17 @@
                 </div>
             </div>
 <%-- 进度条--%>
-            <div class="progress" style="width: 280px; margin-top: 30em;">
-                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+            <div class="progress" style="width: 280px; margin-top: 30em;" >
+                <div class="progress-bar" role="progressbar" id="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
                      style="min-width: 2em;">
-                    0%
+
                 </div>
                 <span style="float: right;padding-right: 50px;">
                     <s:property value="#session.used"/>G/<s:property value="#session.totalsize"/>G
                 </span>
-
             </div>
-
         </div>
+
         <div class="center_right" style="margin-top: 1em;">
 <%--上传按键--%>
             <table id="sort" cellpadding="5px;">
@@ -309,8 +308,7 @@
                                                        id="local_path" name="filename">
                                                 <label class="control-label">Upload_path:</label>
                                                 <label class="form-control" id="input-text"
-                                                       name="dbPath"><s:property
-                                                        value="#session.dir"></s:property></label>
+                                                       name="dbPath"><s:property value="#session.dir"></s:property></label>
                                                 <select style="width: 152px;margin-left: 0px;border-top-width: 1px;margin-top: 10px;height: 31px;"
                                                         name="tag">
                                                     <option selected>=请选择文件标签=</option>
@@ -441,8 +439,10 @@
                             <td style="width:216px"; padding-left: 20px;>
                                 <a href="download?id=<s:property value="id"/>"><div class="download"></div></a>
                                 <a href="delete?id=<s:property value="id"/>"><div class="delete"></div></a>
-                                <a href="share?IJtyzVlqab8=<s:property value="id"/>"><div class="share"></div></a>
+                                <a href="share?id=<s:property value="id"/>" ><div class="share"></div></a>
                             </td>
+
+
                         </tr>
 
                     </s:iterator>
@@ -465,6 +465,7 @@
 <%--<div class="Bottom">基于JFinal+Hadoop+bootstrap+AngularJs的云端文件管理系统</div>--%>
 </body>
 </html>
+
 
 <script>
     $('#upload').on('show.bs.modal', function (event) {                 //上传function
@@ -521,98 +522,18 @@
             document.oncontextmenu = true;
         }
     }
-</script>
-<%--进度条ajax异步--%>
-<script type="text/javascript">
-    var xmlHttp;
-    var bar_color = 'blue';
-    var span_id = "yellow";
-    var clear = "   "
-    function createXMLHttpRequest() {
-        if (window.ActiveXObject) {
-            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        else if (window.XMLHttpRequest) {
-            xmlHttp = new XMLHttpRequest();
-        }
-    }
-    function go() {
-        createXMLHttpRequest();
-        checkDiv();
-        var url = "ProgressBarJsp.jsp?task=create";
-        xmlHttp.open("GET", url, true);
-        xmlHttp.onreadystatechange = goCallback;
-        xmlHttp.send(null);
-    }
-    function goCallback() {
-        if (xmlHttp.readyState == 4) {
-            if (xmlHttp.status == 200) {
-                setTimeout("pollServer()", 2000);
+//    进度条
+        function getCurrentProgress() {
+            var probar=${session.used}/${session.totalsize};
+//            var probar = 50;
+            if( probar == 100){
+                alert("boom!");
             }
+            else {
+                document.getElementById("progressbar").style.width = probar + "%";
         }
     }
 
-    function pollServer() {
-        createXMLHttpRequest();
-        var url = "ProgressBarJsp.jsp?task=poll";
-        xmlHttp.open("GET", url, true);
-        xmlHttp.onreadystatechange = pollCallback;
-        xmlHttp.send(null);
-    }
-
-    function pollCallback() {
-        if (xmlHttp.readyState == 4) {
-            if (xmlHttp.status == 200) {
-                var percent_complete = xmlHttp.responseXML.getElementsByTagName
-                ("percent")[0].firstChild.data;
-                var index = processResult(percent_complete);
-                for (var i = 1; i <= index; i++) {
-                    var elem = document.getElementById("block" + i);
-                    elem.innerHTML = clear;
-                    elem.style.backgroundColor = bar_color;
-                    var next_cell = i + 1;
-                    if (next_cell > index && next_cell <= 9) {
-                        document.getElementById("block" + next_cell).
-                            innerHTML = percent_complete + "%";
-                    }
-                }
-                if (index < 9) {
-                    setTimeout("pollServer()", 2000);
-                } else {
-                    document.getElementById("complete").innerHTML = "网站已完成加载!";
-                }
-            }
-        }
-    }
-    function processResult(percent_complete) {
-        var ind;
-        if (percent_complete.length == 1) {
-            ind = 1;
-        } else if (percent_complete.length == 2) {
-            ind = percent_complete.substring(0, 1);
-        } else {
-            ind = 9;
-        }
-        return ind;
-    }
-
-    function checkDiv() {
-        var progress_bar = document.getElementById("progressBar");
-        if (progress_bar.style.visibility == "visible") {
-            clearBar();
-            document.getElementById("complete").innerHTML = "";
-        } else {
-            progress_bar.style.visibility = "visible"
-        }
-    }
-
-    function clearBar() {
-        for (var i = 1; i < 10; i++) {
-            var elem = document.getElementById("block" + i);
-            elem.innerHTML = clear;
-            elem.style.backgroundColor = "white";
-        }
-    }
 </script>
 
 <!-- angularjs插件 -->
@@ -627,15 +548,3 @@
 <link rel="stylesheet" href="/web-plug/bootstrap-3.0.0/css/bootstrap.min.css">
 
 <script type="text/javascript" src="/web-plug/jQuery-Form.min.js"></script>
-<script>
-    window.onload = function () {
-        var errorMsg = "${request.errorMessage}";
-        var sharemess = "${request.sharemess}";
-        if (errorMsg != "") {
-            alert(errorMsg);
-        }
-        if (sharemess != "") {
-            alert(sharemess);
-        }
-    }
-</script>
