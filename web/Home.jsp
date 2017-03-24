@@ -152,9 +152,11 @@
             -webkit-border-top-right-radius: 10px;
             -moz-border-top-right-radius: 10px;
             -moz-border-top-right-radius: 10px;
-            -o-border-top-right-radius: 10px; "
+            -o-border-top-right-radius: 10px;
+        "
         }
-        .download{
+
+        .download {
             cursor: pointer;
             background: url(/images/download148.svg) no-repeat 0px 0px;
             width: 20px;
@@ -164,7 +166,8 @@
             border-radius: 50%;
             margin: 16px 10px 0px 0px;
         }
-        .delete{
+
+        .delete {
             cursor: pointer;
             background: url(/images/delete67.svg) no-repeat 0px 0px;
             width: 20px;
@@ -174,7 +177,8 @@
             border-radius: 50%;
             margin: 16px 10px 0px 0px;
         }
-        .share{
+
+        .share {
             cursor: pointer;
             background: url(/images/share6.svg) no-repeat 0px 0px;
             width: 20px;
@@ -217,7 +221,7 @@
 
 
         <div class="center_left" style="height: 480px;">
-<%-- 个人信息--%>
+            <%-- 个人信息--%>
             <div class="col-sm-6 col-md-4" style="margin-top: 20px;width:280px;">
                 <div class="thumbnail">
                     <img src="showtupian.action" alt="个人图片" style="width:160px;height: 200px;">
@@ -269,9 +273,10 @@
                     </div>
                 </div>
             </div>
-<%-- 进度条--%>
-            <div class="progress" style="width: 280px; margin-top: 30em;" >
-                <div class="progress-bar" role="progressbar" id="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+            <%-- 进度条--%>
+            <div class="progress" style="width: 280px; margin-top: 30em;">
+                <div class="progress-bar" role="progressbar" id="progressbar" aria-valuenow="0" aria-valuemin="0"
+                     aria-valuemax="100"
                      style="min-width: 2em;">
 
                 </div>
@@ -282,14 +287,14 @@
         </div>
 
         <div class="center_right" style="margin-top: 1em;">
-<%--上传按键--%>
+            <%--上传按键--%>
             <table id="sort" cellpadding="5px;">
                 <tr>
                     <th>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#upload"
                                 data-whatever="upload">Upload
                         </button>
-<%--上传框--%>
+                        <%--上传框--%>
                         <div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="uploadLabel">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -308,7 +313,8 @@
                                                        id="local_path" name="filename">
                                                 <label class="control-label">Upload_path:</label>
                                                 <label class="form-control" id="input-text"
-                                                       name="dbPath"><s:property value="#session.dir"></s:property></label>
+                                                       name="dbPath"><s:property
+                                                        value="#session.dir"></s:property></label>
                                                 <select style="width: 152px;margin-left: 0px;border-top-width: 1px;margin-top: 10px;height: 31px;"
                                                         name="tag">
                                                     <option selected>=请选择文件标签=</option>
@@ -335,13 +341,13 @@
                             </div>
                         </div>
                     </th>
-<%--新建文件夹按键--%>
+                    <%--新建文件夹按键--%>
                     <th>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newdir"
                                 data-whatever="newdir">New Dir
                         </button>
                     </th>
-<%--新建文件夹栏--%>
+                    <%--新建文件夹栏--%>
                     <div class="modal fade" id="newdir" tabindex="-1" role="dialog" aria-labelledby="newdirLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -355,7 +361,8 @@
                                     <form action="newDir">
                                         <div class="form-group">
                                             <label class="control-label">New Folder Name:</label>
-                                            <input class="form-control" id="inputDirName" name="inputFolderName" placeholder="Folder Name"></input>
+                                            <input class="form-control" id="inputDirName" name="inputFolderName"
+                                                   placeholder="Folder Name"></input>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -370,13 +377,14 @@
                         </div>
                     </div>
 
-<%--搜索--%>
+                    <%--搜索--%>
                     <form action="search">
                         <th><input type="text" class="form-control" id="FileType" placeholder="According FileType"
                                    style="width:315px;" name="search"></th>
                         <th>
                             <div class="dropdown">
-                                <select class="btn btn-default" name="searchType" style="width: 105px;" onchange="document.getElementById('FileType').setAttribute('placeholder',this.value)">
+                                <select class="btn btn-default" name="searchType" style="width: 105px;"
+                                        onchange="document.getElementById('FileType').setAttribute('placeholder',this.value)">
                                     <option selected>Type</option>
                                     <option value="FileName">FileName</option>
                                     <option value="FileContext">FileContext</option>
@@ -387,7 +395,7 @@
                     </form>
                 </tr>
             </table>
-<%--路径导航栏--%>
+            <%--路径导航栏--%>
             <ol class="breadcrumb" style="margin-top: 10px;border-top-width: 0px;margin-bottom: 10px;">
                 <li><a href="list">Home</a></li>
                 <s:iterator value="dirList">
@@ -396,10 +404,10 @@
                 </s:iterator>
                 <%--<li class="active">Data</li>--%>
             </ol>
-<%--文件table--%>
+            <%--文件table--%>
             <table class="table table-hover" style="margin-bottom: 0px;" align="center">
                 <tr>
-                    <th style="width:166px;text-align: left" >filename</th>
+                    <th style="width:166px;text-align: left">filename</th>
                     <th style="width:166px;text-align: left">tag</th>
                     <th style="width:150px;text-align: left">size</th>
                     <th style="width:166px;text-align: left">operation</th>
@@ -436,10 +444,16 @@
                             <td style="width:196px">
                                 <s:property value="size"/>
                             </td>
-                            <td style="width:216px"; padding-left: 20px;>
-                                <a href="download?id=<s:property value="id"/>"><div class="download"></div></a>
-                                <a href="delete?id=<s:property value="id"/>"><div class="delete"></div></a>
-                                <a href="share?id=<s:property value="id"/>" ><div class="share"></div></a>
+                            <td style="width:216px" ; padding-left: 20px;>
+                                <a href="download?id=<s:property value="id"/>">
+                                    <div class="download"></div>
+                                </a>
+                                <a href="delete?id=<s:property value="id"/>">
+                                    <div class="delete"></div>
+                                </a>
+                                <a href="share?IJtyzVlqab8=<s:property value="id"/>">
+                                    <div class="share"></div>
+                                </a>
                             </td>
 
 
@@ -449,20 +463,20 @@
                 </table>
             </div>
 
-<%--右键菜单--%>
+            <%--右键菜单--%>
             <%--<div id="menu_context">--%>
-                <%--<ul style="line-height: 40px;list-style-type: none; padding: 0px;margin-left: 5px;border: 2px;">--%>
-                    <%--<a href=""><li>download</li></a>--%>
-                    <%--<a href=""><li>delete</li></a>--%>
-                <%--</ul>--%>
+            <%--<ul style="line-height: 40px;list-style-type: none; padding: 0px;margin-left: 5px;border: 2px;">--%>
+            <%--<a href=""><li>download</li></a>--%>
+            <%--<a href=""><li>delete</li></a>--%>
+            <%--</ul>--%>
             <%--</div>--%>
-        <%--</div>--%>
-    </div> <!--center end -->
+            <%--</div>--%>
+        </div> <!--center end -->
 
-</div> <!-- contain end -->
+    </div> <!-- contain end -->
 
 
-<%--<div class="Bottom">基于JFinal+Hadoop+bootstrap+AngularJs的云端文件管理系统</div>--%>
+    <%--<div class="Bottom">基于JFinal+Hadoop+bootstrap+AngularJs的云端文件管理系统</div>--%>
 </body>
 </html>
 
@@ -522,15 +536,17 @@
             document.oncontextmenu = true;
         }
     }
-//    进度条
-        function getCurrentProgress() {
-            var probar=${session.used}/${session.totalsize};
+    //    进度条
+    function getCurrentProgress() {
+        var probar =
+        ${session.used}/
+        ${session.totalsize};
 //            var probar = 50;
-            if( probar == 100){
-                alert("boom!");
-            }
-            else {
-                document.getElementById("progressbar").style.width = probar + "%";
+        if (probar == 100) {
+            alert("boom!");
+        }
+        else {
+            document.getElementById("progressbar").style.width = probar + "%";
         }
     }
 
@@ -548,3 +564,26 @@
 <link rel="stylesheet" href="/web-plug/bootstrap-3.0.0/css/bootstrap.min.css">
 
 <script type="text/javascript" src="/web-plug/jQuery-Form.min.js"></script>
+<script>
+    window.onload = function () {
+        var errorMsg = "${request.errorMessage}";
+        var sharemess = "${request.sharemess}";
+        if (errorMsg != "") {
+            alert(errorMsg);
+        }
+        if (sharemess != "") {
+            alert(sharemess);
+        }
+        var proaa =<%=session.getAttribute("used")%>;
+        var probbb =<%=session.getAttribute("totalsize")%>;
+
+        var probar = (proaa/probbb)*100;
+        //   var probar = 50;
+        if (probar == 100) {
+            alert("boom!");
+        }
+        else {
+            document.getElementById("progressbar").style.width = probar + "%";
+        }
+    }
+</script>
