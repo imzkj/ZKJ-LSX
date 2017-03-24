@@ -399,7 +399,7 @@
                 <%--<li class="active">Data</li>--%>
             </ol>
 <%--文件table--%>
-            <table class="table table-hover" style="margin-bottom: 0px;">
+            <table class="table table-hover" style="margin-bottom: 0px;" align="center">
                 <tr>
                     <th style="width:200px;text-align: left" >filename</th>
                     <th style="width:200px;text-align: left">tag</th>
@@ -411,7 +411,7 @@
                 </tr>
             </table>
             <div style="overflow-x: auto; overflow-y: auto; height: 350px; width:680px;">
-                <table class="table table-hover" id="fileTable" width="680px" height="350px">
+                <table class="table table-hover" id="fileTable" width="680px" height="350px" align="center">
 
                     <s:iterator value="fileslist">
                         <tr style="height: 40px;">
@@ -524,6 +524,99 @@
 
             menu.style.display = "none";
             document.oncontextmenu = true;
+        }
+    }
+</script>
+<%--进度条ajax异步--%>
+<script type="text/javascript">
+    var xmlHttp;
+    var bar_color = 'blue';
+    var span_id = "yellow";
+    var clear = "   "
+    function createXMLHttpRequest() {
+        if (window.ActiveXObject) {
+            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        else if (window.XMLHttpRequest) {
+            xmlHttp = new XMLHttpRequest();
+        }
+    }
+    function go() {
+        createXMLHttpRequest();
+        checkDiv();
+        var url = "ProgressBarJsp.jsp?task=create";
+        xmlHttp.open("GET", url, true);
+        xmlHttp.onreadystatechange = goCallback;
+        xmlHttp.send(null);
+    }
+    function goCallback() {
+        if (xmlHttp.readyState == 4) {
+            if (xmlHttp.status == 200) {
+                setTimeout("pollServer()", 2000);
+            }
+        }
+    }
+
+    function pollServer() {
+        createXMLHttpRequest();
+        var url = "ProgressBarJsp.jsp?task=poll";
+        xmlHttp.open("GET", url, true);
+        xmlHttp.onreadystatechange = pollCallback;
+        xmlHttp.send(null);
+    }
+
+    function pollCallback() {
+        if (xmlHttp.readyState == 4) {
+            if (xmlHttp.status == 200) {
+                var percent_complete = xmlHttp.responseXML.getElementsByTagName
+                ("percent")[0].firstChild.data;
+                var index = processResult(percent_complete);
+                for (var i = 1; i <= index; i++) {
+                    var elem = document.getElementById("block" + i);
+                    elem.innerHTML = clear;
+                    elem.style.backgroundColor = bar_color;
+                    var next_cell = i + 1;
+                    if (next_cell > index && next_cell <= 9) {
+                        document.getElementById("block" + next_cell).
+                            innerHTML = percent_complete + "%";
+                    }
+                }
+                if (index < 9) {
+                    setTimeout("pollServer()", 2000);
+                } else {
+                    document.getElementById("complete").innerHTML = "
+                    网站已完成加载!";
+                }
+            }
+        }
+    }
+    function processResult(percent_complete) {
+        var ind;
+        if (percent_complete.length == 1) {
+            ind = 1;
+        } else if (percent_complete.length == 2) {
+            ind = percent_complete.substring(0, 1);
+        } else {
+            ind = 9;
+        }
+        return ind;
+    }
+
+    function checkDiv() {
+        var progress_bar = document.getElementById("progressBar");
+        if (progress_bar.style.visibility == "visible") {
+            clearBar();
+            document.getElementById("complete").innerHTML = "";
+        } else {
+            progress_bar.style.visibility = "visible"
+        }
+    }
+
+    function clearBar() {
+        for (var i = 1; i < 10; i++) {
+            var elem = document.getElementById("block" + i);
+            elem.innerHTML = clear;
+            elem.style.backgroundColor = "white";
         }
     }
 </script>
