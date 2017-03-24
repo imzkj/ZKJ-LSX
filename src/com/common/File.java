@@ -11,6 +11,16 @@ public class File {
     private String size;
     private String used;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId( String id ) {
+        this.id = id;
+    }
+
+    private String id;
+
     public String getUsed() {
         return used;
     }

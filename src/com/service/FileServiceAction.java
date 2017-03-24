@@ -38,6 +38,16 @@ public class FileServiceAction extends ActionSupport {
     private String dirType;
     private String email;
     private String deftag;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId( String id ) {
+        this.id = id;
+    }
+
+    private String id;
     private utils util = new utils();
     private List<DirPath> dirList;
     public static List<File> fileslist;
@@ -314,6 +324,7 @@ public class FileServiceAction extends ActionSupport {
         ResultSet resultSet = dataBaseOperation.querySql(sql);
         while(resultSet.next()) {
             File file = new File();
+            file.setId(resultSet.getString("id"));
             file.setFilename(resultSet.getString("filename"));
             file.setDbpath(resultSet.getString("dbpath"));
             file.setOwner(resultSet.getString("owner"));
@@ -379,6 +390,7 @@ public class FileServiceAction extends ActionSupport {
         ResultSet resultSet = dataBaseOperation.querySql(sql);
         while(resultSet.next()) {
             File file = new File();
+            file.setId(resultSet.getString("id"));
             file.setFilename(resultSet.getString("filename"));
             file.setDbpath(resultSet.getString("dbpath"));
             file.setOwner(resultSet.getString("owner"));
@@ -399,6 +411,7 @@ public class FileServiceAction extends ActionSupport {
         ResultSet resultSet = dataBaseOperation.querySql(sql);
         while(resultSet.next()) {
             File file = new File();
+            file.setId(resultSet.getString("id"));
             file.setFilename(resultSet.getString("filename"));
             file.setDbpath(resultSet.getString("dbpath"));
             file.setOwner(resultSet.getString("owner"));
@@ -428,5 +441,27 @@ public class FileServiceAction extends ActionSupport {
                 + "/_." + "\")";
         dataBaseOperation.updateSql(newDirSql);
         return "ok";
+    }
+
+    public String download() throws SQLException, IOException {
+        String selectSql = "select * from file where id=\"" + id + "\"";
+        String name = "";
+        ResultSet resultSet = dataBaseOperation.querySql(selectSql);
+        if (resultSet.next()) {
+            hdfsPath = resultSet.getString("hdfspath");
+            name = resultSet.getString("filename");
+        }
+        hdfsOperation.downLoad(hdfsPath, name);
+        return "ok";
+    }
+
+    public String delete() throws SQLException {
+        String selectSql = "delete from file where id=\"" + id + "\"";
+        dataBaseOperation.updateSql(selectSql);
+        return "ok";
+    }
+    public String share() throws SQLException {
+
+        return NONE;
     }
 }

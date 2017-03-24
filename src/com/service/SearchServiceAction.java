@@ -17,7 +17,7 @@ public class SearchServiceAction {
     private String username;
     private String search;
     private String searchType;
-    private LuceneFileSearch fileSearch=new LuceneFileSearch();
+    private LuceneFileSearch fileSearch = new LuceneFileSearch();
     private DataBaseOperation dataBaseOperation = new DataBaseOperation();
 
     public List<File> getFileslist() {
@@ -69,11 +69,13 @@ public class SearchServiceAction {
         }
         return "ok";
     }
+
     public void searchFileName() throws Exception {
-        String sql = "select * from file where owner=\"" + username + "\" and filename like \"%" +search+"%\"";
+        String sql = "select * from file where owner=\"" + username + "\" and filename like \"%" + search + "%\"";
         ResultSet resultSet = dataBaseOperation.querySql(sql);
         while(resultSet.next()) {
             File file = new File();
+            file.setId(resultSet.getString("id"));
             file.setFilename(resultSet.getString("filename"));
             file.setDbpath(resultSet.getString("dbpath"));
             file.setOwner(resultSet.getString("owner"));
@@ -86,6 +88,6 @@ public class SearchServiceAction {
     }
 
     public void searchFileContent() throws Exception {
-        fileslist=fileSearch.contentSearch(search,username);
+        fileslist = fileSearch.contentSearch(search, username);
     }
 }
