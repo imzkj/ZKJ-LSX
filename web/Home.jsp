@@ -174,6 +174,16 @@
             border-radius: 50%;
             margin: 16px 10px 0px 0px;
         }
+        .share{
+            cursor: pointer;
+            background: url(/images/share6.svg) no-repeat 0px 0px;
+            width: 20px;
+            height: 20px;
+            display: block;
+            float: left;
+            border-radius: 50%;
+            margin: 16px 10px 0px 0px;
+        }
     </style>
 
 </head>
@@ -391,10 +401,20 @@
 <%--文件table--%>
             <table class="table table-hover" style="margin-bottom: 0px;">
                 <tr>
+<<<<<<< HEAD
                     <th style="width:166px;text-align: left" >filename</th>
                     <th style="width:166px;text-align: left">tag</th>
                     <th style="width:150px;text-align: left">size</th>
                     <th style="width:166px;text-align: left">operation</th>
+=======
+                    <th style="width:200px;text-align: left" >filename</th>
+                    <th style="width:200px;text-align: left">tag</th>
+                    <th style="width:200px;text-align: left">size</th>
+                    <th style="text-align: left">operation</th>
+                    <%--<th><a><div class="download"></div></a>--%>
+                    <%--<a><div class="delete"></div></a>--%>
+                    <%--<a><div class="share"></div></a></th>--%>
+>>>>>>> 1bb09c7dccc582b74b4277f38d12b01cdb753fe9
                 </tr>
             </table>
             <div style="overflow-x: auto; overflow-y: auto; height: 350px; width:680px;">
@@ -432,6 +452,7 @@
                                 <a href="download?id=<s:property value="id"/>"><div class="download"></div></a>
                                 <a href="delete?id=<s:property value="id"/>"><div class="delete"></div></a>
                                 <a href="share?id=<s:property value="id"/>" data-whatever="share" data-toggle="modal" data-target="#share"><div class="delete"></div></a>
+
                             </td>
                         </tr>
 
