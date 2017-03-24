@@ -224,7 +224,12 @@
             <%-- 个人信息--%>
             <div class="col-sm-6 col-md-4" style="margin-top: 20px;width:280px;">
                 <div class="thumbnail">
-                    <img src="showtupian.action" alt="个人图片" style="width:160px;height: 200px;">
+                    <s:if test='%{#session.hasphoto=="1"}'>
+                    <img src="showtupian.action?username=<s:property value="#session.username"/>" alt="个人图片" style="width:160px;height: 200px;">
+                    </s:if>
+                    <s:else >
+                        <img src="/images/person.svg" alt="个人图片" style="width:160px;height: 200px;">
+                    </s:else>
                     <div class="caption">
                         <h5>UserName:<font color="red"><s:property value="#session.username"/></font></h5>
                         <h5>E_mail:<font color="red"><s:property value="#session.email"/></font></h5>

@@ -14,7 +14,7 @@ import java.util.Map;
 public class ImageAction extends ActionSupport {
     private File picture;
     private String username;
-
+    private Map<String, Object> session = ActionContext.getContext().getSession();
     public File getPicture() {
         return picture;
     }
@@ -43,6 +43,7 @@ public class ImageAction extends ActionSupport {
         System.out.println(picture);
         FileInputStream fileInputStream = new FileInputStream(picture);
         ImageOperation.readImage2DB(username, fileInputStream);
+        session.put("hasphoto","1");
         return "ok";
     }
 }

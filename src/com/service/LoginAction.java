@@ -26,6 +26,7 @@ public class LoginAction extends ActionSupport {
     private DataBaseOperation dataBaseOperation;
     private ResultSet resultSet;
     private String code;
+    private Map<String, Object> session = ActionContext.getContext().getSession();
 
     public String getCode() {
         return code;
@@ -73,11 +74,20 @@ public class LoginAction extends ActionSupport {
         dataBaseOperation = new DataBaseOperation();
 
         HttpServletRequest request = ServletActionContext.getRequest();
-        String sql = " SELECT * FROM user WHERE username = \""+username+"\"";
+        String sql = " SELECT * FROM user WHERE username = \"" + username + "\"";
         ResultSet rs = dataBaseOperation.querySql(sql);
         if (rs.next()) {
-            InputStream out=(InputStream)rs.getBinaryStream("photo");
-            request.setAttribute("ss",rs.getBinaryStream("photo"));
+            try {
+                if (rs.getBlob("photo").equals(null)) {
+                    session.put("hasphoto", "0");
+                } else {
+                    session.put("hasphoto", "1");
+                }
+            }catch (Exception e){
+                session.put("hasphoto", "0");
+                System.out.println("blob is null");
+            }
+
         }
 
 
@@ -111,16 +121,16 @@ public class LoginAction extends ActionSupport {
         session.put("phonenum", phonenum);
         session.put("email", email);
         identify = (String) session.get("code");
-        if (identify==null) {
-            identify="0";
+        if (identify == null) {
+            identify = "0";
         }
         String jcode = icode + "";
-        String selectsql="";
+        String selectsql = "";
         if (code.equals("0")) {
-            selectsql= "insert into user(username,password,phonenum,email,totalsize,used) values(\""
+            selectsql = "insert into user(username,password,phonenum,email,totalsize,used) values(\""
                     + username + "\",\"" + password + "\",\"" + phonenum + "\",\"" + email + "\",10,0)";
-        }else {
-            selectsql= "insert into user(username,password,phonenum,email,totalsize,used) values(\""
+        } else {
+            selectsql = "insert into user(username,password,phonenum,email,totalsize,used) values(\""
                     + username + "\",\"" + password + "\",\"" + phonenum + "\",\"" + email + "\",100,0)";
             if (!identify.equals(code)) {
                 session.put("code", jcode);
