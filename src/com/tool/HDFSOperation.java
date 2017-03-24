@@ -15,7 +15,7 @@ public class HDFSOperation {
 
     private Configuration conf;
     private FileSystem fs;
-    private String localPath;
+    private String localPath="G:\\DiskDownload\\";
     private String dbPath;
     private String hdfsPath;
 
@@ -45,12 +45,13 @@ public class HDFSOperation {
     /*
     下载文件
      */
-    public boolean downLoad() throws IOException {
+    public boolean downLoad(String hdfsPath,String filename) throws IOException {
         Path path = new Path(hdfsPath);
         if (!fs.exists(path)) {
             System.out.println("云端文件不存在");
             return false;
         }
+        localPath+=filename;
         Path dstPath = new Path(localPath);
         fs.copyToLocalFile(false, path, dstPath);
         return true;

@@ -31,17 +31,20 @@
         <action name="search" class="com.service.SearchServiceAction" method="search">
             <result name="ok">/Home.jsp</result>
         </action>
+        <action name="download" class="com.service.FileServiceAction" method="download">
+            <result name="ok" type="chain">listDir</result>
+        </action>
+        <action name="delete" class="com.service.FileServiceAction" method="delete">
+            <result name="ok" type="chain">listDir</result>
+        </action>
+        <action name="share" class="com.service.FileServiceAction" method="share">
+            <result name="ok" type="chain">listDir</result>
+        </action>
         <action name="upload" class="com.service.FileServiceAction" method="uploadFile">
             <result name="ok" type="chain">listDir</result>
         </action>
         <action name="uploadpath" class="com.service.FileServiceAction" method="uploadFilePath">
             <result name="ok">/test.jsp</result>
-        </action>
-        <action name="downLoad" class="com.tool.HDFSOperation" method="downLoad">
-            <result name="ok" >/Home.jsp</result>
-        </action>
-        <action name="delete" class="com.tool.HDFSOperation" method="deleteFile">
-            <result name="ok" >/Home.jsp</result>
         </action>
     </package>
 
