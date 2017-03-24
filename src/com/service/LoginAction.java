@@ -8,6 +8,9 @@ import com.tool.DataBaseOperation;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Path;
 import java.sql.ResultSet;
 import java.util.Map;
 import java.util.Random;
@@ -68,6 +71,16 @@ public class LoginAction extends ActionSupport {
 
     public String login() throws Exception {
         dataBaseOperation = new DataBaseOperation();
+
+        HttpServletRequest request = ServletActionContext.getRequest();
+        String sql = " SELECT * FROM user WHERE username = \""+username+"\"";
+        ResultSet rs = dataBaseOperation.querySql(sql);
+        if (rs.next()) {
+            InputStream out=(InputStream)rs.getBinaryStream("photo");
+            request.setAttribute("ss",rs.getBinaryStream("photo"));
+        }
+
+
         String selectUsed = "select used,totalsize from user where username=\"" + username + "\"";
         ResultSet resultSet1 = dataBaseOperation.querySql(selectUsed);
         Map<String, Object> session = ActionContext.getContext().getSession();

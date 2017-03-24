@@ -303,13 +303,6 @@ public class FileServiceAction extends ActionSupport {
         return "ok";
     }
 
-    public String uploadFilePath() throws Exception {
-
-        System.getProperty("java.class.path");
-
-        return "ok";
-    }
-
     public String listAll() throws Exception {
         fileslist = new ArrayList<File>();
         session.put("dir", "Home");
@@ -460,6 +453,7 @@ public class FileServiceAction extends ActionSupport {
         dataBaseOperation.updateSql(selectSql);
         return "ok";
     }
+
     public String share() throws SQLException {
 
         return "ok";

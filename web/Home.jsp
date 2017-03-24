@@ -220,7 +220,7 @@
 <%-- 个人信息--%>
             <div class="col-sm-6 col-md-4" style="margin-top: 20px;width:280px;">
                 <div class="thumbnail">
-                    <img src="/images/person.svg" alt="个人图片" style="width:160px;height: 200px;">
+                    <img src="showtupian.action" alt="个人图片" style="width:160px;height: 200px;">
                     <div class="caption">
                         <h5>UserName:<font color="red"><s:property value="#session.username"/></font></h5>
                         <h5>E_mail:<font color="red"><s:property value="#session.email"/></font></h5>
@@ -243,9 +243,9 @@
                                         <h4 class="modal-title" id="modifyPhotoLabel">New h</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="">
+                                        <s:form action="photo" method="post" enctype="multipart/form-data">
                                             <div class="form-group">
-                                                <input type="file" name="photoField" class="file" id="photoField"
+                                                <input type="file" name="picture" class="file" id="photoField"
                                                        size="28"/>
                                                 <label class="control-label"
                                                        style="margin-top: 5px;">文件最大不能超过20MB</label><br>
@@ -258,7 +258,7 @@
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">Confirm</button>
                                             </div>
-                                        </form>
+                                        </s:form>
                                     </div>
 
                                 </div>

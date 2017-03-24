@@ -8,7 +8,7 @@ import java.sql.*;
  * Created by ZKJ on 2017/3/16 0016.
  */
 public class DataBaseOperation {
-    private Connection conn = null;
+    public Connection conn = null;
     Statement stmt = null;
 
     public DataBaseOperation() throws Exception {
