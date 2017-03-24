@@ -273,7 +273,7 @@
             <div class="progress" style="width: 280px; margin-top: 30em;" >
                 <div class="progress-bar" role="progressbar" id="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
                      style="min-width: 2em;">
-                    0%
+
                 </div>
                 <span style="float: right;padding-right: 50px;">
                     <s:property value="#session.used"/>G/<s:property value="#session.totalsize"/>G
@@ -525,6 +525,7 @@
 //    进度条
         function getCurrentProgress() {
             var probar=${session.used}/${session.totalsize};
+//            var probar = 50;
             if( probar == 100){
                 alert("boom!");
             }
