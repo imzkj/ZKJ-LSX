@@ -401,20 +401,10 @@
 <%--文件table--%>
             <table class="table table-hover" style="margin-bottom: 0px;" align="center">
                 <tr>
-<<<<<<< HEAD
                     <th style="width:166px;text-align: left" >filename</th>
                     <th style="width:166px;text-align: left">tag</th>
                     <th style="width:150px;text-align: left">size</th>
                     <th style="width:166px;text-align: left">operation</th>
-=======
-                    <th style="width:200px;text-align: left" >filename</th>
-                    <th style="width:200px;text-align: left">tag</th>
-                    <th style="width:200px;text-align: left">size</th>
-                    <th style="text-align: left">operation</th>
-                    <%--<th><a><div class="download"></div></a>--%>
-                    <%--<a><div class="delete"></div></a>--%>
-                    <%--<a><div class="share"></div></a></th>--%>
->>>>>>> 1bb09c7dccc582b74b4277f38d12b01cdb753fe9
                 </tr>
             </table>
             <div style="overflow-x: auto; overflow-y: auto; height: 350px; width:680px;">
@@ -451,43 +441,41 @@
                             <td style="width:216px"; padding-left: 20px;>
                                 <a href="download?id=<s:property value="id"/>"><div class="download"></div></a>
                                 <a href="delete?id=<s:property value="id"/>"><div class="delete"></div></a>
-                                <a href="share?id=<s:property value="id"/>" data-whatever="share" data-toggle="modal" data-target="#share"><div class="delete"></div></a>
-
+                                <a href="share?id=<s:property value="id"/>" data-toggle="modal" data-target="#share" data-whatever="share"><div class="share"></div></a>
                             </td>
+                            <div class="modal fade" id="share" tabindex="-1" role="dialog" aria-labelledby="shareLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close"><span
+                                                    aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="shareLabel">Share</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="share">
+                                                <div class="form-group">
+                                                    <label class="control-label">Share:</label>
+                                                    <input class="form-control" id="inputshare" name="inputFolderName" placeholder="Folder Name"></input>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                        Close
+                                                    </button>
+                                                    <button type="submit" class="btn btn-primary">Confirm</button>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
                         </tr>
 
                     </s:iterator>
                 </table>
             </div>
-    <div class="modal fade" id="share" tabindex="-1" role="dialog" aria-labelledby="shareLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"
-                            aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="aaa">Share</h4>
-                </div>
-                <div class="modal-body">
-                    <form action="">
-                        <div class="form-group">
-                            <label class="control-label">New Folder Name:</label>
-                            <label class="form-control" id="sha"
-                                   name="dbPath"><s:property
-                                    value="#session.share"></s:property></label>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">
-                                Close
-                            </button>
-                            <button type="submit" class="btn btn-primary" onclick="copy()">Copy</button>
-                        </div>
-                    </form>
-                </div>
 
-            </div>
-        </div>
-    </div>
 <%--右键菜单--%>
             <%--<div id="menu_context">--%>
                 <%--<ul style="line-height: 40px;list-style-type: none; padding: 0px;margin-left: 5px;border: 2px;">--%>
