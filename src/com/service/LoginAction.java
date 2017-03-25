@@ -12,6 +12,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Path;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 import java.util.Random;
 
@@ -72,7 +75,9 @@ public class LoginAction extends ActionSupport {
 
     public String login() throws Exception {
         dataBaseOperation = new DataBaseOperation();
-
+        Date now = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        String signday = dateFormat.format(now);
         HttpServletRequest request = ServletActionContext.getRequest();
         String sql = " SELECT * FROM user WHERE username = \"" + username + "\"";
         ResultSet rs = dataBaseOperation.querySql(sql);
@@ -83,7 +88,11 @@ public class LoginAction extends ActionSupport {
                 } else {
                     session.put("hasphoto", "1");
                 }
-            }catch (Exception e){
+                int sidntime = rs.getInt("signtime");
+                String temp = "";
+                temp += sidntime;
+                session.put("signtime", temp);
+            } catch (Exception e) {
                 session.put("hasphoto", "0");
                 System.out.println("blob is null");
             }
@@ -142,5 +151,12 @@ public class LoginAction extends ActionSupport {
         System.out.println(selectsql);
         dataBaseOperation.updateSql(selectsql);
         return "ok";
+    }
+
+    public static void main( String[] args ) {
+        Date now = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");//可以方便地修改日期格式
+        String hehe = dateFormat.format(now);
+        System.out.println(hehe);
     }
 }

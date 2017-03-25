@@ -298,11 +298,12 @@
                          style="min-width: 2em;">
 
                     </div>
-                    <span id="i" style="float: right;padding-right: 50px;" >
-                    0
+                    <span style="float: right;padding-right: 50px;">
+                    <s:property value="#session.signtime"/> Days/7 Days
+
                 </span>
                 </div>
-                <button type="submit" class="btn btn-primary" onclick="document.getElementById('signUpBar').style.width = 50 + '%';" style=" float: left;margin-top:20px; margin-left:5px;"  >Sign</button>
+                <button type="submit" class="btn btn-primary" onclick="document.getElementById('signUpBar').style.width = <%=session.getAttribute("signtime")%> + '%';" style=" float: left;margin-top:20px; margin-left:5px;"  >Sign</button>
             </div>
         </div>
 
@@ -614,5 +615,12 @@
         else {
             document.getElementById("progressbar").style.width = probar + "%";
         }
+
+
+        var pro1aa =<%=session.getAttribute("signtime")%>;
+
+        var probar1 = (pro1aa / 7) * 100;
+        document.getElementById("progressbar1").style.width = probar1 + "%";
+
     }
 </script>
