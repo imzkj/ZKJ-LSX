@@ -292,7 +292,7 @@
             </div>
             <%--签到--%>
             <div style="width: 280px;">
-                <div class="progress" style="float: left; width: 220px;margin-top: 25px;">
+                <div class="progress" style="float: left; width: 220px;margin-top: 20px;">
                     <div class="progress-bar" role="progressbar" id="signUpBar" aria-valuenow="0" aria-valuemin="0"
                          aria-valuemax="100"
                          style="min-width: 2em;">
@@ -302,7 +302,7 @@
                     <s:property value="#session.signtime"/> Days/7 Days
                 </span>
                 </div>
-                <button type="submit" class="btn btn-primary" style=" float: left;margin-top:20px; margin-left:5px;">
+                <button type="submit" class="btn btn-primary" style=" float: left;margin-top:10px; margin-left:5px;">
                     Sign
                 </button>
             </div>
@@ -621,7 +621,7 @@
         var pro1aa =<%=session.getAttribute("signtime")%>;
 
         var probar1 = (pro1aa / 7) * 100;
-        document.getElementById("progressbar1").style.width = probar1 + "%";
+        document.getElementById("signUpBar").style.width = probar1 + "%";
 
     }
 </script>
