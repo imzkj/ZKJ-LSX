@@ -290,20 +290,21 @@
                     <s:property value="#session.used"/>G/<s:property value="#session.totalsize"/>G
                 </span>
             </div>
-                <%--签到--%>
+            <%--签到--%>
             <div style="width: 280px;">
-                <div class="progress" style="float: left; width: 180px;margin-top: 25px;">
+                <div class="progress" style="float: left; width: 220px;margin-top: 20px;">
                     <div class="progress-bar" role="progressbar" id="signUpBar" aria-valuenow="0" aria-valuemin="0"
                          aria-valuemax="100"
                          style="min-width: 2em;">
 
                     </div>
-                    <span style="float: right;padding-right: 50px;">
+                    <span style="float: right;padding-right: 0px;position: absolute;display: inline-block;margin-left: 100px;">
                     <s:property value="#session.signtime"/> Days/7 Days
-
                 </span>
                 </div>
-                <button type="submit" class="btn btn-primary" onclick="document.getElementById('signUpBar').style.width = <%=session.getAttribute("signtime")%> + '%';" style=" float: left;margin-top:20px; margin-left:5px;"  >Sign</button>
+                <button type="submit" class="btn btn-primary" style=" float: left;margin-top:10px; margin-left:5px;">
+                    Sign
+                </button>
             </div>
         </div>
 
@@ -576,8 +577,8 @@
 //        var day = document.getElementById("i");
 //        var i = day.value();
 //        i++;
-        var i=5;
-        i=i*10;
+        var i = 5;
+        i = i * 10;
         document.getElementById("signUpBar").style.width = i + "%";
     }
 </script>
@@ -620,7 +621,7 @@
         var pro1aa =<%=session.getAttribute("signtime")%>;
 
         var probar1 = (pro1aa / 7) * 100;
-        document.getElementById("progressbar1").style.width = probar1 + "%";
+        document.getElementById("signUpBar").style.width = probar1 + "%";
 
     }
 </script>

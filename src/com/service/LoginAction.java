@@ -12,6 +12,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Path;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -75,10 +77,6 @@ public class LoginAction extends ActionSupport {
 
     public String login() throws Exception {
         dataBaseOperation = new DataBaseOperation();
-        Date now = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        String signday = dateFormat.format(now);
-        HttpServletRequest request = ServletActionContext.getRequest();
         String sql = " SELECT * FROM user WHERE username = \"" + username + "\"";
         ResultSet rs = dataBaseOperation.querySql(sql);
         if (rs.next()) {
@@ -88,9 +86,26 @@ public class LoginAction extends ActionSupport {
                 } else {
                     session.put("hasphoto", "1");
                 }
-                int sidntime = rs.getInt("signtime");
+                String a = (String) rs.getString("signday");
+                int signtime = rs.getInt("signtime");
+                Date now = new Date();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+                String signday = dateFormat.format(now);
+                DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+                Date d1 = df.parse(signday);
+                if (!a.equals("0")) {
+                    Date d2 = df.parse(a);
+                    long diff = d1.getTime() - d2.getTime();
+                    long days = diff / (1000 * 60 * 60 * 24);
+                    if (days > 1) {
+                        String updateTime = "update user set username=\"" + username + "\" and signtime=0";
+                        DataBaseOperation dataBaseOperation = new DataBaseOperation();
+                        dataBaseOperation.updateSql(updateTime);
+                        signtime = 0;
+                    }
+                }
                 String temp = "";
-                temp += sidntime;
+                temp += signtime;
                 session.put("signtime", temp);
             } catch (Exception e) {
                 session.put("hasphoto", "0");
@@ -153,10 +168,16 @@ public class LoginAction extends ActionSupport {
         return "ok";
     }
 
-    public static void main( String[] args ) {
-        Date now = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");//可以方便地修改日期格式
-        String hehe = dateFormat.format(now);
-        System.out.println(hehe);
+    public static void main( String[] args ) throws ParseException {
+//        Date now = new Date();
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");//可以方便地修改日期格式
+//        String hehe = dateFormat.format(now);
+//        System.out.println(hehe);
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+        Date d1 = df.parse("2004/03/26");
+        Date d2 = df.parse("2004/03/24");
+        long diff = d1.getTime() - d2.getTime();
+        long days = diff / (1000 * 60 * 60 * 24);
+        System.out.println(days);
     }
 }
