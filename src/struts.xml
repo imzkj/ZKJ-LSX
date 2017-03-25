@@ -51,6 +51,9 @@
         </action>
         <action name="showtupian" class="com.service.showImageAction">
         </action>
+        <action name="sign" class="com.service.SignAction" method="sign">
+            <result name="ok" type="chain">listDir</result>
+        </action>
     </package>
 
 </struts>

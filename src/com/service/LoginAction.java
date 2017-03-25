@@ -98,7 +98,13 @@ public class LoginAction extends ActionSupport {
                     long diff = d1.getTime() - d2.getTime();
                     long days = diff / (1000 * 60 * 60 * 24);
                     if (days > 1) {
-                        String updateTime = "update user set username=\"" + username + "\" and signtime=0";
+                        String updateTime = "update user set signtime=0 where username=\"" + username + "\"";
+                        DataBaseOperation dataBaseOperation = new DataBaseOperation();
+                        dataBaseOperation.updateSql(updateTime);
+                        signtime = 0;
+                    }
+                    if (days >= 1 && signtime == 7) {
+                        String updateTime = "update user set signtime=0 where username=\"" + username + "\"";
                         DataBaseOperation dataBaseOperation = new DataBaseOperation();
                         dataBaseOperation.updateSql(updateTime);
                         signtime = 0;

@@ -26,23 +26,25 @@ public class SignAction extends ActionSupport {
         String signday = dateFormat.format(now);
         int signtime;
         String signdaydb = "";
-        String updateDay = "update user set signday=\"" + signday + "\" and username=\"" + username + "\"";
-        String updateTime = "update user set username=\"" + username + "\" and signtime=";
+        String updateDay = "update user set signday=\"" + signday + "\" where username=\"" + username + "\"";
+        String updateTime = "update user set signtime=";
         String sql = " SELECT * FROM user WHERE username = \"" + username + "\"";
+        double size = 0;
         ResultSet rs = dataBaseOperation.querySql(sql);
         if (rs.next()) {
             try {
                 signdaydb = (String) rs.getString("signday");
                 signtime = rs.getInt("signtime");
+                size = rs.getDouble("totalsize");
                 DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
                 Date d1 = df.parse(signday);
                 if (signdaydb.equals("0")) {
                     dataBaseOperation.updateSql(updateDay);
-                    updateTime += "1";
+                    updateTime += "1 where username=\"" + username + "\"";
                     dataBaseOperation.updateSql(updateTime);
                     session.put("signtime", "1");
-                    request.setAttribute("signmess", "签到成功，请继续坚持！");
-                    return NONE;
+                    request.setAttribute("signmessge", "签到成功,您已连续签到1天,请继续坚持！");
+                    return "ok";
                 }
                 Date d2 = df.parse(signdaydb);
                 long diff = d1.getTime() - d2.getTime();
@@ -54,15 +56,24 @@ public class SignAction extends ActionSupport {
                     int temp = signtime + 1;
                     String a = "";
                     a += temp;
-                    updateTime += temp;
+                    updateTime += temp + " where username=\"" + username + "\"";
                     session.put("signtime", a);
                     dataBaseOperation.updateSql(updateTime);
-                    request.setAttribute("signmess", "签到成功，请继续坚持！");
+                    request.setAttribute("signmessge", "签到成功,您已连续签到" + a + "天,请继续坚持！");
+                    if (temp == 7) {
+                        size += 10;
+                        updateTime = "update user set signtime=7,totalsize=" + size + " where username=\"" + username + "\"";
+                        dataBaseOperation.updateSql(updateTime);
+                        String aaa = "";
+                        aaa += size;
+                        session.put("totalsize", aaa);
+                        request.setAttribute("signmessge", "您已连续签到7天,恭喜您获得10G免费空间，请再接再厉！");
+                    }
                 }
             } catch (Exception e) {
             }
 
         }
-        return NONE;
+        return "ok";
     }
 }

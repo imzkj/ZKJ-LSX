@@ -302,9 +302,12 @@
                     <s:property value="#session.signtime"/> Days/7 Days
                 </span>
                 </div>
-                <button type="submit" class="btn btn-primary" style=" float: left;margin-top:10px; margin-left:5px;">
-                    Sign
-                </button>
+                <form action="sign">
+                    <button type="submit" class="btn btn-primary"
+                            style=" float: left;margin-top:10px; margin-left:5px;">
+                        Sign
+                    </button>
+                </form>
             </div>
         </div>
 
@@ -599,11 +602,15 @@
     window.onload = function () {
         var errorMsg = "${request.errorMessage}";
         var sharemess = "${request.sharemess}";
+        var signmessge = "${request.signmessge}";
         if (errorMsg != "") {
             alert(errorMsg);
         }
         if (sharemess != "") {
             alert(sharemess);
+        }
+        if (signmessge != "") {
+            alert(signmessge);
         }
         var proaa =<%=session.getAttribute("used")%>;
         var probbb =<%=session.getAttribute("totalsize")%>;
