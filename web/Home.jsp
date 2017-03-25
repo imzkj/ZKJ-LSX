@@ -286,7 +286,7 @@
                      style="min-width: 2em;">
 
                 </div>
-                <span style="float: right;padding-right: 50px;">
+                <span style="float: right;padding-right: 0px;margin-right: 0px;position: absolute;display: inline-block;left: 0px;margin-left: 370px;">
                     <s:property value="#session.used"/>G/<s:property value="#session.totalsize"/>G
                 </span>
             </div>
@@ -301,7 +301,7 @@
                     <s:property value="#session.used"/>G/<s:property value="#session.totalsize"/>G
                 </span>
                 </div>
-                <button type="submit" class="btn btn-primary">Sign</button>
+                <button type="submit" class="btn btn-primary" style="position: absolute">Sign</button>
             </div>
         </div>
 
