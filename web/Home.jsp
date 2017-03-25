@@ -298,7 +298,7 @@
 
                     </div>
                     <span style="float: right;padding-right: 50px;">
-                    <s:property value="#session.used"/>G/<s:property value="#session.totalsize"/>G
+                    <s:property value="#session.signtime"/> Days/7 Days
                 </span>
                 </div>
                 <button type="submit" class="btn btn-primary" style="position: absolute">Sign</button>
@@ -604,5 +604,12 @@
         else {
             document.getElementById("progressbar").style.width = probar + "%";
         }
+
+
+        var pro1aa =<%=session.getAttribute("signtime")%>;
+
+        var probar1 = (pro1aa / 7) * 100;
+        document.getElementById("progressbar1").style.width = probar1 + "%";
+
     }
 </script>
