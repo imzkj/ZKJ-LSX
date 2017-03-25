@@ -282,8 +282,10 @@
             <%-- 进度条--%>
             <div class="progress" style="width: 280px;margin-top: 400px;">
                 <div class="progress-bar" role="progressbar" id="progressbar" aria-valuenow="0" aria-valuemin="0"
-                     aria-valuemax="100"
+                     aria-valuemax="80"
                      style="min-width: 2em;">
+                </div>
+                <div class="progress-bar progress-bar-danger" role="progressbar" id="progressbar2" aria-valuemin="0" aria-valuemax="20" >
 
                 </div>
                 <span style="float: right;padding-right: 0px;margin-right: 0px;position: absolute;display: inline-block;left: 0px;margin-left: 370px;">
@@ -620,8 +622,12 @@
         if (probar == 100) {
             alert("boom!");
         }
-        else {
+        else if(probar<=80){
             document.getElementById("progressbar").style.width = probar + "%";
+        }
+        else {
+            probar=probar-80;
+            document.getElementById("progressbar2").style.width = probar + "%";
         }
 
 

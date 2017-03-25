@@ -20,7 +20,7 @@
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
-            min-height: 900px;
+            min-height: 800px;
         }
         .contain {
             width: 1024px;
@@ -94,14 +94,6 @@
             color: #2B2B36;
             font-size: 3em;
         }
-        .Bottom {
-            font-family: 'Exo 2', sans-serif;
-            text-align: center;
-            padding-top: 1em;
-            font-weight: 600;
-            color: silver;
-            font-size: 2em;
-        }
         #menu_context{
             width: 80px;
             height: 90px;
@@ -126,6 +118,43 @@
             -webkit-border-top-right-radius: 10px;
             -moz-border-top-right-radius: 10px;
             -o-border-top-right-radius: 10px;"
+        }
+        .grid_wrapper{
+            margin-top: 2em;
+            width: 240px;
+            height: 240px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .grid{
+            margin-left: 5px;
+            margin-top: 5px;
+        }
+        .grid:after{
+            content: ".";
+            display: block;
+            line-height: 0;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+            overflow: hidden;
+        }
+        .grid a,.grid a:visited{
+            float: left;
+            display: inline;
+            border: 5px solid #ccc;
+            width: 80px;
+            height: 80px;
+            text-align: center;
+            line-height: 50px;
+            margin-left: -5px;
+            margin-top: -5px;
+            position: relative;
+            z-index: 1;
+        }
+        .grid a:hover{
+            border-color: #f00;
+            z-index: 2;
         }
     </style>
 
@@ -157,6 +186,31 @@
             <li role="presentation" class="active"><a href="#">File</a></li>
         </ul>
 
+        <div class="center_left" style="width: 50%;height: 400px;float: left;">
+             <label class="control-label" style="margin-top: 1em; margin-left:1em;font-size: 24px;">会员等级:</label>    <br>
+             <label class="control-label" style="margin-top: 2em; margin-left:1em;">存储空间：会员等级*10G</label>
+        </div>
+
+        <div class="center_right" style="height: 400px;width: 50%;float: left;">
+            <label class="control-label" style="margin-top: 1em; margin-left:1em;font-size: 24px; " >会员充值:</label>    <br>
+            <div class="grid_wrapper">
+                <div class="grid">
+                    <a onclick="showImg()" title="1" style="cursor: pointer;">1元</a>
+                    <a href="#" title="2" style="cursor: pointer;">5元</a>
+                    <a href="#" title="3" style="cursor: pointer;">10元</a>
+                    <a href="#" title="4" style="cursor: pointer;">15元</a>
+                    <a href="#" title="5" style="cursor: pointer;">20元</a>
+                    <a href="#" title="6" style="cursor: pointer;">25元</a>
+                    <a href="#" title="7" style="cursor: pointer;">50元</a>
+                    <a href="#" title="8" style="cursor: pointer;">80元</a>
+                    <a href="#" title="9" style="cursor: pointer;">100元</a>
+                </div>
+            </div>
+
+        </div>
+        <div id="wxImg" style="display:none; right: 120px; top: 50px;back-ground:#f00;position:absolute; z-index:999;">
+            <img src="/images/avtar.png" />
+        </div>
     </div> <!--center end -->
 
     <%--<div id="menu_context">--%>
@@ -167,39 +221,28 @@
     <%--</div>--%>
 
 <%--进度条--%>
-    <div class="progress" style="margin-left: 40px;margin-right: 300px;">
+
+        <div class="progress" style="margin-left: 40px;margin-right: 300px;">
         <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
              style="min-width: 2em;">
         ?%
         </div>
         <span style="float: right;padding-right: 50px;">
         <s:property value="#session.used"/>G/<s:property value="#session.totalsize"/>G
-    </span>
-    </div>
-
-</div> <!-- contain end -->
+        </span>
+        </div>
 
 
+    </div> <!-- contain end -->
 
+</div>
 </body>
 </html>
-<script>
-
-    $('#upload').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        var recipient = button.data('whatever') // Extract info from data-* attributes
-// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        var modal = $(this)
-        modal.find('.modal-title').text('New message to ' + recipient)
-        modal.find('.modal-body input').val(recipient)
-    })
-
+<script type="text/javascript">
     function lblwhite() {
         var bc = document.getElementById("mainform");
         bc.style.background = "#FFFFFF";
     }
-    ;
     function lblbrown() {
         var bc = document.getElementById("mainform");
         bc.style.background = "#9199aa";
@@ -212,42 +255,6 @@
         var bc = document.getElementById("mainform");
         bc.style.background = "#f1c85f";
     }
-    function click(){
-
-    }
-    function addFile() {
-
-    }
-    function sortType_name() {
-        var st= document.getElementById("FileType");
-        st.setAttribute("placeholder","According FileName");
-
-    }
-    function sortType_context() {
-        var st= document.getElementById("FileType");
-        st.setAttribute("placeholder","According FileContext");
-
-    }
-    function menu_context() {
-        var menu = document.getElementById("menu_context");
-        document.oncontextmenu = function(ev) {
-            var oEvent = ev || event;
-            //自定义的菜单显示
-            menu.style.display = "block";
-            //让自定义菜单随鼠标的箭头位置移动
-            menu.style.left = oEvent.clientX + "px";
-            menu.style.top = oEvent.clientY + "px";
-            //return false阻止系统自带的菜单，
-            //return false必须写在最后，否则自定义的右键菜单也不会出现
-            return false;
-        }
-        //实现点击document，自定义菜单消失
-        document.onclick = function() {
-            menu.style.display = "none";
-            document.oncontextmenu=true;
-        }
-
-    }
     //进度条
     function getCurrentProgress() {
         var probar=${session.used}/${session.totalsize};
@@ -258,7 +265,14 @@
         else {
             document.getElementById("progressbar").style.width = probar + "%";
         }
-
+    }
+    function  showImg(){
+            alert("a");
+            document.getElementById("wxImg").style.display='block';
+        }
+    function hideImg(){
+            document.getElementById("wxImg").style.display='none';
+        }
 </script>
 
 <!-- angularjs插件 -->
