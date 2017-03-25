@@ -285,7 +285,7 @@
                      aria-valuemax="80"
                      style="min-width: 2em;">
                 </div>
-                <div class="progress-bar progress-bar-danger" role="progressbar" id="progressbar2" aria-valuemin="0" aria-valuemax="20" style="width: 20%">
+                <div class="progress-bar progress-bar-danger" role="progressbar" id="progressbar2" aria-valuemin="0" aria-valuemax="20" >
 
                 </div>
                 <span style="float: right;padding-right: 0px;margin-right: 0px;position: absolute;display: inline-block;left: 0px;margin-left: 370px;">
