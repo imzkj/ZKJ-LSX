@@ -225,9 +225,10 @@
             <div class="col-sm-6 col-md-4" style="margin-top: 20px;width:280px;">
                 <div class="thumbnail">
                     <s:if test='%{#session.hasphoto=="1"}'>
-                    <img src="showtupian.action?username=<s:property value="#session.username"/>" alt="个人图片" style="width:160px;height: 200px;">
+                        <img src="showtupian.action?username=<s:property value="#session.username"/>" alt="个人图片"
+                             style="width:160px;height: 200px;">
                     </s:if>
-                    <s:else >
+                    <s:else>
                         <img src="/images/person.svg" alt="个人图片" style="width:160px;height: 200px;">
                     </s:else>
                     <div class="caption">
@@ -279,7 +280,7 @@
                 </div>
             </div>
             <%-- 进度条--%>
-            <div class="progress" style="width: 280px; margin-top: 30em;">
+            <div class="progress" style="width: 280px;margin-top: 400px;">
                 <div class="progress-bar" role="progressbar" id="progressbar" aria-valuenow="0" aria-valuemin="0"
                      aria-valuemax="100"
                      style="min-width: 2em;">
@@ -288,6 +289,19 @@
                 <span style="float: right;padding-right: 50px;">
                     <s:property value="#session.used"/>G/<s:property value="#session.totalsize"/>G
                 </span>
+            </div>
+            <div style="float: left;width: 280px;">
+                <div class="progress" style="width: 180px;margin-top: 25px;">
+                    <div class="progress-bar" role="progressbar" id="progressbar1" aria-valuenow="0" aria-valuemin="0"
+                         aria-valuemax="100"
+                         style="min-width: 2em;">
+
+                    </div>
+                    <span style="float: right;padding-right: 50px;">
+                    <s:property value="#session.used"/>G/<s:property value="#session.totalsize"/>G
+                </span>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign</button>
             </div>
         </div>
 
@@ -582,7 +596,7 @@
         var proaa =<%=session.getAttribute("used")%>;
         var probbb =<%=session.getAttribute("totalsize")%>;
 
-        var probar = (proaa/probbb)*100;
+        var probar = (proaa / probbb) * 100;
         //   var probar = 50;
         if (probar == 100) {
             alert("boom!");
