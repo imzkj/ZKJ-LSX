@@ -220,7 +220,7 @@
         </ul>
 
 
-        <div class="center_left" style="height: 480px;">
+        <div class="center_left" style="height: 500px;">
             <%-- 个人信息--%>
             <div class="col-sm-6 col-md-4" style="margin-top: 20px;width:280px;">
                 <div class="thumbnail">
@@ -290,18 +290,19 @@
                     <s:property value="#session.used"/>G/<s:property value="#session.totalsize"/>G
                 </span>
             </div>
-            <div style="float: left;width: 280px;">
-                <div class="progress" style="width: 180px;margin-top: 25px;">
-                    <div class="progress-bar" role="progressbar" id="progressbar1" aria-valuenow="0" aria-valuemin="0"
+                <%--签到--%>
+            <div style="width: 280px;">
+                <div class="progress" style="float: left; width: 180px;margin-top: 25px;">
+                    <div class="progress-bar" role="progressbar" id="signUpBar" aria-valuenow="0" aria-valuemin="0"
                          aria-valuemax="100"
                          style="min-width: 2em;">
 
                     </div>
-                    <span style="float: right;padding-right: 50px;">
-                    <s:property value="#session.used"/>G/<s:property value="#session.totalsize"/>G
+                    <span id="i" style="float: right;padding-right: 50px;" >
+                    0
                 </span>
                 </div>
-                <button type="submit" class="btn btn-primary" style="position: absolute">Sign</button>
+                <button type="submit" class="btn btn-primary" onclick="document.getElementById('signUpBar').style.width = 50 + '%';" style=" float: left;margin-top:20px; margin-left:5px;"  >Sign</button>
             </div>
         </div>
 
@@ -501,6 +502,7 @@
 
 
 <script>
+
     $('#upload').on('show.bs.modal', function (event) {                 //上传function
         var button = $(event.relatedTarget) // Button that triggered the modal
         var recipient = button.data('whatever') // Extract info from data-* attributes
@@ -568,7 +570,15 @@
             document.getElementById("progressbar").style.width = probar + "%";
         }
     }
-
+    function signUp() {
+        alert("aa");
+//        var day = document.getElementById("i");
+//        var i = day.value();
+//        i++;
+        var i=5;
+        i=i*10;
+        document.getElementById("signUpBar").style.width = i + "%";
+    }
 </script>
 
 <!-- angularjs插件 -->
