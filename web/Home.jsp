@@ -282,8 +282,7 @@
             <%-- 进度条--%>
             <div class="progress" style="width: 280px;margin-top: 400px;">
                 <div class="progress-bar" role="progressbar" id="progressbar" aria-valuenow="0" aria-valuemin="0"
-                     aria-valuemax="80"
-                     style="min-width: 2em;">
+                     aria-valuemax="80">
                 </div>
                 <div class="progress-bar progress-bar-danger" role="progressbar" id="progressbar2" aria-valuemin="0" aria-valuemax="20" >
 
@@ -297,10 +296,10 @@
                 <div class="progress" style="float: left; width: 220px;margin-top: 20px;">
                     <div class="progress-bar" role="progressbar" id="signUpBar" aria-valuenow="0" aria-valuemin="0"
                          aria-valuemax="100"
-                         style="min-width: 2em;">
+                         style="min-width: 1px;">
 
                     </div>
-                    <span style="float: right;padding-right: 0px;position: absolute;display: inline-block;margin-left: 100px;">
+                    <span style="float: right;padding-right: 0px;position: absolute;display: inline-block;margin-left: 90px;">
                     <s:property value="#session.signtime"/> Days/7 Days
                 </span>
                 </div>
@@ -626,7 +625,7 @@
             document.getElementById("progressbar").style.width = probar + "%";
         }
         else {
-            probar=probar-80;
+            document.getElementById("progressbar").style.width = 0 + "%";
             document.getElementById("progressbar2").style.width = probar + "%";
         }
 
