@@ -188,7 +188,12 @@
 
         <div class="center_left" style="width: 50%;height: 400px;float: left;">
              <label class="control-label" style="margin-top: 1em; margin-left:1em;font-size: 24px;">会员等级:</label>    <br>
-             <label class="control-label" style="margin-top: 2em; margin-left:1em;">存储空间：会员等级*10G</label>
+             <label class="control-label" style="margin-top: 2em; margin-left:1em;">存储空间：会员等级*10G</label>   <br>
+            <label class="control-label" style="margin-top: 2em; margin-left:1em;font-size: 24px;">每日任务:</label>    <br>
+            <label class="control-label" style="margin-top: 2em; margin-left:1em;">任务一：每日签到</label>   <br>
+            <label class="control-label" style="margin-top: 2em; margin-left:1em;">任务二：邮箱验证</label>   <br>
+            <label class="control-label" style="margin-top: 2em; margin-left:1em;">任务三：手机验证</label>   <br>
+            <label class="control-label" style="margin-top: 2em; margin-left:1em;">任务四：手机验证</label>
         </div>
 
         <div class="center_right" style="height: 400px;width: 50%;float: left;">
@@ -223,11 +228,11 @@
 <%--进度条--%>
 
         <div class="progress" style="margin-left: 40px;margin-right: 300px;">
-        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
-             style="min-width: 2em;">
-        ?%
+        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="80">
         </div>
-        <span style="float: right;padding-right: 50px;">
+        <div class="progress-bar progress-bar-danger" role="progressbar" id="progressbar2" aria-valuemin="0" aria-valuemax="20" >
+        </div>
+        <span style="float: right;padding-right: 0px;margin-right: 0px;position: absolute;display: inline-block;left: 0px;margin-left: 370px;">
         <s:property value="#session.used"/>G/<s:property value="#session.totalsize"/>G
         </span>
         </div>
@@ -287,3 +292,23 @@
 <link rel="stylesheet" href="/web-plug/bootstrap-3.0.0/css/bootstrap.min.css">
 
 <script type="text/javascript" src="/web-plug/jQuery-Form.min.js"></script>
+<script>
+    window.onload = function () {
+
+        var proaa =<%=session.getAttribute("used")%>;
+        var probbb =<%=session.getAttribute("totalsize")%>;
+
+        var probar = (proaa / probbb) * 100;
+        //   var probar = 50;
+        if (probar == 100) {
+            alert("boom!");
+        }
+        else if(probar<=80){
+            document.getElementById("progressbar").style.width = probar + "%";
+        }
+        else {
+            document.getElementById("progressbar").style.width = 0 + "%";
+            document.getElementById("progressbar2").style.width = probar + "%";
+        }
+    }
+</script>
