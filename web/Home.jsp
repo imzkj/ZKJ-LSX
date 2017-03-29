@@ -158,7 +158,7 @@
 
         .download {
             cursor: pointer;
-            background: url(/images/download148.svg) no-repeat 0px 0px;
+            background: url(/images/download.ico) no-repeat 0px 0px;
             width: 20px;
             height: 20px;
             display: block;
@@ -169,7 +169,7 @@
 
         .delete {
             cursor: pointer;
-            background: url(/images/delete67.svg) no-repeat 0px 0px;
+            background: url(/images/delete.ico) no-repeat 0px 0px;
             width: 20px;
             height: 20px;
             display: block;
@@ -180,7 +180,7 @@
 
         .share {
             cursor: pointer;
-            background: url(/images/share6.svg) no-repeat 0px 0px;
+            background: url(/images/share.ico) no-repeat 0px 0px;
             width: 20px;
             height: 20px;
             display: block;
@@ -447,14 +447,14 @@
                             <td style="width:250px;">
                                 <s:if test='type=="image"'><img src="images/jpg.ico"><s:property
                                         value="filename"/></s:if>
-                                <s:elseif test='type=="TXT"'><img src="images/txt.svg"><s:property
+                                <s:elseif test='type=="TXT"'><img src="images/txt.ico"><s:property
                                         value="filename"/></s:elseif>
-                                <s:elseif test='type=="word"'><img src="images/word.svg"><s:property value="filename"/></s:elseif>
-                                <s:elseif test='type=="xls"'><img src="images/xls.svg"><s:property
+                                <s:elseif test='type=="word"'><img src="images/Word.ico"><s:property value="filename"/></s:elseif>
+                                <s:elseif test='type=="xls"'><img src="images/xls.ico"><s:property
                                         value="filename"/></s:elseif>
-                                <s:elseif test='type=="EXE"'><img src="images/exe.svg"><s:property
+                                <s:elseif test='type=="EXE"'><img src="images/exe.ico"><s:property
                                         value="filename"/></s:elseif>
-                                <s:elseif test='type=="zip"'><img src="images/zip.svg"><s:property
+                                <s:elseif test='type=="zip"'><img src="images/zip.ico"><s:property
                                         value="filename"/></s:elseif>
                                 <s:elseif test='type=="dir"'>
                                     <a href="listDir?dirName=<s:property value="filename"/>">
@@ -462,7 +462,7 @@
                                         <s:property value="filename"/>
                                     </a>
                                 </s:elseif>
-                                <s:else><img src="images/unknown.svg"><s:property value="filename"/></s:else>
+                                <s:else><img src="images/unknown.ico"><s:property value="filename"/></s:else>
                             </td>
                             <td style="width:196px">
                                 <a href="listTag?tag=<s:property value="tag"/>"><s:property
