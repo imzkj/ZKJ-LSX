@@ -433,7 +433,7 @@
             <%--文件table--%>
             <table class="table table-hover" style="margin-bottom: 0px;" align="center">
                 <tr>
-                    <th style="width:166px;text-align: left">filename</th>
+                    <th style="width：250px;text-align: left">filename</th>
                     <th style="width:166px;text-align: left">tag</th>
                     <th style="width:150px;text-align: left">size</th>
                     <th style="width:166px;text-align: left">operation</th>
@@ -444,8 +444,8 @@
 
                     <s:iterator value="fileslist">
                         <tr style="height: 40px;">
-                            <td style="width:196px;">
-                                <s:if test='type=="image"'><img src="images/file.svg"><s:property
+                            <td style="width:250px;">
+                                <s:if test='type=="image"'><img src="images/jpg.svg"><s:property
                                         value="filename"/></s:if>
                                 <s:elseif test='type=="TXT"'><img src="images/txt.svg"><s:property
                                         value="filename"/></s:elseif>
