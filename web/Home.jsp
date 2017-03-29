@@ -445,7 +445,7 @@
                     <s:iterator value="fileslist">
                         <tr style="height: 40px;">
                             <td style="width:250px;">
-                                <s:if test='type=="image"'><img src="images/jpg.svg"><s:property
+                                <s:if test='type=="image"'><img src="images/jpg.ico"><s:property
                                         value="filename"/></s:if>
                                 <s:elseif test='type=="TXT"'><img src="images/txt.svg"><s:property
                                         value="filename"/></s:elseif>
@@ -458,7 +458,7 @@
                                         value="filename"/></s:elseif>
                                 <s:elseif test='type=="dir"'>
                                     <a href="listDir?dirName=<s:property value="filename"/>">
-                                        <img src="images/zip.svg">
+                                        <img src="images/folder.ico">
                                         <s:property value="filename"/>
                                     </a>
                                 </s:elseif>
